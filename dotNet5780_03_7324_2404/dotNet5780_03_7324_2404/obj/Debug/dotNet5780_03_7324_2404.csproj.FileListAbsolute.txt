@@ -1,0 +1,17 @@
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\bin\Debug\dotNet5780_03_7324_2404.exe.config
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\bin\Debug\dotNet5780_03_7324_2404.exe
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\bin\Debug\dotNet5780_03_7324_2404.pdb
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\HostingUnitUserControl.g.cs
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\MainWindow.g.cs
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\App.g.cs
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404_MarkupCompile.cache
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404_MarkupCompile.lref
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\HostingUnitUserControl.baml
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\MainWindow.baml
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.g.resources
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.Properties.Resources.resources
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.csproj.GenerateResource.cache
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.exe
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.pdb
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_03_7324_2404\dotNet5780_03_7324_2404\obj\Debug\dotNet5780_03_7324_2404.csprojAssemblyReference.cache

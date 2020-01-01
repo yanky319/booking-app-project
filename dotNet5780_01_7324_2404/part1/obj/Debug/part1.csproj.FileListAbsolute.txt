@@ -1,0 +1,7 @@
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\bin\Debug\part1.exe.config
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\bin\Debug\part1.exe
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\bin\Debug\part1.pdb
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\obj\Debug\part1.csprojAssemblyReference.cache
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\obj\Debug\part1.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\obj\Debug\part1.exe
+C:\Users\yanky\Desktop\scoole\C#\dotNet5780_01_7324_2404\part1\obj\Debug\part1.pdb
