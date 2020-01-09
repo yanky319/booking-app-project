@@ -1,0 +1,35 @@
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\DAL.dll
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\DAL.pdb
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\BE.dll
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\Utilities.dll
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\BE.pdb
+C:\Users\eliezer\source\repos\The Project\DAL\bin\Debug\Utilities.pdb
+C:\Users\eliezer\source\repos\The Project\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\eliezer\source\repos\The Project\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\eliezer\source\repos\The Project\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\eliezer\source\repos\The Project\DAL\obj\Debug\DAL.dll
+C:\Users\eliezer\source\repos\The Project\DAL\obj\Debug\DAL.pdb
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\DAL.dll
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\DAL.pdb
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\BE.dll
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\DataSource.dll
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\Utilities.dll
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\BE.pdb
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\DataSource.pdb
+C:\Users\student\Source\Repos\TheProject\DAL\bin\Debug\Utilities.pdb
+C:\Users\student\Source\Repos\TheProject\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\student\Source\Repos\TheProject\DAL\obj\Debug\DAL.dll
+C:\Users\student\Source\Repos\TheProject\DAL\obj\Debug\DAL.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\DAL.dll
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\DAL.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\BE.dll
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\DataSource.dll
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\Utilities.dll
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\BE.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\DataSource.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\bin\Debug\Utilities.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\obj\Debug\DAL.dll
+C:\Users\eliezer\Source\Repos\TheProject2\DAL\obj\Debug\DAL.pdb

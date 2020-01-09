@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
 namespace PL
 {
     class Program
@@ -13,3 +13,6 @@ namespace PL
         }
     }
 }
+/*
+ EMAIL_PATTERN = r"([\w\.-]+)@([\w\.-]+)(\.[\w\.]+)"
+*/

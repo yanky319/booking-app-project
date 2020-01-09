@@ -1,0 +1,42 @@
+C:\Users\eliezer\source\repos\The Project\BE\bin\Debug\BE.dll
+C:\Users\eliezer\source\repos\The Project\BE\bin\Debug\BE.pdb
+C:\Users\eliezer\source\repos\The Project\BE\bin\Debug\Utilities.dll
+C:\Users\eliezer\source\repos\The Project\BE\bin\Debug\Utilities.pdb
+C:\Users\eliezer\source\repos\The Project\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\eliezer\source\repos\The Project\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\eliezer\source\repos\The Project\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\eliezer\source\repos\The Project\BE\obj\Debug\BE.dll
+C:\Users\eliezer\source\repos\The Project\BE\obj\Debug\BE.pdb
+C:\Users\student\Source\Repos\TheProject\BE\bin\Debug\BE.dll
+C:\Users\student\Source\Repos\TheProject\BE\bin\Debug\BE.pdb
+C:\Users\student\Source\Repos\TheProject\BE\bin\Debug\Utilities.dll
+C:\Users\student\Source\Repos\TheProject\BE\bin\Debug\Utilities.pdb
+C:\Users\student\Source\Repos\TheProject\BE\obj\Debug\BE.csprojResolveAssemblyReference.cache
+C:\Users\student\Source\Repos\TheProject\BE\obj\Debug\BE.dll
+C:\Users\student\Source\Repos\TheProject\BE\obj\Debug\BE.pdb
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\bin\Debug\BE.dll
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\bin\Debug\BE.pdb
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\bin\Debug\Utilities.dll
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\bin\Debug\Utilities.pdb
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\obj\Debug\BE.dll
+C:\Users\Eliezer\Source\Repos\eliezergensburger\TheProject\BE\obj\Debug\BE.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\BE\bin\Debug\BE.dll
+C:\Users\eliezer\Source\Repos\TheProject2\BE\bin\Debug\BE.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\BE\bin\Debug\Utilities.dll
+C:\Users\eliezer\Source\Repos\TheProject2\BE\bin\Debug\Utilities.pdb
+C:\Users\eliezer\Source\Repos\TheProject2\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\eliezer\Source\Repos\TheProject2\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\eliezer\Source\Repos\TheProject2\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\eliezer\Source\Repos\TheProject2\BE\obj\Debug\BE.dll
+C:\Users\eliezer\Source\Repos\TheProject2\BE\obj\Debug\BE.pdb
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\bin\Debug\BE.dll
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\bin\Debug\BE.pdb
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\bin\Debug\Utilities.dll
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\bin\Debug\Utilities.pdb
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\obj\Debug\BE.csproj.CopyComplete
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\obj\Debug\BE.dll
+C:\Users\yanky\Desktop\scoole\C#\TheProject-master\TheProject-master\BE\obj\Debug\BE.pdb

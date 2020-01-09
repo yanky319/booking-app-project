@@ -1,0 +1,6 @@
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\bin\Debug\Exceptions.dll
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\bin\Debug\Exceptions.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\obj\Debug\Exceptions.csprojAssemblyReference.cache
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\obj\Debug\Exceptions.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\obj\Debug\Exceptions.dll
+C:\Users\yanky\Desktop\scoole\C#\Project01_7324_2404_dotNet5780\Exceptions\obj\Debug\Exceptions.pdb

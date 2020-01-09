@@ -5,20 +5,21 @@
 
 public enum SubAreas
 {
-    Zefat = 100, Haifa, Miron,
-    Tel_Aviv = 200, Netanya, Ramat_Gan,
-    Jerusalem = 300, Beit_Shemesh, Maale_Adumim,
-    Beer_Sheva = 400,
+    All = 0,
+    Zefat = 101, Haifa, Miron,
+    Tel_Aviv = 201, Netanya, Ramat_Gan,
+    Jerusalem = 301, Beit_Shemesh, Maale_Adumim,
+    Ber_Sheva = 401,
 }
 
 public enum Types
 {
-    Zimmer, Hotel, Camping, Etc, 
+   All, Zimmer, Hotel, Camping, 
 }
 
 public enum ThreeChoice
 {
-    not_interested, optional, necessary
+    optional, not_interested, necessary
 }
 
 public enum RequestStatus
@@ -29,4 +30,19 @@ public enum RequestStatus
 public enum OrderStatus
 {
     not_addressed, mail_sent, closed_with_deal, closed_without_deal
+}
+
+public enum meals
+{
+    not_interested, Breakfast, Full_board
+}
+
+public  enum special_meal
+{
+   non, Milk_free, Gluten_free, nut_free, vegetarian, Glatt_Kosher
+}
+
+public enum BankNames
+{
+   Hapoalim, Mercantile, mizrahi, leumi, Discount 
 }
