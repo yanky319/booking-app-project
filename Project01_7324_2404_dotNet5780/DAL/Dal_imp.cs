@@ -10,11 +10,7 @@ namespace DAL
 {
     public class Dal_imp : Idal
     {
-        //public List<T> list_clone<T>(List<T> list) where T : ICloneable
-        //{
-        //    return (from item in list select (T)item.Clone()).ToList();
-        //}
-
+       
         public List<T> copy_List<T>(List<T> DSlist)
         {
             T[] Arr = new T[DSlist.Count];
@@ -32,7 +28,6 @@ namespace DAL
             request.RegistrationDate = DateTime.Now;
             DataSource.guestRequests.Add(copy_List<GuestRequest>(new List<GuestRequest>(){request})[0]);
         }
-
         public void updateGuestRequest(int key, RequestStatus status)
         {
             if (DataSource.guestRequests == null)
@@ -62,18 +57,19 @@ namespace DAL
             int index = DataSource.hostingUnits.FindIndex(e => e.HostingUnitKey == unitKey);
             if (index == -1)
                 throw new KeyNotFoundException("DAL_ERROR, hosting unit with this key does not exist");
+            int index2 = DataSource.hosts.FindIndex(e => e.HostKey == DataSource.hostingUnits[index].HostKey);
+            DataSource.hosts[index2].numUnits--;
             DataSource.hostingUnits.RemoveAt(index);
         }
-
         public void addHostingUnit(HostingUnit unit)
         {
             if (DataSource.hostingUnits == null || DataSource.hosts == null)
                 throw new TargetNotFoundException("DAL_");
-
+            int index = DataSource.hosts.FindIndex(e => e.HostKey == unit.HostKey);
+            DataSource.hosts[index].numUnits++;
             unit.HostingUnitKey = ++Configuration.HostingUnitKey;
             DataSource.hostingUnits.Add(copy_List<HostingUnit>(new List<HostingUnit>() { unit})[0]);
         }
-
         public void updateHostingUnit(HostingUnit unit)
         {
             if (DataSource.hostingUnits == null)

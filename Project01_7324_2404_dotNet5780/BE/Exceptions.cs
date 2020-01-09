@@ -79,6 +79,14 @@ namespace BE
 
         }
     }
+
+    public class OrderCannotBePlacedException : Exception
+    {
+        public OrderCannotBePlacedException(string a) : base(a)
+        {
+
+        }
+    }
 }
 
 

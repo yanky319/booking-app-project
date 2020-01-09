@@ -10,6 +10,9 @@ namespace PL
     {
         static void Main(string[] args)
         {
+            DateTime a = DateTime.Now.AddMonths(11);
+            Console.WriteLine(a.ToShortDateString());
+            Console.ReadKey();
         }
     }
 }

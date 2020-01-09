@@ -8,6 +8,7 @@ using BE;
 
 namespace BL
 {
+    public delegate bool GuestRequestCondition(GuestRequest unit);
     class BL_imp : IBL
     {
 
@@ -57,7 +58,7 @@ namespace BL
         }
         public void IsValidRequestKey(int Key)
         {
-            int index = getGuestRequests().ToList().FindIndex(e => e.GuestRequestKey == key);
+            int index = getGuestRequests().ToList().FindIndex(e => e.GuestRequestKey == Key);
             if (index == -1)
                 throw new KeyNotFoundException("A Host with this key does not exist");
         }
@@ -96,20 +97,30 @@ namespace BL
                 throw new branchNotFoundException();
         }
         public void IsValidOrder(GuestRequest request, HostingUnit unit)
-        { 
-            if (request.Status != RequestStatus.open) ;
-            if (request.Area != Areas.All && request.Area != unit.Area) ;
-            if (request.SubArea != SubAreas.All && request.SubArea != unit.SubArea) ;
-            if (request.Type != Types.All && request.Type != unit.Type) ;
-            if (request.Adults + request.Children > unit.num_beds) ;
-            if (!ThreeChoiceboolMatch(request.Pool, unit.Pool)) ;
-            if (!ThreeChoiceboolMatch(request.Jacuzzi, unit.Jacuzzi)) ;
-            if (!ThreeChoiceboolMatch(request.Garden, unit.Garden)) ;
-            if (!ThreeChoiceboolMatch(request.ChildrensAttractions, unit.ChildrensAttractions)) ;
-            if (!ThreeChoiceboolMatch(request.wifi, unit.wifi)) ;
-            if (!ThreeChoiceboolMatch(request.accessibility, unit.accessibility)) ;
-            //להוסיף בדיקה שהלוח פנוי
-        } 
+        {
+            if (request.Status != RequestStatus.open)
+                throw new OrderCannotBePlacedException("request Status is not open");
+            if ((request.Area != Areas.All && request.Area != unit.Area) || (request.SubArea != SubAreas.All && request.SubArea != unit.SubArea))
+                throw new OrderCannotBePlacedException("Area or Sub Area does not match the request");
+            if (request.Type != Types.All && request.Type != unit.Type)
+                throw new OrderCannotBePlacedException("type does not match the request");
+            if (request.Adults + request.Children > unit.num_beds)
+                throw new OrderCannotBePlacedException("There are not enough beds in the unit");
+            if (!ThreeChoiceboolMatch(request.Pool, unit.Pool))
+                throw new OrderCannotBePlacedException("Client requirements for pool not matched");
+            if (!ThreeChoiceboolMatch(request.Jacuzzi, unit.Jacuzzi))
+                throw new OrderCannotBePlacedException("Client requirements for Jacuzzi not matched");
+            if (!ThreeChoiceboolMatch(request.Garden, unit.Garden))
+                throw new OrderCannotBePlacedException("Client requirements for Garden not matched");
+            if (!ThreeChoiceboolMatch(request.ChildrensAttractions, unit.ChildrensAttractions))
+                throw new OrderCannotBePlacedException("Client requirements for Childrens Attractions not matched");
+            if (!ThreeChoiceboolMatch(request.wifi, unit.wifi))
+                throw new OrderCannotBePlacedException("Client requirements for wifi not matched");
+            if (!ThreeChoiceboolMatch(request.accessibility, unit.accessibility))
+                throw new OrderCannotBePlacedException("Client requirements for accessibility not matched");
+            if (!CheckDatsAvailable(unit.Diary, request.EntryDate, request.ReleaseDate))
+                throw new OrderCannotBePlacedException("The unit is not available on the requested dates");
+        }
         public bool ThreeChoiceboolMatch(ThreeChoice requested, bool exists)
         {
 
@@ -120,8 +131,107 @@ namespace BL
             return false;
         }
         public void sendEmail(Order order) { }
-        public void calculatOrderCommition(Order order) { }
+        public void calculatOrderCommition(Order order)
+        {
+
+        }
+        public bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release)
+        {
+            for (DateTime i = Entry; i < Release; i.AddDays(1))
+                if (diary[i.Month - DateTime.Now.AddMonths(-1).Month, i.Day - DateTime.Now.AddMonths(-1).Day])
+                    return false;
+            return true;
+        }
+
+        public IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition)
+        {
+            try
+            {
+                List<GuestRequest> requests = getGuestRequests().ToList();
+                foreach (GuestRequest item in requests)
+                    if (!condition(item))
+                        requests.Remove(item);
+                return requests;
+            }
+            catch
+            {
+                throw new SourceNotFoundException("BL_");
+            }
+        }
+        public List<HostingUnit> FindAvailableUnits(DateTime Entry, int days)
+        {
+            var a = from item in getHostingUnits()
+                    where CheckDatsAvailable(item.Diary, Entry, Entry.AddDays(days - 1))
+                    select item;
+            return a.ToList();
+        }
+        public int? dateRange(params DateTime[] dates)
+        {
+            if (dates.Count() == 1)
+            {
+                return (DateTime.Now - dates[0]).Days;
+            }
+            if (dates.Count() == 2)
+            {
+                return (dates[1] - dates[0]).Days;
+            }
+            return null;
+        }
+        public List<Order> FindExpiredOrders(int days)
+        {
+            var a = from item in getOrders()
+                    where dateRange(item.CreateDate) < days
+                    select item;
+            return a.ToList();
+        }
+        public int NumOfOrdersPerRequest(GuestRequest request)
+        {
+            return getOrders().ToList().FindAll(e => e.GuestRequestKey == request.GuestRequestKey).Count();
+        }
+        public int NomOfOrdersPerHostingUnit(HostingUnit unit)
+        {
+            return getOrders().ToList().FindAll(e => e.HostingUnitKey == unit.HostingUnitKey && e.Status == OrderStatus.closed_with_deal).Count();
+        }
+
+        public List<GuestRequest> GuestRequestGroupdeByArae()
+        {
+            var a = from item in getGuestRequests()
+                    group item by item.Area into g
+                    from i in g
+                    select i;
+
+            return a.ToList();
+        }
+        public List<GuestRequest> GuestRequestGroupdeByNuOfPeople()
+        {
+            var a = from item in getGuestRequests()
+                    group item by (item.Adults + item.Children) into g
+                    from i in g
+                    select i;
+
+            return a.ToList();
+        }
+        public List<HostingUnit> HostingUnitGroupdeByArae()
+        {
+            var a = from item in getHostingUnits()
+                    group item by item.Area into g
+                    from i in g
+                    select i;
+
+            return a.ToList();
+        }
+        public List<Host> HostsGroupdeByNumOfUnits()
+        {
+            var a = from item in getHosts()
+                    group item by item.numUnits into g
+                    from i in g
+                    select i;v
+
+            return a.ToList();
+        }
         #endregion
+
+
 
         #region GuestRequest functions
 
@@ -423,9 +533,7 @@ namespace BL
         public void updateOrder(int key, OrderStatus status)
         {
             Order order = getOrder(key);
-            if (order.Status >= status)
-                throw new ArgumentException();
-            if (status != order.Status + 1)
+            if (status != order.Status + 1 && status != OrderStatus.closed_without_deal)
                 throw new ArgumentException();
             if (status == OrderStatus.mail_sent && !getHost(order.HostKey).CollectionClearance)
                 throw new NoBillingAuthorizationException();
@@ -435,10 +543,26 @@ namespace BL
                 dal.updateOrder(key, status);
                 if (status == OrderStatus.mail_sent)
                     sendEmail(order);
-                if (status == OrderStatus.mail_sent)
-                    sendEmail(order);
                 if (status == OrderStatus.closed_with_deal)
+                {
                     calculatOrderCommition(order);
+                    var a = from item in getOrders()
+                            where item.GuestRequestKey == order.GuestRequestKey && item.OrderKey != order.OrderKey && item.Status != OrderStatus.closed_without_deal
+                            select item.OrderKey ;
+                    if (a.Count() != 0)
+                        foreach (int item in a)
+                        {
+                            try
+                            {
+                                updateOrder(item, OrderStatus.closed_without_deal);
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                }
+                   
 
             }
             catch (TargetNotFoundException e)

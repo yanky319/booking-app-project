@@ -17,6 +17,7 @@ namespace BE
         public int BankAccountNumber { get; set; }
         public bool CollectionClearance { get; set; }
         public int numOrders { get; set; }
+        public int numUnits { get; set; }
         //public override string ToString()
         //{
         //    return base.ToString();
