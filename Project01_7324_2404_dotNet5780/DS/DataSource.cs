@@ -11,7 +11,7 @@ namespace DS
     {
         public static List<GuestRequest> guestRequests = new List<GuestRequest>()
         {
-           
+          
         };
 
         public static List<HostingUnit> hostingUnits = new List<HostingUnit>()
@@ -31,7 +31,14 @@ namespace DS
 
         public static List<BankBranch> bankBranches = new List<BankBranch>()
         {
-
+           new BankBranch()
+           {
+                 BankNumber = 123,
+                 BankName = BankNames.Hapoalim,
+                 BranchNumber = 765,
+                 BranchAddress = "ggg",
+                 BranchCity = "jerusalem"
+           }   
         };
     }
 }

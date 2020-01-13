@@ -14,11 +14,12 @@ namespace BE
         public int OrderKey { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime? OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
+        public override string ToString()
+        {
+            return string.Format("HostingUnitKey: {0}\nHostKey: {1}\nGuestRequestKey: {2}\nOrderKey: {3}\nStatus: {4}\nCreateDate: {5}\nOrderDate: {6}"
+                , HostingUnitKey, HostKey, GuestRequestKey, OrderKey, Status, CreateDate.ToShortDateString(), OrderDate.ToShortDateString());
+        }
     }
 }

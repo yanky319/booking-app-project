@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfPL.Resources.Languages"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="Menulogin">כניסה</System:String>
+    <System:String x:Key="MenuGuest">אורח</System:String>
+    <System:String x:Key="MenuHost">מארח</System:String>
+    <System:String x:Key="MenuOwner">בעל האתר</System:String>
+
+    <System:String x:Key="NameLabelString">שם משתמש</System:String>
+    <System:String x:Key="NameTextBoxString">נא להכניס שם משתמש</System:String>
+    <System:String x:Key="PasswordLabel">סיסמא</System:String>
+    <System:String x:Key="PasswordPasswordBox">נא להכניס סיסמא</System:String>
+    <System:String x:Key="Owner_Login_Window_title">כניסת בעל האתר</System:String>
+    <System:String x:Key="LoginButton">כניסה</System:String>
+    <System:String x:Key="CancelButton">ביטול</System:String>
+    <System:String x:Key="Incorrect_login_information">שם משתמש או סיסמא שגויים</System:String>
+
+
+
+
+
+    <System:String x:Key="MainWindowTitle">Owner Login</System:String>
+</ResourceDictionary>

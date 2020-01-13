@@ -23,9 +23,13 @@ namespace BE
         public bool wifi { get; set; }
         public bool accessibility { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
+        public override string ToString()
+        {
+            return string.Format("HostingUnitKey: {0}\nHostKey: {1}\nHostingUnitName: {2}" +
+                "nArea: {3}\nSubArea: {4}\nType: {5}\n ---more information---\n pool:{6}  lacuzzi:{7}  Garden:{8}\n" +
+                "ChildrensAttractions:{9}  wifi:{10}  accessibility:{11}"
+                , HostingUnitKey, HostKey, HostingUnitName, Area, SubArea, Type, Pool, Jacuzzi,
+                Garden, ChildrensAttractions, wifi, accessibility);
+        }
     }
 }

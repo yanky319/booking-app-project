@@ -9,7 +9,7 @@ using BE;
 namespace BL
 {
     public delegate bool GuestRequestCondition(GuestRequest unit);
-    class BL_imp : IBL
+    public class BL_imp : IBL
     {
 
         #region fonction's
@@ -22,7 +22,7 @@ namespace BL
         {
             try
             {
-                if (!Regex.Match(name, "^[A-Z][a-zA-Z]*$").Success)
+                if (!Regex.Match(name, "^[a-zA-Z][a-zA-Z]*$").Success)
                     throw new FormatException("invalid " + type + " name format");
             }
             catch
@@ -42,7 +42,7 @@ namespace BL
         {
             try
             {
-                if (!Regex.Match(name, "^[A-Z][a-zA-Z]*$").Success)
+                if (!Regex.Match(name, "^[a-zA-Z][a-zA-Z]*$").Success)
                     throw new FormatException("invalid Hosting Unit Name");
             }
             catch
@@ -86,7 +86,15 @@ namespace BL
         }
         public void IsValidFhoneNamber(string number)
         {
-            int.Parse(number);
+            try
+            {
+                if (!Regex.Match(number, "^[0-9][0-9]*$").Success)
+                    throw new FormatException("invalid Fhone Namber format");
+            }
+            catch
+            {
+                throw new FormatException("invalid Fhone Namber format");
+            }
         }
         public void IsValidBankBranch(BankBranch branch)
         {
@@ -133,16 +141,30 @@ namespace BL
         public void sendEmail(Order order) { }
         public void calculatOrderCommition(Order order)
         {
-
+            var a = getGuestRequests().ToList().Find(e => e.GuestRequestKey == order.GuestRequestKey);
+           int commission = (int)dateRange(a.EntryDate, a.ReleaseDate) * Configuration.commission;
         }
         public bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release)
         {
+            int j = 0;
             for (DateTime i = Entry; i < Release; i.AddDays(1))
-                if (diary[i.Month - DateTime.Now.AddMonths(-1).Month, i.Day - DateTime.Now.AddMonths(-1).Day])
+            {
+                j = (i - DateTime.Now.AddMonths(-1)).Days;
+                if (diary[j / 31, j % 31])
                     return false;
+            }
+               
             return true;
         }
-
+        public void BlockDates(bool[,] diary, DateTime Entry, DateTime Release)
+        {
+            int j = 0;
+            for (DateTime i = Entry; i < Release; i.AddDays(1))
+            {
+                j = (i - DateTime.Now.AddMonths(-1)).Days;
+                diary[j / 31, j % 31] = true;
+            }
+        }
         public IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition)
         {
             try
@@ -192,46 +214,46 @@ namespace BL
         {
             return getOrders().ToList().FindAll(e => e.HostingUnitKey == unit.HostingUnitKey && e.Status == OrderStatus.closed_with_deal).Count();
         }
+       
 
-        public List<GuestRequest> GuestRequestGroupdeByArae()
+
+        
+         public IEnumerable<IGrouping<Areas,GuestRequest>> GuestRequestGroupdeByArae()
         {
             var a = from item in getGuestRequests()
-                    group item by item.Area into g
-                    from i in g
-                    select i;
+                    group item by item.Area;
 
-            return a.ToList();
+
+            return a;
         }
-        public List<GuestRequest> GuestRequestGroupdeByNuOfPeople()
+        public IEnumerable<IGrouping<int, GuestRequest>> GuestRequestGroupdeByNuOfPeople()
         {
             var a = from item in getGuestRequests()
-                    group item by (item.Adults + item.Children) into g
-                    from i in g
-                    select i;
+                    group item by (item.Adults + item.Children);
+                    
 
-            return a.ToList();
+            return a;
         }
-        public List<HostingUnit> HostingUnitGroupdeByArae()
+       
+        public IEnumerable<IGrouping<Areas, HostingUnit>> HostingUnitGroupdeByArae()
         {
             var a = from item in getHostingUnits()
-                    group item by item.Area into g
-                    from i in g
-                    select i;
+                    group item by item.Area;
+                    
 
-            return a.ToList();
+            return a;
         }
-        public List<Host> HostsGroupdeByNumOfUnits()
+        public IEnumerable<IGrouping<int, Host>> HostsGroupdeByNumOfUnits()
         {
             var a = from item in getHosts()
-                    group item by item.numUnits into g
-                    from i in g
-                    select i;v
+                    group item by item.numUnits;
+                    
 
-            return a.ToList();
+            return a;
         }
+        
+        
         #endregion
-
-
 
         #region GuestRequest functions
 
@@ -323,7 +345,7 @@ namespace BL
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.deleteHostingUnit(unitKey);
             }
-            catch(SourceNotFoundException e)
+            catch(SourceNotFoundException )
             {
                 throw new SourceNotFoundException("BL_");
             }
@@ -342,7 +364,7 @@ namespace BL
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.addHostingUnit(unit);
             }
-            catch(TargetNotFoundException e)
+            catch(TargetNotFoundException )
             {
                 throw new TargetNotFoundException("BL_");
             }
@@ -545,7 +567,13 @@ namespace BL
                     sendEmail(order);
                 if (status == OrderStatus.closed_with_deal)
                 {
+
                     calculatOrderCommition(order);
+                    dal.updateGuestRequest(order.GuestRequestKey, RequestStatus.deal_closed);
+                    var unit = getHostingUnit(order.HostingUnitKey);
+                    var Request = getGuestRequests().ToList().Find(e => e.GuestRequestKey == order.GuestRequestKey);
+                    BlockDates(unit.Diary, Request.EntryDate, Request.ReleaseDate);
+                    updateHostingUnit(unit);
                     var a = from item in getOrders()
                             where item.GuestRequestKey == order.GuestRequestKey && item.OrderKey != order.OrderKey && item.Status != OrderStatus.closed_without_deal
                             select item.OrderKey ;
@@ -624,7 +652,6 @@ namespace BL
         }
 
         #endregion
-
 
     }
 }

@@ -30,13 +30,14 @@ namespace BE
         public meals Meals { get; set; }
         public special_meal specialMmeal { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return string.Format("GuestRequestKey: {0}\nPrivateName: {1}\nFamilyName: {2}\nMailAddress: {3}\nStatus: {4}\nRegistrationDate: {5}\n" +
-        //        "EntryDate: {6}\nReleaseDate: {7}\nArea: {8}\nSubArea: {9}\nType: {10}"
-        //        , GuestRequestKey, PrivateName, FamilyName, MailAddress, Status, RegistrationDate, EntryDate, ReleaseDate, Area, SubArea, Type);
-        //}
-
+        public override string ToString()
+        {
+            return string.Format("GuestRequestKey: {0}\nPrivateName: {1}\nFamilyName: {2}\nMailAddress: {3}\nStatus: {4}\nRegistrationDate: {5}\n" +
+                "EntryDate: {6}\nReleaseDate: {7}\nArea: {8}\nSubArea: {9}\nType: {10}\n ---more information---\n pool:{11}  lacuzzi:{12}  Garden:{13}  " +
+                "ChildrensAttractions:{14}\nwifi:{15}  accessibility:{16}  Meals:{17}  specialMmeal:{18}"
+                , GuestRequestKey, PrivateName, FamilyName, MailAddress, Status, RegistrationDate, EntryDate, ReleaseDate, Area, SubArea, Type, Pool, Jacuzzi,
+                Garden, ChildrensAttractions, wifi, accessibility, Meals, specialMmeal, specialMmeal);
+        }
 
     }
 }

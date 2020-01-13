@@ -13,9 +13,7 @@ namespace DAL
        
         public List<T> copy_List<T>(List<T> DSlist)
         {
-            T[] Arr = new T[DSlist.Count];
-            DSlist.CopyTo(Arr);
-            return Arr.ToList();
+            return new List<T>(DSlist);
         }
       
         #region GuestRequest functions
@@ -100,7 +98,8 @@ namespace DAL
             order.OrderKey = ++Configuration.orderKey;
             order.Status = OrderStatus.not_addressed;
             order.CreateDate = DateTime.Now;
-            order.OrderDate = null;
+            order.OrderDate = DateTime.MinValue;
+
             DataSource.orders.Add(copy_List<Order>(new List<Order>() { order })[0]);
         }
 

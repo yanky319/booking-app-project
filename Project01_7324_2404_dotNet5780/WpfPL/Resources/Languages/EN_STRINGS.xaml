@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WpfPL.Resources.Languages"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <System:String x:Key="MenuLanguagestring">Language</System:String>
+    <System:String x:Key="Menulogin">login</System:String>
+    <System:String x:Key="MenuGuest">Guest</System:String>
+    <System:String x:Key="MenuHost">Host</System:String>
+    <System:String x:Key="MenuOwner">Owner</System:String>
+
+    <System:String x:Key="NameLabelString">Username</System:String>
+    <System:String x:Key="NameTextBoxString">Please enter your username</System:String>
+    <System:String x:Key="PasswordLabel">Password</System:String>
+    <System:String x:Key="PasswordPasswordBox">Please enter your Password</System:String>
+    <System:String x:Key="Owner_Login_Window_title">Owner Login</System:String>
+    <System:String x:Key="LoginButton">Login</System:String>
+    <System:String x:Key="CancelButton">Cancel</System:String>
+    <System:String x:Key="Incorrect_login_information">wrong username or password</System:String>
+   
+    
+    
+    
+    
+    <System:String x:Key="MainWindowTitle">Owner Login</System:String>
+    
+</ResourceDictionary>

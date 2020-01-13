@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{52AF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS", "DS\DS.csproj", "{853F07C7-368E-437C-A84F-82458E780FC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPL", "WpfPL\WpfPL.csproj", "{B56ECEEF-F809-4C3F-B28D-42D5078A0230}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{853F07C7-368E-437C-A84F-82458E780FC7}.Release|x64.Build.0 = Release|Any CPU
 		{853F07C7-368E-437C-A84F-82458E780FC7}.Release|x86.ActiveCfg = Release|Any CPU
 		{853F07C7-368E-437C-A84F-82458E780FC7}.Release|x86.Build.0 = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|x64.Build.0 = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Debug|x86.Build.0 = Debug|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|x64.ActiveCfg = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|x64.Build.0 = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|x86.ActiveCfg = Release|Any CPU
+		{B56ECEEF-F809-4C3F-B28D-42D5078A0230}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

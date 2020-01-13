@@ -15,14 +15,29 @@ namespace BL
         void IsValidDates(DateTime Entry, DateTime Release);
         void IsValidUnitName(string name);
         void IsValidHostKey(int key);
+        void IsValidRequestKey(int Key);
         void IsValidNumBeds(int NumBeds);
         void IsValidArea(Areas area);
         void IsValidSubArea(Areas area, SubAreas subArea);
         void IsValidUnitKey(int key);
         void IsValidFhoneNamber(string number);
         void IsValidBankBranch(BankBranch branch);
+        void IsValidOrder(GuestRequest request, HostingUnit unit);
+        bool ThreeChoiceboolMatch(ThreeChoice requested, bool exists);
         void sendEmail(Order order);
         void calculatOrderCommition(Order order);
+        bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release);
+        void BlockDates(bool[,] diary, DateTime Entry, DateTime Release);
+        IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition);
+        List<HostingUnit> FindAvailableUnits(DateTime Entry, int days);
+        int? dateRange(params DateTime[] dates);
+        List<Order> FindExpiredOrders(int days);
+        int NumOfOrdersPerRequest(GuestRequest request);
+        int NomOfOrdersPerHostingUnit(HostingUnit unit);
+        IEnumerable<IGrouping<Areas, GuestRequest>> GuestRequestGroupdeByArae();
+        IEnumerable<IGrouping<int, GuestRequest>> GuestRequestGroupdeByNuOfPeople();
+        IEnumerable<IGrouping<Areas, HostingUnit>> HostingUnitGroupdeByArae();
+        IEnumerable<IGrouping<int, Host>> HostsGroupdeByNumOfUnits();
 
         #endregion
 
@@ -36,11 +51,20 @@ namespace BL
 
         #region HostingUnit functions
 
-        void addHostingUnit(HostingUnit unit);
         void deleteHostingUnit(int unitKey);
+        void addHostingUnit(HostingUnit unit);
         void updateHostingUnit(HostingUnit unit);
         IEnumerable<HostingUnit> getHostingUnits();
         HostingUnit getHostingUnit(int key);
+        #endregion
+
+        #region Host functions
+
+        void addHost(Host host);
+        void deleteHost(int Key);
+        Host getHost(int key);
+        void updateHost(Host host);
+        IEnumerable<Host> getHosts();
 
         #endregion
 
@@ -48,17 +72,8 @@ namespace BL
 
         void addOrder(Order order);
         void updateOrder(int key, OrderStatus status);
+        Order getOrder(int key);
         IEnumerable<Order> getOrders();
-
-        #endregion
-
-        #region Host functions
-
-        void addHost(Host host);
-        void deleteHost(int Key);
-        void updateHost(Host host);
-        IEnumerable<Host> getHosts();
-        Host getHost(int key);
 
         #endregion
 
@@ -67,5 +82,6 @@ namespace BL
         IEnumerable<BankBranch> getBankBranchs();
 
         #endregion
+
     }
 }

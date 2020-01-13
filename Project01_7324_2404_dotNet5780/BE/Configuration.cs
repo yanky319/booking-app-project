@@ -12,5 +12,6 @@ namespace BE
         public static int HostingUnitKey = 10000000;
         public static int HostKey = 10000000;
         public static int orderKey = 10000000;
+        public static int commission = 10;
     }
 }
