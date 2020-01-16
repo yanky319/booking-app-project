@@ -4,7 +4,7 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
     <System:String x:Key="MenuLanguagestring">Language</System:String>
-    <System:String x:Key="Menulogin">login</System:String>
+    <System:String x:Key="Menulogin">Login</System:String>
     <System:String x:Key="MenuGuest">Guest</System:String>
     <System:String x:Key="MenuHost">Host</System:String>
     <System:String x:Key="MenuOwner">Owner</System:String>
@@ -23,5 +23,14 @@
     
     
     <System:String x:Key="MainWindowTitle">Owner Login</System:String>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 </ResourceDictionary>

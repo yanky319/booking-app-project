@@ -142,24 +142,24 @@ namespace BL
         public void calculatOrderCommition(Order order)
         {
             var a = getGuestRequests().ToList().Find(e => e.GuestRequestKey == order.GuestRequestKey);
-           int commission = (int)dateRange(a.EntryDate, a.ReleaseDate) * Configuration.commission;
+            int commission = (int)dateRange(a.EntryDate, a.ReleaseDate) * Configuration.commission;
         }
         public bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release)
         {
             int j = 0;
-            for (DateTime i = Entry; i < Release; i.AddDays(1))
+            for (DateTime i = Entry; i < Release; i = i.AddDays(1))
             {
                 j = (i - DateTime.Now.AddMonths(-1)).Days;
                 if (diary[j / 31, j % 31])
                     return false;
             }
-               
+
             return true;
         }
         public void BlockDates(bool[,] diary, DateTime Entry, DateTime Release)
         {
             int j = 0;
-            for (DateTime i = Entry; i < Release; i.AddDays(1))
+            for (DateTime i = Entry; i < Release; i = i.AddDays(1))
             {
                 j = (i - DateTime.Now.AddMonths(-1)).Days;
                 diary[j / 31, j % 31] = true;
@@ -214,11 +214,11 @@ namespace BL
         {
             return getOrders().ToList().FindAll(e => e.HostingUnitKey == unit.HostingUnitKey && e.Status == OrderStatus.closed_with_deal).Count();
         }
-       
 
 
-        
-         public IEnumerable<IGrouping<Areas,GuestRequest>> GuestRequestGroupdeByArae()
+
+
+        public IEnumerable<IGrouping<Areas, GuestRequest>> GuestRequestGroupdeByArae()
         {
             var a = from item in getGuestRequests()
                     group item by item.Area;
@@ -230,16 +230,16 @@ namespace BL
         {
             var a = from item in getGuestRequests()
                     group item by (item.Adults + item.Children);
-                    
+
 
             return a;
         }
-       
+
         public IEnumerable<IGrouping<Areas, HostingUnit>> HostingUnitGroupdeByArae()
         {
             var a = from item in getHostingUnits()
                     group item by item.Area;
-                    
+
 
             return a;
         }
@@ -247,23 +247,23 @@ namespace BL
         {
             var a = from item in getHosts()
                     group item by item.numUnits;
-                    
+
 
             return a;
         }
-        
-        
+
+
         #endregion
 
         #region GuestRequest functions
 
-        public void addGuestRequest(GuestRequest request) 
+        public void addGuestRequest(GuestRequest request)
         {
             IsValidDates(request.EntryDate, request.ReleaseDate);
             IsValidName(request.PrivateName, "Privat");
             IsValidName(request.FamilyName, "Family");
             IsValidEmail(request.MailAddress);
-             
+
             try
             {
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
@@ -278,7 +278,7 @@ namespace BL
         public void updateGuestRequest(int key, RequestStatus status)
         {
             DAL.Idal dal = DAL.FactorySingleton.Instance;
-           
+
             try
             {
                 List<GuestRequest> Requests = dal.getGuestRequests().ToList();
@@ -290,15 +290,15 @@ namespace BL
                     throw new StatusException("BL_");
                 dal.updateGuestRequest(key, status);
             }
-            catch(KeyNotFoundException e)
+            catch (KeyNotFoundException e)
             {
                 throw new KeyNotFoundException("BL" + e.Message.Substring(3));
             }
-            catch(TargetNotFoundException)
+            catch (TargetNotFoundException)
             {
                 throw new TargetNotFoundException("BL_");
             }
-            catch(SourceNotFoundException)
+            catch (SourceNotFoundException)
             {
                 throw new SourceNotFoundException("BL_");
             }
@@ -314,7 +314,7 @@ namespace BL
                     throw new SourceNotFoundException("BL_");
                 return Requests;
             }
-            catch(SourceNotFoundException)
+            catch (SourceNotFoundException)
             {
                 throw new SourceNotFoundException("BL_");
             }
@@ -345,7 +345,7 @@ namespace BL
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.deleteHostingUnit(unitKey);
             }
-            catch(SourceNotFoundException )
+            catch (SourceNotFoundException)
             {
                 throw new SourceNotFoundException("BL_");
             }
@@ -364,11 +364,11 @@ namespace BL
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.addHostingUnit(unit);
             }
-            catch(TargetNotFoundException )
+            catch (TargetNotFoundException)
             {
                 throw new TargetNotFoundException("BL_");
             }
-            
+
         }
 
         public void updateHostingUnit(HostingUnit unit)
@@ -413,7 +413,7 @@ namespace BL
                     throw new KeyNotFoundException("HostingUnit with this key does not exist");
                 return a.ToList()[0];
             }
-            catch(SourceNotFoundException)
+            catch (SourceNotFoundException)
             {
                 throw new SourceNotFoundException("BL_");
             }
@@ -504,12 +504,12 @@ namespace BL
             {
                 throw new TargetNotFoundException("BL_");
             }
-        }              
+        }
 
 
         public IEnumerable<Host> getHosts()
         {
-            
+
             try
             {
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
@@ -540,7 +540,7 @@ namespace BL
             var b = getHostingUnit(order.HostingUnitKey);
 
             IsValidOrder(a.ElementAt(0), b);
-
+            BlockDates(b.Diary, a.ElementAt(0).EntryDate, a.ElementAt(0).ReleaseDate);
             try
             {
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
@@ -576,7 +576,7 @@ namespace BL
                     updateHostingUnit(unit);
                     var a = from item in getOrders()
                             where item.GuestRequestKey == order.GuestRequestKey && item.OrderKey != order.OrderKey && item.Status != OrderStatus.closed_without_deal
-                            select item.OrderKey ;
+                            select item.OrderKey;
                     if (a.Count() != 0)
                         foreach (int item in a)
                         {
@@ -590,7 +590,7 @@ namespace BL
                             }
                         }
                 }
-                   
+
 
             }
             catch (TargetNotFoundException e)

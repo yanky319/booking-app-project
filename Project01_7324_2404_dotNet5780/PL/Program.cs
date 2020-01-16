@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 namespace PL
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
-            BL.BL_imp a = new BL.BL_imp();
+            BL.IBL a = BL.FactorySingleton.Instance;
             #region add Requests
+            Console.WriteLine("--------------------------ERROR'S-------------------------------");
             try
             {
                 a.addGuestRequest(new BE.GuestRequest()
@@ -26,7 +27,7 @@ namespace PL
                     Type = Types.All,
                     Adults = 2,
                     Children = 0,
-                    Pool = ThreeChoice.optional,
+                    Pool = ThreeChoice.necessary,
                     Jacuzzi = ThreeChoice.optional,
                     Garden = ThreeChoice.optional,
                     ChildrensAttractions = ThreeChoice.optional,
@@ -36,7 +37,7 @@ namespace PL
                     specialMmeal = special_meal.non,
                 });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -46,7 +47,7 @@ namespace PL
                 {
                     PrivateName = "Moshe",
                     FamilyName = "Helfgot",
-                    MailAddress = "a@a.a",
+                    MailAddress = "a@ayy.a",
                     EntryDate = new DateTime(2020, 6, 13),
                     ReleaseDate = new DateTime(2020, 6, 23),
                     Area = Areas.All,
@@ -101,9 +102,37 @@ namespace PL
                 a.addGuestRequest(new BE.GuestRequest()
                 {
                     PrivateName = "Yaankov",
-                    FamilyName = "Goldshmit",
+                    FamilyName = "zozo",
                     MailAddress = "a@a.a",
                     EntryDate = new DateTime(2020, 3, 23),
+                    ReleaseDate = new DateTime(2020, 3, 23),
+                    Area = Areas.All,
+                    SubArea = SubAreas.All,
+                    Type = Types.All,
+                    Adults = 2,
+                    Children = 3,
+                    Pool = ThreeChoice.optional,
+                    Jacuzzi = ThreeChoice.optional,
+                    Garden = ThreeChoice.optional,
+                    ChildrensAttractions = ThreeChoice.optional,
+                    wifi = ThreeChoice.optional,
+                    accessibility = ThreeChoice.optional,
+                    Meals = meals.not_interested,
+                    specialMmeal = special_meal.non,
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                a.addGuestRequest(new BE.GuestRequest()
+                {
+                    PrivateName = "Yaankov",
+                    FamilyName = "coco",
+                    MailAddress = "a@abb.a",
+                    EntryDate = new DateTime(2020, 3, 21),
                     ReleaseDate = new DateTime(2020, 3, 23),
                     Area = Areas.All,
                     SubArea = SubAreas.All,
@@ -184,6 +213,7 @@ namespace PL
                     ChildrensAttractions = true,
                     wifi = true,
                     accessibility = true,
+
                 });
             }
             catch (Exception e)
@@ -232,14 +262,59 @@ namespace PL
 
                 Console.WriteLine(e.Message);
             }
-            #endregion
+            try
+            {
+                a.addOrder(new BE.Order()
+                {
+                    HostingUnitKey = 10000002,
+                    HostKey = 10000001,
+                    GuestRequestKey = 10000003,
+                });
+            }
+            catch (Exception e)
+            {
 
+                Console.WriteLine(e.Message);
+            }
+            try
+            {
+                a.addOrder(new BE.Order()
+                {
+                    HostingUnitKey = 10000002,
+                    HostKey = 10000001,
+                    GuestRequestKey = 10000004,
+                });
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("\n\n--------------------------Guest requests-------------------------------");
+            foreach (var item in a.getGuestRequests())
+            {
+                Console.WriteLine(item);
+                Console.WriteLine('\n');
+            }
+            Console.WriteLine("--------------------------Hosting units-------------------------------");
+            foreach (var item in a.getHostingUnits())
+            {
+                Console.WriteLine(item);
+                Console.WriteLine('\n');
+            }
+            Console.WriteLine("--------------------------Orders-------------------------------");
+            foreach (var item in a.getOrders())
+            {
+                Console.WriteLine(item);
+                Console.WriteLine('\n');
+            }
+
+            #endregion
             Console.ReadKey();
         }
     }
 }
 
 
-                
-               
-               
+
+
