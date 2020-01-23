@@ -10,13 +10,6 @@
         Title="{DynamicResource MainWindowTitle}" Height="450" Width="800"
         WindowStartupLocation ="CenterScreen">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*"/>
-            <ColumnDefinition Width="34*"/>
-        </Grid.ColumnDefinitions>
-        <windos:menuControl HorizontalAlignment="Left" Height="20" Margin="10,0,0,0" VerticalAlignment="Top" Width="782" RenderTransformOrigin="0.483,-0.564" Grid.ColumnSpan="2"/>
-
-
-
+        <Button x:Name="AA" Content="Button"  HorizontalAlignment="Center" Margin="73,314,644,85" VerticalAlignment="Center" Width="75" Background="#FF9E2424" Click="AA_Click"/>
     </Grid>
 </Window>

@@ -1,0 +1,92 @@
+﻿<Window x:Class="WpfPL.windos.Owner_screen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:WpfPL.windos"
+        mc:Ignorable="d"
+        Title="Owner_screen" Width="800" ResizeMode="NoResize" Height="900" WindowState="Maximized"   >
+   
+    
+    
+    
+    
+    <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource main}" VerticalAlignment="Bottom" Height="850" FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
+                    Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue">
+        <TabItem Header="Hosting units" BorderThickness="0" Background="{StaticResource main}" >
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource main}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="logoImage" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"  Margin="5"  VerticalAlignment="Stretch" />
+
+                <Label x:Name= "searchLabel" Content="{StaticResource searchLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="0" ></Label>
+                <Label x:Name= "ResetFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
+
+                <Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Center" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="2" ></Label>
+                <TextBox Name="searchTextBox"  Background="{StaticResource main}" Grid.Column="5" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False"  ></TextBox>
+
+                <Label x:Name= "accessibilityLabel" Content="{StaticResource accessibility}" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="0" ></Label>
+                <CheckBox x:Name= "accessibilityCheckBox" HorizontalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="4" IsChecked="False" Grid.Row="1" />
+
+                <Label x:Name= "AreaLabel" Content="{StaticResource Area}" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="0" ></Label>
+                <ComboBox x:Name="AreaComboBox" SelectedIndex="0" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="1"  HorizontalAlignment="Center"  Grid.Row="1" VerticalAlignment="Center"  >
+                    <ComboBoxItem Content="השבוע" IsEnabled="False"/>
+                    <ComboBoxItem Content="בשבוע הבא" Background="{DynamicResource main}" BorderThickness="0"/>
+                    <ComboBoxItem Content="החודש" Background="{DynamicResource main}" BorderThickness="0"/>
+                    <ComboBoxItem Content="בחודש הבא" Background="{DynamicResource main}" BorderThickness="0"/>
+                </ComboBox>
+                <Label x:Name= "SubAreaLabel" Content="{StaticResource SubArea}" HorizontalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
+                <ComboBox x:Name="SubAreaComboBox" Grid.Column="2" Background="{DynamicResource main}" StaysOpenOnEdit="False" BorderBrush="Black" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" >
+                    <ComboBoxItem Content="השבוע"  />
+                    <ComboBoxItem Content="בשבוע הבא"/>
+                    <ComboBoxItem Content="החודש"/>
+                    <ComboBoxItem Content="בחודש הבא"/>
+                </ComboBox>
+                <Label x:Name= "TypeLabel" Content="{StaticResource Type}" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="0" ></Label>
+                <ComboBox x:Name="TypeComboBox" Grid.Column="3" Background="{DynamicResource main}" BorderBrush="Black" HorizontalAlignment="Center"  Margin="3" Grid.Row="1" VerticalAlignment="Center" >
+                    <ComboBoxItem Content="השבוע" />
+                    <ComboBoxItem Content="בשבוע הבא"/>
+                    <ComboBoxItem Content="החודש"/>
+                    <ComboBoxItem Content="בחודש הבא"/>
+                </ComboBox>
+
+
+
+                <DataGrid x:Name="UnitsDataGrid" Grid.ColumnSpan="8"  Grid.Row="2" IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
+                        <DataGridTextColumn Header="{DynamicResource HostingUnitName}" Binding="{Binding HostingUnitName}"/>
+                        <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}" />
+                        <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
+                        <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="{DynamicResource Diary}"  />
+                        <DataGridTextColumn Header="{DynamicResource num_beds}" Binding="{Binding num_beds}"/>
+                        <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
+                        <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
+                        <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
+                        <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
+                        <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
+                        <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
+</Window>

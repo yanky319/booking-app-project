@@ -1,6 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:WpfPL.Resources.styles">
-    
+                    xmlns:local="clr-namespace:WpfPL.Resources.styles"
+                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
+    <SolidColorBrush x:Key="main">#FFA03131</SolidColorBrush>
+    <SolidColorBrush x:Key="Button_bakgrund_color">#FFA03131</SolidColorBrush>
+    <System:Double x:Key="over_size">15</System:Double>
+    <System:Double x:Key="not_over_size">12</System:Double>
+    <SolidColorBrush x:Key="over_color">#FF211616</SolidColorBrush>
+    <SolidColorBrush x:Key="not_over_color">#FFFFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="AlternatingRowBackground">blue</SolidColorBrush>
+    
+    
+    <Style TargetType="Label"  x:Key="Label_style">
+        <Setter Property="FontSize" Value="{DynamicResource not_over_size}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Focusable" Value="True"/>
+        <Setter Property="Foreground" Value="{DynamicResource not_over_color}"/>
+    </Style>
+
+   
 </ResourceDictionary>
+
