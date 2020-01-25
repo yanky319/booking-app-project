@@ -15,17 +15,15 @@ using System.Windows.Shapes;
 
 namespace WpfPL.windos
 {
-    /// <summary>
-    /// Interaction logic for Host_Window.xaml
-    /// </summary>
     public partial class Host_Window : Window
     {
         BE.Host myhost;
-        public Host_Window(BE.Host host)
+        bool isHost;
+        public Host_Window(BE.Host host, bool ishost)
         {
             InitializeComponent();
-            //throw new Exception("AAAAAAAA");
             myhost = host;
+            isHost = ishost;
             TypeComboBox.ItemsSource = Enum.GetValues(typeof(Types));
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(Areas));
             SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
@@ -33,22 +31,27 @@ namespace WpfPL.windos
 
 
             UnitsResetFilters(this, new RoutedEventArgs());
+            ordersResetFilters(this, new RoutedEventArgs());
             searchUnitsLabel.MouseDown += refreshUnitsdata;
             ResetUnitFiltersLabel.MouseDown += UnitsResetFilters;
+            searchUnitsLabel.MouseDown += refreshordersdata;
+            ResetUnitFiltersLabel.MouseDown += ordersResetFilters;
 
             searchUnitsLabel.MouseEnter += mouseEnter;
             ResetUnitFiltersLabel.MouseEnter += mouseEnter;
-            
+            ResetorderFiltersLabel.MouseEnter += mouseEnter;
+            searchordersLabel.MouseEnter += mouseEnter;
 
             searchUnitsLabel.MouseLeave += mouseLeave;
             ResetUnitFiltersLabel.MouseLeave += mouseLeave;
-            
+            ResetorderFiltersLabel.MouseLeave += mouseLeave;
+            searchordersLabel.MouseLeave += mouseLeave;
         }
 
         private void AreaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SubAreaComboBox.ItemsSource = null;
-            if(AreaComboBox.SelectedIndex == 0)
+            if (AreaComboBox.SelectedIndex == 0)
             {
                 SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
             }
@@ -102,7 +105,7 @@ namespace WpfPL.windos
                                             ChildrensAttractions = item.ChildrensAttractions ? "     \u2713" : "     \u2717",
 
                                         };
-            
+
         }
 
         void UnitsResetFilters(object sender, RoutedEventArgs e)
@@ -114,64 +117,164 @@ namespace WpfPL.windos
             refreshUnitsdata(sender, e);
         }
 
-        void refreshdata2()
+        void ordersResetFilters(object sender, RoutedEventArgs e)
+        {
+            statusComboBox.SelectedIndex = -1;
+            fromdatePicker.SelectedDate = null;
+            todatePicker.SelectedDate = null;
+            refreshordersdata(sender, e);
+        }
+
+        private void refreshordersdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bl = BL.FactorySingleton.Instance;
-            //OrderDataGrid.ItemsSource = bl.getHostsOrders(myhost);
-                                    
+            ordersDataGrid.ItemsSource = from item in bl.getHostsOrders(myhost,
+                (i => (statusComboBox.SelectedIndex == -1 || i.Status.ToString() == statusComboBox.SelectedItem.ToString())
+                && (fromdatePicker.SelectedDate == null || i.CreateDate >= fromdatePicker.SelectedDate)
+                && (todatePicker.SelectedDate == null || i.CreateDate <= todatePicker.SelectedDate)))
+                                         select item;
 
         }
 
         void UpdateUnit(object sender, RoutedEventArgs e)
         {
-            
-            if (UnitsDataGrid.SelectedItems.Count > 1)
+
+           if(isHost)
             {
+                if (UnitsDataGrid.SelectedItems.Count > 1)
+                {
                     MessageBox.Show("error cannot updated more than one unit at a time", "EROOR", MessageBoxButton.OK,
                                     MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-            }
-            else
-            {
-                dynamic a = UnitsDataGrid.SelectedItem;
-                new Unit_window(a.HostingUnitKey).ShowDialog();
+                }
+                else
+                {
+                    dynamic a = UnitsDataGrid.SelectedItem;
+                    new Unit_window(a.HostingUnitKey).ShowDialog();
+                }
             }
         }
         void DeleteUnit(object sender, RoutedEventArgs e)
         {
-            if (UnitsDataGrid.SelectedItems.Count > 1)
+            if(isHost)
             {
-                MessageBox.Show("error cannot updated more than one unit at a time", "EROOR", MessageBoxButton.OK,
-                                MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-            }
-            else
-            {
-                dynamic a = UnitsDataGrid.SelectedItem;
-                string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
-               b= b.Replace(" ", "");
-                b = b.Replace(",", ", ");
-               
-                MessageBoxResult result = MessageBox.Show(b, "אישור מחיקה", MessageBoxButton.YesNo,
-                                                     MessageBoxImage.Question, MessageBoxResult.No);
-                if(result.ToString() == "Yes")
+                if (UnitsDataGrid.SelectedItems.Count > 1)
                 {
-                    try
+                    MessageBox.Show("error cannot updated more than one unit at a time", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                }
+                else
+                {
+                    dynamic a = UnitsDataGrid.SelectedItem;
+                    string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
+                    b = b.Replace(" ", "");
+                    b = b.Replace(",", ", ");
+
+                    MessageBoxResult result = MessageBox.Show(b, "Delete permission", MessageBoxButton.YesNo,
+                                                         MessageBoxImage.Question, MessageBoxResult.No);
+                    if (result.ToString() == "Yes")
                     {
-                        BL.IBL bl = BL.FactorySingleton.Instance;
-                        bl.deleteHostingUnit(a.HostingUnitKey);
-                        refreshUnitsdata(sender, e);
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "EROOR", MessageBoxButton.OK,
-                                        MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        try
+                        {
+                            BL.IBL bl = BL.FactorySingleton.Instance;
+                            bl.deleteHostingUnit(a.HostingUnitKey);
+                            refreshUnitsdata(sender, e);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "EROOR", MessageBoxButton.OK,
+                                            MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        }
                     }
                 }
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new Unit_window().ShowDialog();
+            if(isHost)
+            {
+                new Unit_window().ShowDialog();
+            }
         }
+
+
+
+        void Updateorder(object sender, RoutedEventArgs e)
+        {
+            if (isHost)
+            {
+                if (ordersDataGrid.SelectedItems.Count > 1)
+                {
+                    MessageBox.Show("error cannot updated more than one order at a time", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                }
+                else
+                {
+                    dynamic a = ordersDataGrid.SelectedItem;
+                    string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
+                    if (b.Contains("not_addressed"))
+                    {
+                       if(myhost.CollectionClearance)
+                        {
+                            try
+                            {
+                                b = b.Replace(" ", "");
+                                b = b.Replace(",", "");
+
+                                int Start = b.IndexOf("OrderKey", 0) + "OrderKey".Length;
+                                BL.IBL bl = BL.FactorySingleton.Instance;
+                                bl.updateOrder(int.Parse(b.Substring(Start, 8)), OrderStatus.mail_sent);
+                            }
+                            catch(Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+
+                            }
+                        }
+                       else 
+                        {
+                            MessageBox.Show("error Host without collection Clearance cannot take orders", "EROOR", MessageBoxButton.OK,
+                                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        }
+
+                        ordersResetFilters(sender, e);
+                        return;
+                    }
+                   
+                    if (b.Contains("closed_without_deal") || b.Contains("closed_with_deal"))
+                    {
+
+                        MessageBox.Show("error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
+                                        MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        ordersResetFilters(sender, e);
+                        return;
+                    }
+                   
+                    if(b.Contains("mail_sent"))
+                    {
+                        int i = BE.Configuration.commission;
+                        MessageBoxResult result = MessageBox.Show("Closing the deal will result in a charge "+ i + "NIS per day", "אישור מחיקה", MessageBoxButton.YesNo,
+                                                        MessageBoxImage.Question, MessageBoxResult.No);
+                        if (result.ToString() == "Yes")
+                        {
+                            try
+                            {
+                                b = b.Replace(" ", "");
+                                b = b.Replace(",", "");
+
+                                int Start = b.IndexOf("OrderKey", 0) + "OrderKey".Length;
+                                BL.IBL bl = BL.FactorySingleton.Instance;
+                                bl.updateOrder(int.Parse(b.Substring(Start, 8)), OrderStatus.closed_with_deal);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+
+                            }
+                        }
+                    }
+                   
+                }
+            }
     }
 }

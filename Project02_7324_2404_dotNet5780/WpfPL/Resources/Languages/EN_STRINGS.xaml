@@ -56,8 +56,10 @@
     <System:String x:Key="Delete">Delete</System:String>
     <System:String x:Key="Update">Update</System:String>
 
-
-
+    <System:String x:Key="fromLabel">From date</System:String>
+    <System:String x:Key="toLabel">To date</System:String>
+    <System:String x:Key="status">status</System:String>
+    
     <!--#endregion-->
     
     

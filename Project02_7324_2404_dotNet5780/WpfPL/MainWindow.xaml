@@ -10,7 +10,7 @@
         Title="{DynamicResource MainWindowTitle}"  WindowState="Maximized"  FontFamily="Segoe UI Semibold"
         WindowStartupLocation ="CenterScreen" >
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\naomi\Desktop\mini project\mini_project\Project01_7324_2404_dotNet5780\WpfPL\Resources\images\10229.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="/../WpfPL/Resources/images/bak.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <Window.Resources>
         <!--<Style x:Key="CB"  TargetType="{x:Type ComboBox}">

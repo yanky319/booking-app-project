@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:WpfPL.Resources.styles"
                      xmlns:System="clr-namespace:System;assembly=mscorlib">
 
-    <SolidColorBrush x:Key="main">#FFA03131</SolidColorBrush>
+    <SolidColorBrush x:Key="main">#FF0767A8</SolidColorBrush>
     <SolidColorBrush x:Key="Button_bakgrund_color">#FFA03131</SolidColorBrush>
     <System:Double x:Key="over_size">15</System:Double>
     <System:Double x:Key="not_over_size">12</System:Double>
