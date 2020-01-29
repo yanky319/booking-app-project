@@ -25,11 +25,11 @@ namespace BL
         void IsValidOrder(GuestRequest request, HostingUnit unit);
         bool ThreeChoiceboolMatch(ThreeChoice requested, bool exists);
         void sendEmail(Order order);
-        void calculatOrderCommition(Order order);
+        int calculatOrderCommition(Order order);
         bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release);
         void BlockDates(bool[,] diary, DateTime Entry, DateTime Release);
         IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition);
-        List<HostingUnit> FindAvailableUnits(DateTime Entry, int days);
+        List<HostingUnit> FindAvailableUnits(DateTime Entry, int days,Host host);
         int? dateRange(params DateTime[] dates);
         List<Order> FindExpiredOrders(int days);
         int NumOfOrdersPerRequest(GuestRequest request);

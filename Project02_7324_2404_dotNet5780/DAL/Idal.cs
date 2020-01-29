@@ -13,6 +13,7 @@ namespace DAL
 
         void addGuestRequest(GuestRequest request);
         void updateGuestRequest(int key , RequestStatus status);
+        void deleteGuestRequest(int key);
         IEnumerable<GuestRequest> getGuestRequests();
 
         #endregion

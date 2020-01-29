@@ -40,6 +40,7 @@ namespace DS
             new HostingUnit()
             {
                 HostID = 10000002,
+                HostingUnitKey = 10000003,
                 HostingUnitName = "chofeshTow",
                 Area = Areas.Jerusalem,
                 SubArea = SubAreas.Beit_Shemesh,
@@ -51,10 +52,12 @@ namespace DS
                 ChildrensAttractions = true,
                 wifi = true,
                 accessibility = true,
+                Diary = new bool[12,31],
             },
             new HostingUnit()
             {
                 HostID = 10000002,
+                HostingUnitKey =10000002,
                 HostingUnitName = "chofeshTow",
                 Area = Areas.Jerusalem,
                 SubArea = SubAreas.Beit_Shemesh,
@@ -66,10 +69,12 @@ namespace DS
                 ChildrensAttractions = true,
                 wifi = true,
                 accessibility = true,
+                 Diary = new bool[12,31],
             },
             new HostingUnit()
     {
         HostID = 10000002,
+        HostingUnitKey =10000004,
         HostingUnitName = "chofeshOne",
         Area = Areas.Jerusalem,
         SubArea = SubAreas.Beit_Shemesh,
@@ -81,7 +86,7 @@ namespace DS
         ChildrensAttractions = true,
         wifi = true,
         accessibility = true,
-
+         Diary = new bool[12,31],
     }
     };
 

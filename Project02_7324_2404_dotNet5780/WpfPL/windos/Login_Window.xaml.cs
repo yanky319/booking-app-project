@@ -193,12 +193,12 @@ namespace WpfPL.windos
             List<BE.Host> hosts = bl.getHosts().ToList();
             foreach (BE.Host host in hosts)
             {
-                if (host.PrivateName + ' ' + host.FamilyName == NameTextBox2.Text && host.passworde == PasswordPasswordBox2.Password)
+                if (host.PrivateName + ' ' + host.FamilyName == NameTextBox2.Text && host.passwordeHash == PasswordPasswordBox2.Password.GetHashCode())
                 {
                     for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
                         if (App.Current.Windows[intCounter] != this)
                             App.Current.Windows[intCounter].Close();
-                    new Host_Window(host).Show();
+                    new Host_Window(host,true).Show();
                     this.Close();
 
                 }

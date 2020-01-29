@@ -20,3 +20,14 @@ C:\Users\yanky\Desktop\יענקי\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cac
 C:\Users\yanky\Desktop\יענקי\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\yanky\Desktop\יענקי\DAL\obj\Debug\DAL.dll
 C:\Users\yanky\Desktop\יענקי\DAL\obj\Debug\DAL.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\DAL.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\DAL.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\BE.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\DS.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\BE.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\bin\Debug\DS.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\obj\Debug\DAL.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\DAL\obj\Debug\DAL.pdb

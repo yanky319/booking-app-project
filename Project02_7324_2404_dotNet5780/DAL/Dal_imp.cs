@@ -23,8 +23,8 @@ namespace DAL
         {
             if (DataSource.guestRequests == null)
                 throw new TargetNotFoundException("DAL_");
-            request.GuestRequestKey = ++Configuration.GuestRequestKey;
-            request.RegistrationDate = DateTime.Now;
+            request.GuestRequestKey = Configuration.GuestRequestKey;
+            request.RegistrationDate = DateTime.Today;
             DataSource.guestRequests.Add(copy_List<GuestRequest>(new List<GuestRequest>(){request})[0]);
         }
         public void updateGuestRequest(int key, RequestStatus status)
@@ -37,6 +37,15 @@ namespace DAL
             if (a.Count() == 0)
                 throw new KeyNotFoundException("DAL_ERROR, guest Request with this key does not exist");
             a.ElementAt(0).Status = status;
+        }
+        public void deleteGuestRequest(int key)
+        {
+            if (DataSource.guestRequests == null)
+                throw new SourceNotFoundException("DAL_");
+            int index = DataSource.guestRequests.FindIndex(e => e.GuestRequestKey == key);
+            if (index == -1)
+                throw new KeyNotFoundException("DAL_ERROR, Guest Request with this key does not exist");
+            DataSource.guestRequests.RemoveAt(index);
         }
         public IEnumerable<GuestRequest> getGuestRequests()
         {
@@ -66,7 +75,7 @@ namespace DAL
                 throw new TargetNotFoundException("DAL_");
             int index = DataSource.hosts.FindIndex(e => e.HostID == unit.HostID);
             DataSource.hosts[index].numUnits++;
-            unit.HostingUnitKey = ++Configuration.HostingUnitKey;
+            unit.HostingUnitKey = Configuration.HostingUnitKey;
             DataSource.hostingUnits.Add(copy_List<HostingUnit>(new List<HostingUnit>() { unit})[0]);
         }
         public void updateHostingUnit(HostingUnit unit)
@@ -96,10 +105,10 @@ namespace DAL
             if (DataSource.orders == null)
                 throw new TargetNotFoundException("DAL_");
 
-            order.OrderKey = ++Configuration.orderKey;
+            order.OrderKey = Configuration.orderKey;
             order.Status = OrderStatus.not_addressed;
-            order.CreateDate = DateTime.Now;
-            order.Order_Date = DateTime.MinValue;
+            order.CreateDate = DateTime.Today;
+            order.OrderDate = DateTime.MinValue;
 
             DataSource.orders.Add(copy_List<Order>(new List<Order>() { order })[0]);
         }
@@ -131,8 +140,8 @@ namespace DAL
         {
             if (DataSource.hosts == null)
                 throw new TargetNotFoundException("DAL_");
-            host.HostID = ++Configuration.HostKey;
             host.numOrders = 0;
+            host.numUnits = 0;
             DataSource.hosts.Add(copy_List<Host>(new List<Host>() { host })[0]);
         }
 

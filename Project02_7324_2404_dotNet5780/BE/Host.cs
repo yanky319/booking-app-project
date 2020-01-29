@@ -10,7 +10,7 @@ namespace BE
     {
         public int HostID { get;  set; }
         public string PrivateName { get;  set; }
-        public string passworde { get; set; }
+        public int passwordeHash { get; set; }
         public string FamilyName { get;  set; }
         public string FhoneNumber { get;  set; }
         public string MailAddress { get;  set; }

@@ -8,9 +8,11 @@
         mc:Ignorable="d"
         x:Name="HostWindow"
         Title="Host_Window" ResizeMode="NoResize" Height="900" WindowState="Maximized"  Background="{StaticResource main}" >
-
+    
+    
     <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"  Height="850" FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue">
+
         <TabItem x:Name="unitsMainGrid" Header="Hosting units" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
             <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
                 <Grid.ColumnDefinitions>
@@ -39,6 +41,7 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
+                    <Label x:Name="logout1" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
                     <Label x:Name= "ResetUnitFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
                     <Label x:Name= "searchUnitsLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
                     <Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
@@ -60,7 +63,7 @@
                         <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
                         <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
                         <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="{DynamicResource Diary}"  />
+                        <!--<DataGridTextColumn Header="{DynamicResource Diary}"  />-->
                         <DataGridTextColumn Header="{DynamicResource num_beds}" Binding="{Binding num_beds}"/>
                         <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
                         <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
@@ -120,7 +123,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
+                    <Label x:Name="logout2" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
                     <Label x:Name= "ResetorderFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
                     <Label x:Name= "searchordersLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
                             
@@ -179,6 +182,113 @@
             </Grid>
         </TabItem>
 
+
+        <TabItem x:Name="RequestsMainGrid" Header="Guest requests" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
+            <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="713*"/>
+                    <ColumnDefinition Width="49*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="RequestHeaderGrid" Grid.ColumnSpan="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="logout3" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
+                    <Label x:Name= "ResetRequestFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
+                    <Label x:Name= "searchRequestsLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
+                    <!--<Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
+                    <TextBox Name="searchTextBox"  Background="{StaticResource main}" Grid.Column="4" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False"   ></TextBox>-->
+
+                    <Label x:Name= "AreaLabel2" Content="{StaticResource Area}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" ></Label>
+                    <ComboBox x:Name="AreaComboBox2" Foreground="{DynamicResource not_over_color}" SelectedIndex="0" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Center"  ></ComboBox>
+                    <Label x:Name= "SubAreaLabel2" Content="{StaticResource SubArea}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
+                    <ComboBox x:Name="SubAreaComboBox2" Grid.Column="2" Background="{DynamicResource main}" StaysOpenOnEdit="False" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
+                    <Label x:Name= "TypeLabel2" Content="{StaticResource Type}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="0" ></Label>
+                    <ComboBox x:Name="TypeComboBox2" Grid.Column="3" Background="{DynamicResource main}" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
+                    <Label x:Name= "fromLabel2" Content="{StaticResource fromLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="4" Grid.Row="0" ></Label>
+                    <DatePicker FontSize="20"  BorderThickness="0"  x:Name="fromdatePicker2" SelectedDateChanged="SelectedDateChanged"    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"  Grid.Column="4" Grid.Row="3"   >
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Text" Value="Select date" />
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                            </Style>
+                        </DatePicker.Resources>
+                        <DatePicker.CalendarStyle>
+                            <StaticResource ResourceKey="resizedCalendarItem"/>
+                        </DatePicker.CalendarStyle>
+                    </DatePicker>
+
+                    <Label x:Name= "toLabel2" Content="{StaticResource toLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" ></Label>
+                    <DatePicker FontSize="20" Grid.Column="5" Grid.Row="2"  BorderThickness="0"  x:Name="todatePicker2"  SelectedDateChanged="SelectedDateChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"     >
+                        <DatePicker.Resources >
+                            <Style  TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Text" Value="Select date" />
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </Style>
+                        </DatePicker.Resources>
+                        <DatePicker.CalendarStyle>
+                            <StaticResource ResourceKey="resizedCalendarItem"/>
+                        </DatePicker.CalendarStyle>
+                    </DatePicker>
+                </Grid>
+
+                <DataGrid x:Name="RequestsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                    <DataGrid.Columns >
+                     
+                        <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
+                        <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
+                        <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
+                        <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
+                        <DataGridTextColumn Header="{DynamicResource EntryDate}" Binding="{Binding EntryDate}"/>
+                        <DataGridTextColumn Header="{DynamicResource ReleaseDate}" Binding="{Binding ReleaseDate}"/> 
+                        <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
+                        <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
+                        <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
+                        <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
+                        <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
+                        <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
+                        <DataGridTextColumn Header="{DynamicResource Meals}" Binding="{Binding Meals}" />
+                        <DataGridTextColumn Header="{DynamicResource specialMmeal}" Binding="{Binding specialMmeal}"/>
+                        <DataGridTextColumn  Width="*" />
+                        <DataGridTemplateColumn Width="70">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button  Content="{DynamicResource Placeorder}" IsEnabled="{Binding Path=isHost}" Background="{DynamicResource main}" Click="Placeorder"></Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Grid x:Name="RequestndingGrid" Grid.Row="2">
+                    
+                </Grid>
+            </Grid>
+        </TabItem>
 
     </TabControl>
 </Window>

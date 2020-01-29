@@ -22,7 +22,7 @@ namespace BL
         {
             try
             {
-                if (!Regex.Match(name, "^[a-zA-Z][a-zA-Z]*$").Success)
+                if (!Regex.Match(name, "^[a-zA-Z][a-zA-Z]{1,}$").Success)
                     throw new FormatException("invalid " + type + " name format");
             }
             catch
@@ -35,7 +35,7 @@ namespace BL
         {
             if ((Release - Entry).TotalDays < 1)
                 throw new EntryAndReleaseDatesMismatchException("BL_");
-            if (Entry < DateTime.Now || Entry > DateTime.Now.AddMonths(11) || Release > DateTime.Now.AddMonths(11))
+            if (Entry < DateTime.Today || Entry > DateTime.Today.AddMonths(11) || Release > DateTime.Today.AddMonths(11))
                 throw new datsOutOfRange("BL_");
         }
         public void IsValidUnitName(string name)
@@ -139,17 +139,18 @@ namespace BL
             return false;
         }
         public void sendEmail(Order order) { }
-        public void calculatOrderCommition(Order order)
+        public int calculatOrderCommition(Order order)
         {
             var a = getGuestRequests().ToList().Find(e => e.GuestRequestKey == order.GuestRequestKey);
             int commission = (int)dateRange(a.EntryDate, a.ReleaseDate) * Configuration.commission;
+            return commission;
         }
         public bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release)
         {
             int j = 0;
             for (DateTime i = Entry; i < Release; i = i.AddDays(1))
             {
-                j = (i - DateTime.Now.AddMonths(-1)).Days;
+                j = (i - DateTime.Today.AddMonths(-1)).Days;
                 if (diary[j / 31, j % 31])
                     return false;
             }
@@ -161,37 +162,32 @@ namespace BL
             int j = 0;
             for (DateTime i = Entry; i < Release; i = i.AddDays(1))
             {
-                j = (i - DateTime.Now.AddMonths(-1)).Days;
+                j = (i - DateTime.Today.AddMonths(-1)).Days;
                 diary[j / 31, j % 31] = true;
             }
         }
-        public IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition)
+        public List<HostingUnit> FindAvailableUnits(DateTime Entry, int days, Host host = null)
         {
-            try
+            if (host == null)
             {
-                List<GuestRequest> requests = getGuestRequests().ToList();
-                foreach (GuestRequest item in requests)
-                    if (!condition(item))
-                        requests.Remove(item);
-                return requests;
+                var a = from item in getHostingUnits()
+                        where CheckDatsAvailable(item.Diary, Entry, Entry.AddDays(days - 1))
+                        select item;
+                return a.ToList();
             }
-            catch
+            else
             {
-                throw new SourceNotFoundException("BL_");
+                var a = from item in GetHostsHostingUnits(host)
+                        where CheckDatsAvailable(item.Diary, Entry, Entry.AddDays(days - 1))
+                        select item;
+                return a.ToList();
             }
-        }
-        public List<HostingUnit> FindAvailableUnits(DateTime Entry, int days)
-        {
-            var a = from item in getHostingUnits()
-                    where CheckDatsAvailable(item.Diary, Entry, Entry.AddDays(days - 1))
-                    select item;
-            return a.ToList();
         }
         public int? dateRange(params DateTime[] dates)
         {
             if (dates.Count() == 1)
             {
-                return (DateTime.Now - dates[0]).Days;
+                return (DateTime.Today - dates[0]).Days;
             }
             if (dates.Count() == 2)
             {
@@ -214,9 +210,6 @@ namespace BL
         {
             return getOrders().ToList().FindAll(e => e.HostingUnitKey == unit.HostingUnitKey && e.Status == OrderStatus.closed_with_deal).Count();
         }
-
-
-
 
         public IEnumerable<IGrouping<Areas, GuestRequest>> GuestRequestGroupdeByArae()
         {
@@ -320,6 +313,22 @@ namespace BL
             }
         }
 
+        public IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition)
+        {
+            try
+            {
+                List<GuestRequest> requests = getGuestRequests().ToList();
+                foreach (GuestRequest item in requests)
+                    if (!condition(item))
+                        requests.Remove(item);
+                return requests;
+            }
+            catch
+            {
+                throw new SourceNotFoundException("BL_");
+            }
+        }
+
         #endregion
 
         #region HostingUnit functions
@@ -335,7 +344,7 @@ namespace BL
                 var b = from item in a
                         where item.Status != OrderStatus.closed_without_deal
                         from request in getGuestRequests()
-                        let flag = request.GuestRequestKey == item.GuestRequestKey && request.ReleaseDate > DateTime.Now
+                        let flag = request.GuestRequestKey == item.GuestRequestKey && request.ReleaseDate > DateTime.Today
                         where flag
                         select flag;
 
@@ -449,7 +458,7 @@ namespace BL
                 var a = from order in getOrders()
                         where order.HostID == Key && order.Status != OrderStatus.closed_without_deal
                         from request in getGuestRequests()
-                        where request.GuestRequestKey == order.GuestRequestKey && request.ReleaseDate > DateTime.Now
+                        where request.GuestRequestKey == order.GuestRequestKey && request.ReleaseDate > DateTime.Today
                         select new { };
                 if (a.Count() != 0)
                     throw new CanNotDeleteException("host with open Orders can not be deleted ");
@@ -490,7 +499,7 @@ namespace BL
                 var a = from order in getOrders()
                         where order.HostID == host.HostID && order.Status != OrderStatus.closed_without_deal
                         from request in getGuestRequests()
-                        where request.GuestRequestKey == order.GuestRequestKey && request.ReleaseDate > DateTime.Now
+                        where request.GuestRequestKey == order.GuestRequestKey && request.ReleaseDate > DateTime.Today
                         select new { };
                 if (a.Count() != 0)
                     throw new CanNotDeleteException("host with open Orders Can Not cancel Collection Clearance");
@@ -544,6 +553,7 @@ namespace BL
 
             return a.Where(predicate).Select(item => item);
         }
+
         #endregion
 
         #region Order functions

@@ -10,3 +10,9 @@ C:\Users\yanky\Desktop\יענקי\BE\obj\Debug\BE.csprojAssemblyReference.cache
 C:\Users\yanky\Desktop\יענקי\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
 C:\Users\yanky\Desktop\יענקי\BE\obj\Debug\BE.dll
 C:\Users\yanky\Desktop\יענקי\BE\obj\Debug\BE.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\bin\Debug\BE.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\bin\Debug\BE.pdb
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\obj\Debug\BE.csprojAssemblyReference.cache
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\obj\Debug\BE.csproj.CoreCompileInputs.cache
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\obj\Debug\BE.dll
+C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BE\obj\Debug\BE.pdb

@@ -22,11 +22,19 @@
     <System:String x:Key="Incorrect_login_information">wrong username or password</System:String>
     <!--#endregion-->
 
-    
-    
+    <!--#region Owner window-->
+    <System:String x:Key="HostID">Host ID</System:String>
+    <System:String x:Key="PrivateName">Name</System:String>
+    <System:String x:Key="FamilyName">Family Name</System:String>
+    <System:String x:Key="CollectionClearance">Collection Clearance</System:String>
+    <System:String x:Key="numOrders">num of Orders</System:String>
+    <System:String x:Key="numUnits">num of Units</System:String>
+    <System:String x:Key="details">details</System:String>
 
- <!--#region Host window-->
+    <!--#endregion-->
 
+    <!--#region Host window-->
+    <System:String x:Key="logout">Logout</System:String>
     <System:String x:Key="HostingUnitKey">Unit Key</System:String>
     <System:String x:Key="HostingUnitName">Unit Name</System:String>
     <System:String x:Key="Area">Area</System:String>
@@ -50,7 +58,7 @@
 
     <System:String x:Key="searchLabel">search</System:String>
     <System:String x:Key="ResetFiltersLabel">Reset Filters</System:String>
-    <System:String x:Key="searchMesseg">Enter text </System:String>
+    <System:String x:Key="searchMesseg">Enter text</System:String>
     <System:String x:Key="AddUnit">Add Unit</System:String>
 
     <System:String x:Key="Delete">Delete</System:String>
@@ -59,10 +67,16 @@
     <System:String x:Key="fromLabel">From date</System:String>
     <System:String x:Key="toLabel">To date</System:String>
     <System:String x:Key="status">status</System:String>
-    
+
+    <System:String x:Key="EntryDate">Entry Date</System:String>
+    <System:String x:Key="ReleaseDate">Release date</System:String>
+    <System:String x:Key="Meals">Meals</System:String>
+    <System:String x:Key="specialMmeal">special Mmeals</System:String>
+    <System:String x:Key="Placeorder">Place order</System:String>
+
     <!--#endregion-->
-    
-    
+
+
     <!--#region areas -->
     <System:String x:Key="All">All</System:String>
     <System:String x:Key="North">North</System:String>
