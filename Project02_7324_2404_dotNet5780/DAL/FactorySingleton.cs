@@ -18,7 +18,8 @@ namespace DAL
             {
                 if (instance == null)
                 {
-                    instance = new Dal_imp();
+                   // instance = new Dal_imp();
+                    instance = new Dal_XML_imp();
                 }
                 return instance;
             }

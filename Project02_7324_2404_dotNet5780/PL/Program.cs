@@ -4,20 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Xml.Serialization;
+
 namespace PL
 {
     public class Program
     {
+        static string path = @"..\..\..\DataSource\";
+        static string Orders = @"Orders.xml";
+        static string GuestRequestFileName = @"Request.xml";
+        static string HostingUnitsFileName = @"HostingUnits.xml";
+        static string HostsFileName = @"Hosts.xml";
+        static string Configurations = @"Configurations.xml";
+        static string BanksFileName = @"Banks.xml";
+        public static void SaveToXML<T>(T source, string fileName)
+        {
+            try
+            {
+                FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
+                XmlSerializer xmlSerializer = new XmlSerializer(source.GetType());
+                xmlSerializer.Serialize(file, source);
+                file.Close();
+            }
+            catch
+            {
+                Console.WriteLine("AAAAAA");
+            }
+
+        }
         public static void Main()
         {
+            SaveToXML(new List<BE.HostingUnit>()
+            {new BE.HostingUnit() }, HostingUnitsFileName);
 
-            var values = Enum.GetValues(typeof(Types));
-            foreach(var a in values )
-            {
-                Console.WriteLine(a.ToString());
+            //var values = Enum.GetValues(typeof(Types));
+            //foreach(var a in values )
+            //{
+            //    Console.WriteLine(a.ToString());
 
-            }
-               
+            //}
+
 
             //BL.IBL a = BL.FactorySingleton.Instance;
             //#region add Requests

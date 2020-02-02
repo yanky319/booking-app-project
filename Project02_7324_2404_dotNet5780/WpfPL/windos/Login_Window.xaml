@@ -7,14 +7,16 @@
         mc:Ignorable="d"
         Title="{StaticResource Login_Window_title}" Height="400" Width="325"
         WindowStartupLocation ="CenterScreen" Left="50" Top="50">
-    <TabControl Grid.Row="1">
+   
+    <TabControl >
         <TabItem x:Name="OwnerTab"  Header="{StaticResource Owner}" Background="{DynamicResource Button_bakgrund_color}" >
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="78*"/>
+                    <ColumnDefinition Width="64*"/>
+                    <ColumnDefinition Width="14*"/>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="78*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -25,12 +27,12 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name= "NameLabel" Content="{StaticResource Username}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"></Label>
-                <TextBox Name="NameTextBox" Text="{StaticResource Username}"  Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="2" AcceptsReturn="False"  ></TextBox>
-                <Label x:Name="PasswordLabel" Content="{StaticResource Password}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
-                <PasswordBox Name="PasswordPasswordBox" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"  ></PasswordBox>
-                <Label x:Name="ERROR_LABLE" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" HorizontalContentAlignment="Center"></Label>
-                <Grid x:Name="ButtonGrid" Grid.Row="6" Grid.ColumnSpan="4">
+                <Label x:Name= "NameLabel" Content="{StaticResource Username}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Margin="0,0,77.667,0"></Label>
+                <TextBox Name="NameTextBox" Text="{StaticResource Username}"  Grid.Column="1"  Grid.Row="2" Grid.ColumnSpan="4" AcceptsReturn="False" Margin="0,0,77.667,0"  ></TextBox>
+                <Label x:Name="PasswordLabel" Content="{StaticResource Password}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="0,0,77.667,0"/>
+                <PasswordBox Name="PasswordPasswordBox" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,77.667,0"  ></PasswordBox>
+                <Label x:Name="ERROR_LABLE" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" HorizontalContentAlignment="Center" Margin="0,0,-0.333,108.333" Grid.RowSpan="2"></Label>
+                <Grid x:Name="ButtonGrid" Grid.Row="6" Grid.ColumnSpan="5" Margin="0,0.333,-0.333,0.333">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
@@ -87,6 +89,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Label x:Name="LBaddHost" Content="Not registered yet? Register as host" Grid.Column="1" Grid.ColumnSpan="3"/>
                     <Border CornerRadius="5" Background="{StaticResource Button_bakgrund_color}" Grid.Column="1" Grid.Row="1">
                         <Label x:Name="LoginLable2" Style="{StaticResource Label_style}" Content="{DynamicResource LoginButton }"></Label>
                     </Border>

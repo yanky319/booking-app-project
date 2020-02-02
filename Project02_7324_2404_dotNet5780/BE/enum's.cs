@@ -42,7 +42,3 @@ public  enum special_meal
    non, Milk_free, Gluten_free, nut_free, vegetarian, Glatt_Kosher
 }
 
-public enum BankNames
-{
-   Hapoalim, Mercantile, mizrahi, leumi, Discount 
-}

@@ -56,7 +56,7 @@
     <System:String x:Key="CreateDate">Create Date</System:String>
     <System:String x:Key="Order_Date">Order Date</System:String>
 
-    <System:String x:Key="searchLabel">search</System:String>
+    <System:String x:Key="searchLabel">Search</System:String>
     <System:String x:Key="ResetFiltersLabel">Reset Filters</System:String>
     <System:String x:Key="searchMesseg">Enter text</System:String>
     <System:String x:Key="AddUnit">Add Unit</System:String>

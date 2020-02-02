@@ -12,8 +12,7 @@ namespace BE
         public int HostingUnitKey { get; set; }
         public int HostID { get; set; }
         public string HostingUnitName { get; set; }
-        [XmlIgnore]
-        public bool[,] Diary { get; set; }
+        
         public Areas Area { get; set; }
         public SubAreas SubArea { get; set; }
         public Types Type { get; set; }
@@ -24,35 +23,37 @@ namespace BE
         public bool ChildrensAttractions { get; set; }
         public bool wifi { get; set; }
         public bool accessibility { get; set; }
-        [XmlArray]
-        bool[] Diary2
-        {
-            set
-            {
-                Diary2 = value;
+        [XmlIgnore]
+        public bool[,] Diary { get; set; }
+        //[XmlArray]
+        //bool[] Diary2
+        //{
+        //    set
+        //    {
+        //        Diary2 = value;
 
-                Diary = new bool[12, 31];
-                for (int j = 0; j < 12; j++)
-                {
-                    for (int i = 0; i < 31; i++)
-                    {
-                        Diary[i, j] = Diary2[j * 31 + i];
-                    }
-                }
-            }
-            get
-            {
-                Diary2 = new bool[12 * 31];
-                for (int j = 0; j < 12; j++)
-                {
-                    for (int i = 0; i < 31; i++)
-                    {
-                        Diary2[j * 31 + i] = Diary[i, j];
-                    }
-                }
-                return Diary2;
-            }
-        }
+        //        Diary = new bool[12, 31];
+        //        for (int j = 0; j < 12; j++)
+        //        {
+        //            for (int i = 0; i < 31; i++)
+        //            {
+        //                Diary[i, j] = Diary2[j * 31 + i];
+        //            }
+        //        }
+        //    }
+        //    get
+        //    {
+        //        Diary2 = new bool[12 * 31];
+        //        for (int j = 0; j < 12; j++)
+        //        {
+        //            for (int i = 0; i < 31; i++)
+        //            {
+        //                Diary2[j * 31 + i] = Diary[i, j];
+        //            }
+        //        }
+        //        return Diary2;
+        //    }
+        //}
         public override string ToString()
         {
             return string.Format("HostingUnitKey: {0}\nHostKey: {1}\nHostingUnitName: {2}" +

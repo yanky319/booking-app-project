@@ -24,35 +24,19 @@ namespace WpfPL.windos
         public Owner_screen()
         {
             InitializeComponent();
-            ResethostFiltersLabel.MouseEnter += mouseEnter;
-            ResetorderFiltersLabel.MouseEnter += mouseEnter;
-            ResetRequestFiltersLabel.MouseEnter += mouseEnter;
-            ResetUnitFiltersLabel.MouseEnter += mouseEnter;
-            searchhostssLabel.MouseEnter += mouseEnter;
-            searchordersLabel.MouseEnter += mouseEnter;
-            searchRequestsLabel.MouseEnter += mouseEnter;
-            searchUnitsLabel.MouseEnter += mouseEnter;
+           
+            
             logout1.MouseEnter += mouseEnter;
-            logout2.MouseEnter += mouseEnter;
-            logout3.MouseEnter += mouseEnter;
-            logout4.MouseEnter += mouseEnter;
 
-            ResethostFiltersLabel.MouseLeave += mouseLeave;
-            ResetorderFiltersLabel.MouseLeave += mouseLeave;
-            ResetRequestFiltersLabel.MouseLeave += mouseLeave;
-            ResetUnitFiltersLabel.MouseLeave += mouseLeave;
-            searchhostssLabel.MouseLeave += mouseLeave;
-            searchordersLabel.MouseLeave += mouseLeave;
-            searchRequestsLabel.MouseLeave += mouseLeave;
-            searchUnitsLabel.MouseLeave += mouseLeave;
+
+            
+       
             logout1.MouseLeave += mouseLeave;
-            logout2.MouseLeave += mouseLeave;
-            logout3.MouseLeave += mouseLeave;
-            logout4.MouseLeave += mouseLeave;
 
 
 
-            ResethostFiltersLabel.MouseDown += ResethostFilters;
+
+           
             ResetorderFiltersLabel.MouseDown += ResetorderFilters;
             ResetRequestFiltersLabel.MouseDown += ResetRequestFilters;
             ResetUnitFiltersLabel.MouseDown += ResetUnitstFilters;
@@ -61,54 +45,116 @@ namespace WpfPL.windos
             searchRequestsLabel.MouseDown += refresRequesdata;
             searchUnitsLabel.MouseDown += refresUnitsdata;
             logout1.MouseDown += logout;
-            logout2.MouseDown += logout;
-            logout3.MouseDown += logout;
-            logout4.MouseDown += logout;
+
 
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(Areas));
-SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
+            SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
             TypeComboBox.ItemsSource = Enum.GetValues(typeof(Types));
             statusComboBox.ItemsSource = Enum.GetValues(typeof(OrderStatus));
             AreaComboBox2.ItemsSource = Enum.GetValues(typeof(Areas));
             SubAreaComboBox2.ItemsSource = Enum.GetValues(typeof(SubAreas));
             TypeComboBox2.ItemsSource = Enum.GetValues(typeof(Types));
-           
+
             ResetUnitstFilters(this, new RoutedEventArgs());
             ResetorderFilters(this, new RoutedEventArgs());
             ResetRequestFilters(this, new RoutedEventArgs());
             ResethostFilters(this, new RoutedEventArgs());
+            LBOrders.MouseDown += changeTab;
+            LBunits.MouseDown += changeTab;
+            LBrequsts.MouseDown += changeTab;
+            LBHost.MouseDown += changeTab;
         }
+        private void changeTab(object sender, MouseButtonEventArgs e)
+        {
+            Label l = sender as Label;
+            if (l.Name == "LBHost")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 0));
+                LBHost.Foreground = Brushes.White;
+                LBrequsts.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBunits.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBOrders.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+       
+            if (l.Name == "LBOrders")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 2));
+                LBOrders.Foreground = Brushes.White;
+                LBHost.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBrequsts.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBunits.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+            if (l.Name == "LBunits")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 1));
+                LBunits.Foreground = Brushes.White;
+                LBHost.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBrequsts.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBOrders.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+            if (l.Name == "LBrequsts")
+            {
 
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 3));
+                LBHost.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBrequsts.Foreground = Brushes.White;
+                LBunits.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBOrders.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+           
+        }
+        void mouseEnter(object sender, MouseEventArgs e)
+        {
+            Label l = sender as Label;
+            if (l != null)
+                l.Foreground = Brushes.White;
+        }
+        void mouseLeave(object sender, MouseEventArgs e)
+        {
+            Label l = sender as Label;
+            if (l != null)
+                l.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+        }
         private void refresUnitsdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bL = BL.FactorySingleton.Instance;
-            UnitsDataGrid.ItemsSource = from item in bL.getHostingUnits()
-                                        where (item.HostingUnitName.Contains(searchTextBox2.Text))
-                                        &&(AreaComboBox.SelectedIndex == 0 || item.Area.ToString() == AreaComboBox.SelectedItem.ToString())
-                                        &&(SubAreaComboBox.SelectedIndex == 0 || item.SubArea.ToString() == SubAreaComboBox.SelectedItem.ToString())
-                                        &&(TypeComboBox.SelectedIndex == 0 || item.Type.ToString() == TypeComboBox.SelectedItem.ToString())
-                                        select new
-                                        {
-                                            item.HostingUnitKey,
-                                            item.HostingUnitName,
-                                            item.Area,
-                                            item.SubArea,
-                                            item.Type,
-                                            //item.
-                                            item.num_beds,
-                                            accessibility = item.accessibility ? "     \u2713" : "     \u2717",
-                                            Garden = item.Garden ? "     \u2713" : "     \u2717",
-                                            Pool = item.Pool ? "  \u2713" : "  \u2717",
-                                            Jacuzzi = item.Jacuzzi ? "   \u2713" : "   \u2717",
-                                            wifi = item.wifi ? "  \u2713" : "  \u2717",
-                                            ChildrensAttractions = item.ChildrensAttractions ? "     \u2713" : "     \u2717",
+            try
+            {
+                UnitsDataGrid.ItemsSource = from item in bL.getHostingUnits()
+                                            where (item.HostingUnitName.Contains(searchTextBox3.Text))
+                                            && (AreaComboBox.SelectedIndex == 0 || item.Area.ToString() == AreaComboBox.SelectedItem.ToString())
+                                            && (SubAreaComboBox.SelectedIndex == 0 || item.SubArea.ToString() == SubAreaComboBox.SelectedItem.ToString())
+                                            && (TypeComboBox.SelectedIndex == 0 || item.Type.ToString() == TypeComboBox.SelectedItem.ToString())
+                                            select new
+                                            {
+                                                item.HostingUnitKey,
+                                                item.HostingUnitName,
+                                                item.Area,
+                                                item.SubArea,
+                                                item.Type,
+                                                //item.
+                                                item.num_beds,
+                                                accessibility = item.accessibility ? "     \u2713" : "     \u2717",
+                                                Garden = item.Garden ? "     \u2713" : "     \u2717",
+                                                Pool = item.Pool ? "  \u2713" : "  \u2717",
+                                                Jacuzzi = item.Jacuzzi ? "   \u2713" : "   \u2717",
+                                                wifi = item.wifi ? "  \u2713" : "  \u2717",
+                                                ChildrensAttractions = item.ChildrensAttractions ? "     \u2713" : "     \u2717",
 
-                                        };
+                                            };
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
+           
 
         }
         private void ResetUnitstFilters(object sender, RoutedEventArgs e)
         {
-            searchTextBox2.Text = "";
+            searchTextBox3.Text = "";
             AreaComboBox.SelectedIndex = 0;
             SubAreaComboBox.SelectedIndex = 0;
             TypeComboBox.SelectedIndex = 0;
@@ -119,11 +165,20 @@ SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
         private void refresordersdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bL = BL.FactorySingleton.Instance;
-            ordersDataGrid.ItemsSource = from item in bL.getOrders()
-                                         where (statusComboBox.SelectedIndex == 0 || item.Status.ToString() == statusComboBox.SelectedItem.ToString())
-                                         && (fromdatePicker.SelectedDate == null || item.CreateDate >= fromdatePicker.SelectedDate)
-                                         && (todatePicker.SelectedDate == null || item.CreateDate <= todatePicker.SelectedDate)
-                                         select item;
+            try
+            {
+                ordersDataGrid.ItemsSource = from item in bL.getOrders()
+                                             where (statusComboBox.SelectedIndex == 0 || item.Status.ToString() == statusComboBox.SelectedItem.ToString())
+                                             && (fromdatePicker.SelectedDate == null || item.CreateDate >= fromdatePicker.SelectedDate)
+                                             && (todatePicker.SelectedDate == null || item.CreateDate <= todatePicker.SelectedDate)
+                                             select item;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
+           
         }
         private void ResetorderFilters(object sender, RoutedEventArgs e)
         {
@@ -136,13 +191,22 @@ SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
         private void refresRequesdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bL = BL.FactorySingleton.Instance;
-            RequestsDataGrid.ItemsSource = from item in bL.getGuestRequests()
-                                           where (AreaComboBox2.SelectedIndex == 0 || item.Area.ToString() == AreaComboBox2.SelectedItem.ToString())
-                                           && (SubAreaComboBox2.SelectedIndex == 0 || item.SubArea.ToString() == SubAreaComboBox2.SelectedItem.ToString())
-                                           && (TypeComboBox2.SelectedIndex == 0 || item.Type.ToString() == TypeComboBox2.SelectedItem.ToString())
-                                           && (fromdatePicker2.SelectedDate == null || item.EntryDate >= fromdatePicker2.SelectedDate)
-                                           && (todatePicker2.SelectedDate == null || item.EntryDate <= todatePicker2.SelectedDate)
-                                           select item;
+            try
+            {
+                RequestsDataGrid.ItemsSource = from item in bL.getGuestRequests()
+                                               where (AreaComboBox2.SelectedIndex == 0 || item.Area.ToString() == AreaComboBox2.SelectedItem.ToString())
+                                               && (SubAreaComboBox2.SelectedIndex == 0 || item.SubArea.ToString() == SubAreaComboBox2.SelectedItem.ToString())
+                                               && (TypeComboBox2.SelectedIndex == 0 || item.Type.ToString() == TypeComboBox2.SelectedItem.ToString())
+                                               && (fromdatePicker2.SelectedDate == null || item.EntryDate >= fromdatePicker2.SelectedDate)
+                                               && (todatePicker2.SelectedDate == null || item.EntryDate <= todatePicker2.SelectedDate)
+                                               select item;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
+            
         }
         private void ResetRequestFilters(object sender, RoutedEventArgs e)
         {
@@ -153,22 +217,31 @@ SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
             todatePicker2.SelectedDate = null;
             refresRequesdata(sender, e);
         }
-       
+
 
         private void refreshostssdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bL = BL.FactorySingleton.Instance;
-            hostsDataGrid.ItemsSource = from item in bL.getHosts()
-                                        where (item.PrivateName + " " + item.FamilyName).Contains(searchTextBox.Text)
-                                        select new
-                                        {
-                                            item.PrivateName,
-                                            item.FamilyName,
-                                            item.HostID,
-                                            item.numOrders,
-                                            item.numUnits,
-                                            CollectionClearance = item.CollectionClearance ? "     \u2713" : "     \u2717",
-                                        };
+            try
+            {
+                hostsDataGrid.ItemsSource = from item in bL.getHosts()
+                                            where (item.PrivateName + " " + item.FamilyName).Contains(searchTextBox.Text)
+                                            select new
+                                            {
+                                                item.PrivateName,
+                                                item.FamilyName,
+                                                item.HostID,
+                                                item.numOrders,
+                                                item.numUnits,
+                                                CollectionClearance = item.CollectionClearance ? "     \u2713" : "     \u2717",
+                                            };
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                                  MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
+          
         }
         private void ResethostFilters(object sender, RoutedEventArgs e)
         {
@@ -176,21 +249,10 @@ SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
             refreshostssdata(sender, e);
 
         }
-        
-     
 
-        void mouseEnter(object sender, MouseEventArgs e)
-        {
-            Label label = sender as Label;
-            label.FontSize = int.Parse(FindResource("over_size").ToString());
-            label.Foreground = (Brush)new BrushConverter().ConvertFromString(FindResource("over_color").ToString());
-        }
-        void mouseLeave(object sender, MouseEventArgs e)
-        {
-            Label label = sender as Label;
-            label.FontSize = int.Parse(FindResource("not_over_size").ToString());
-            label.Foreground = (Brush)new BrushConverter().ConvertFromString(FindResource("not_over_color").ToString());
-        }
+
+
+       
         void logout(object sender, MouseButtonEventArgs e)
         {
 
@@ -256,7 +318,16 @@ SubAreaComboBox.ItemsSource = Enum.GetValues(typeof(SubAreas));
                 dynamic a = hostsDataGrid.SelectedItem;
                 int b = int.Parse(a.HostID.ToString());
                 BL.IBL bl = BL.FactorySingleton.Instance;
-                new Host_Window(bl.getHost(b), false).ShowDialog();
+                try
+                {
+                    new Host_Window(bl.getHost(b), false).ShowDialog();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                                  MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                }
+               
             }
         }
     }

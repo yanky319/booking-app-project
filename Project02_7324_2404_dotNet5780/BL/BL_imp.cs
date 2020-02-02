@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
-using BE;
+
+using System.Net.Mail;using BE;
 
 namespace BL
 {
-    public delegate bool GuestRequestCondition(GuestRequest unit);
     public class BL_imp : IBL
     {
 
@@ -138,7 +138,40 @@ namespace BL
                 return true;
             return false;
         }
-        public void sendEmail(Order order) { }
+        public void sendEmail(Order order)
+        {
+            
+            MailMessage mail = new MailMessage();
+            
+             mail.To.Add(getGuestRequests().ToList().Find(i => i.GuestRequestKey == order.GuestRequestKey).MailAddress);
+            
+            mail.From = new MailAddress("Vications55@gmail.com");
+            
+            mail.Subject = "New offer from vications";
+            var h = getHost(order.HostID);
+            mail.Body =h.MailAddress.ToString() + "  " + h.FhoneNumber.ToString();
+           
+            mail.IsBodyHtml = true;
+
+           
+            SmtpClient smtp = new SmtpClient();
+         
+            smtp.Host = "smtp.gmail.com";
+             smtp.Credentials = new System.Net.NetworkCredential("Vications55@gmail.com",
+            "54565456");
+           
+            smtp.EnableSsl = true;
+            try
+            {
+               
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                
+                //txtMessage.Text = ex.ToString();
+            }
+        }
         public int calculatOrderCommition(Order order)
         {
             var a = getGuestRequests().ToList().Find(e => e.GuestRequestKey == order.GuestRequestKey);
@@ -296,7 +329,6 @@ namespace BL
                 throw new SourceNotFoundException("BL_");
             }
         }
-
         public IEnumerable<GuestRequest> getGuestRequests()
         {
             try
@@ -313,15 +345,15 @@ namespace BL
             }
         }
 
-        public IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition)
+        public IEnumerable<GuestRequest> findGuestRequestWithCondition(Func<GuestRequest, bool> predicate = null)
         {
             try
             {
                 List<GuestRequest> requests = getGuestRequests().ToList();
-                foreach (GuestRequest item in requests)
-                    if (!condition(item))
-                        requests.Remove(item);
-                return requests;
+                    if (predicate == null)
+                        return requests;
+
+                return requests.Where(predicate).Select(item => item);
             }
             catch
             {
@@ -362,20 +394,20 @@ namespace BL
 
         public void addHostingUnit(HostingUnit unit)
         {
-            IsValidHostKey(unit.HostID);
-            IsValidUnitName(unit.HostingUnitName);
-            IsValidNumBeds(unit.num_beds);
-            IsValidArea(unit.Area);
-            IsValidSubArea(unit.Area, unit.SubArea);
+           // IsValidHostKey(unit.HostID);
+            //IsValidUnitName(unit.HostingUnitName);
+            //IsValidNumBeds(unit.num_beds);
+            //IsValidArea(unit.Area);
+            //IsValidSubArea(unit.Area, unit.SubArea);
             unit.Diary = new bool[12, 31];
             try
             {
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.addHostingUnit(unit);
             }
-            catch (TargetNotFoundException)
+            catch (TargetNotFoundException e)
             {
-                throw new TargetNotFoundException("BL_");
+                throw new TargetNotFoundException(e.Message);
             }
 
         }
@@ -435,9 +467,9 @@ namespace BL
         {
             IsValidName(host.PrivateName, "Privat");
             IsValidName(host.FamilyName, "Family");
-            IsValidFhoneNamber(host.FhoneNumber);
+            //IsValidFhoneNamber(host.FhoneNumber);
             IsValidEmail(host.MailAddress);
-            IsValidBankBranch(host.BankBranch);
+            //IsValidBankBranch(host.BankBranch);
 
             try
             {

@@ -28,7 +28,7 @@ namespace BL
         int calculatOrderCommition(Order order);
         bool CheckDatsAvailable(bool[,] diary, DateTime Entry, DateTime Release);
         void BlockDates(bool[,] diary, DateTime Entry, DateTime Release);
-        IEnumerable<GuestRequest> findGuestRequestWithCondition(GuestRequestCondition condition);
+        IEnumerable<GuestRequest> findGuestRequestWithCondition(Func<GuestRequest, bool> predicate = null);
         List<HostingUnit> FindAvailableUnits(DateTime Entry, int days,Host host);
         int? dateRange(params DateTime[] dates);
         List<Order> FindExpiredOrders(int days);

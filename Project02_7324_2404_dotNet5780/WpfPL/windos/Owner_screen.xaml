@@ -3,322 +3,343 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:WpfPL.windos"
         mc:Ignorable="d"
-        Title="Owner_screen" ResizeMode="NoResize" Height="900" WindowState="Maximized"  Background="{StaticResource main}" >
+        x:Name="HostWindow"
+        Title="Host_Window" ResizeMode="NoResize" Height="900" WindowState="Maximized" FontFamily="Segoe UI Semibold"  Background="{StaticResource main}" >
 
-
-    <TabControl x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"  Height="850" FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
+    <Grid  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" x:Name="LBHost" Content="Hosts" Width="150"  FontSize="22" Foreground="White" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+        <Label Grid.Row="1" x:Name="LBunits" Content="Hosting units" Width="150"  FontSize="22" Foreground="#FFC6C2C2" Margin="80,0,0,0" HorizontalAlignment="Left"/>
+        <Label Grid.Row="1" Width="80" x:Name="LBOrders" Content="Orders"   FontSize="22" Foreground="#FFC6C2C2" Margin="235,0,0,0" HorizontalAlignment="Left" />
+        <Label Grid.Row="1" Width="90" x:Name="LBrequsts" Content="Requsts"  FontSize="22" Foreground="#FFC6C2C2" Margin="335,0,0,0" HorizontalAlignment="Left" />
+        <Label   x:Name="logout1" FontSize="20" Content="{StaticResource logout}" Grid.ColumnSpan="2"    Foreground="#FFC6C2C2" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="8" Grid.RowSpan="1" Margin="0,0,40,0"  />
+        <TabControl Grid.Row="2" x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"  Height="850" FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue">
-        <TabItem x:Name="HostssMainGrid" Header="Hosts" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
-            <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="713*"/>
-                    <ColumnDefinition Width="49*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid x:Name="hostsHeaderGrid" Grid.ColumnSpan="2" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
+
+            <TabItem x:Name="HostssMainGrid"  BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
+                <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="713*"/>
+                        <ColumnDefinition Width="49*"/>
                     </Grid.ColumnDefinitions>
-
-                    <Label x:Name="logout1" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
-                    <Label x:Name= "ResethostFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="4" Grid.Row="1" ></Label>
-                    <Label x:Name= "searchhostssLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="3" Grid.Row="1" />
-                    <Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
-                    <TextBox Name="searchTextBox"  Background="{StaticResource main}" Grid.Column="1" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False"   ></TextBox>
-                </Grid>
-
-                <DataGrid x:Name="hostsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Header="{DynamicResource HostID}" Binding="{Binding HostID}"/>
-                        <DataGridTextColumn Header="{DynamicResource PrivateName}" Binding="{Binding PrivateName}"/>
-                        <DataGridTextColumn Header="{DynamicResource FamilyName}" Binding="{Binding FamilyName}"/>
-                        <DataGridTextColumn Header="{DynamicResource CollectionClearance}" Binding="{Binding CollectionClearance}"/>
-                        <DataGridTextColumn Header="{DynamicResource numOrders}" Binding="{Binding numOrders}" />
-                        <DataGridTextColumn Header="{DynamicResource numUnits}" Binding="{Binding numUnits}"/>
-                        <DataGridTextColumn  Width="*" />
-                        <DataGridTemplateColumn Width="70">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button  Content="{DynamicResource details}" Background="{DynamicResource main}" Click="details"></Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <Grid x:Name="hostssEndingGrid" Grid.Row="2">
-                </Grid>
-            </Grid>
-        </TabItem>
-
-        <TabItem x:Name="unitsMainGrid" Header="Hosting units" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
-            <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="713*"/>
-                    <ColumnDefinition Width="49*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid x:Name="unitsHeaderGrid" Grid.ColumnSpan="2" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="hostsHeaderGrid" Grid.ColumnSpan="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1.6*"/>
+                            
+                            
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label x:Name="logout2" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
-                    <Label x:Name= "ResetUnitFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
-                    <Label x:Name= "searchUnitsLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
-                    <Label x:Name= "searchMesseg2" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
-                    <TextBox Name="searchTextBox2"  Background="{StaticResource main}" Grid.Column="4" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False"   ></TextBox>
+                        
+                       
+                        <Button x:Name= "searchhostssLabel" Content="{StaticResource searchLabel}" FontSize="18" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Height="26" Padding="1" Width="87" Grid.Column="2" Grid.ColumnSpan="1"  Grid.RowSpan="1"  />
+                        <Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Foreground="White"  />
+                        <TextBox Name="searchTextBox" Background="#FFF1F1F1"   Grid.Column="1" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="1" AcceptsReturn="False" Margin="1"   />
+                    </Grid>
 
-                    <Label x:Name= "AreaLabel" Content="{StaticResource Area}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="AreaComboBox" Foreground="{DynamicResource not_over_color}" SelectedIndex="0" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Center"  ></ComboBox>
-                    <Label x:Name= "SubAreaLabel" Content="{StaticResource SubArea}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="SubAreaComboBox" Grid.Column="2" Background="{DynamicResource main}" StaysOpenOnEdit="False" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
-                    <Label x:Name= "TypeLabel" Content="{StaticResource Type}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="TypeComboBox" Grid.Column="3" Background="{DynamicResource main}" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
+                    <DataGrid x:Name="hostsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="{DynamicResource HostID}" Binding="{Binding HostID}"/>
+                            <DataGridTextColumn Header="{DynamicResource PrivateName}" Binding="{Binding PrivateName}"/>
+                            <DataGridTextColumn Header="{DynamicResource FamilyName}" Binding="{Binding FamilyName}"/>
+                            <DataGridTextColumn Header="{DynamicResource CollectionClearance}" Binding="{Binding CollectionClearance}"/>
+                            <DataGridTextColumn Header="{DynamicResource numOrders}" Binding="{Binding numOrders}" />
+                            <DataGridTextColumn Header="{DynamicResource numUnits}" Binding="{Binding numUnits}"/>
+                            <DataGridTextColumn  Width="*" />
+                            <DataGridTemplateColumn Width="70">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button  Content="{DynamicResource details}" Background="{DynamicResource main}" Click="details"></Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
+                    <Grid x:Name="hostssEndingGrid" Grid.Row="2">
+                    </Grid>
                 </Grid>
+            </TabItem>
 
-                <DataGrid x:Name="UnitsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
-                        <DataGridTextColumn Header="{DynamicResource HostingUnitName}" Binding="{Binding HostingUnitName}"/>
-                        <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
-                        <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
-                        <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="{DynamicResource Diary}"  />
-                        <DataGridTextColumn Header="{DynamicResource num_beds}" Binding="{Binding num_beds}"/>
-                        <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
-                        <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
-                        <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
-                        <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
-                        <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
-                        <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
-                        <DataGridTextColumn  Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
+            <TabItem x:Name="unitsMainGrid"  BorderThickness="0" Background="{DynamicResource main}" VerticalAlignment="Top" BorderBrush="#CCD5E3FF" >
 
-                <Grid x:Name="unitsEndingGrid" Grid.Row="2">
-                </Grid>
-            </Grid>
-        </TabItem>
+                <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
 
-
-        <TabItem x:Name="ordersMainGrid" Header="Orders" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
-            <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="713*"/>
-                    <ColumnDefinition Width="49*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid x:Name="ordersHeaderGrid" Grid.ColumnSpan="2" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label x:Name="logout3" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
-                    <Label x:Name= "ResetorderFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
-                    <Label x:Name= "searchordersLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
+                    <Grid x:Name="unitsHeaderGrid" Grid.ColumnSpan="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2.2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*"/>
 
-                    <Label x:Name= "statusLabel" Content="{StaticResource status}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="statusComboBox" Foreground="{DynamicResource not_over_color}"  Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Center"  ></ComboBox>
-                    <Label x:Name= "fromLabel" Content="{StaticResource fromLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
-                    <DatePicker FontSize="20"  BorderThickness="0"  x:Name="fromdatePicker" SelectedDateChanged="SelectedDateChanged"    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"  Grid.Column="2" Grid.Row="3"   >
-                        <DatePicker.Resources>
-                            <Style TargetType="{x:Type DatePickerTextBox}">
-                                <Setter Property="Text" Value="Select date" />
-                                <Setter Property="Background" Value="{x:Null}"/>
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="IsEnabled" Value="False"/>
-                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
-                            </Style>
-                        </DatePicker.Resources>
-                        <DatePicker.CalendarStyle>
-                            <StaticResource ResourceKey="resizedCalendarItem"/>
-                        </DatePicker.CalendarStyle>
-                    </DatePicker>
+                        </Grid.ColumnDefinitions>
 
-                    <Label x:Name= "toLabel" Content="{StaticResource toLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="0" ></Label>
-                    <DatePicker FontSize="20" Grid.Column="3" Grid.Row="2"  BorderThickness="0"  x:Name="todatePicker"  SelectedDateChanged="SelectedDateChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"     >
-                        <DatePicker.Resources >
-                            <Style  TargetType="{x:Type DatePickerTextBox}">
-                                <Setter Property="Text" Value="Select date" />
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
-                                <Setter Property="Background" Value="{x:Null}"/>
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </Style>
-                        </DatePicker.Resources>
-                        <DatePicker.CalendarStyle>
-                            <StaticResource ResourceKey="resizedCalendarItem"/>
-                        </DatePicker.CalendarStyle>
-                    </DatePicker>
+
+                        <Button x:Name= "ResetUnitFiltersLabel" Padding="1" Content="{StaticResource ResetFiltersLabel}" FontSize="18" HorizontalAlignment="Left" Foreground="Black" VerticalAlignment="Top"  Grid.Column="7" Grid.Row="1"   Width="133" Height="26" Margin="-20,2,0,0"  />
+                        <Button   x:Name= "searchUnitsLabel" Content="{StaticResource searchLabel}" FontSize="18" HorizontalAlignment="Left" Foreground="Black" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Height="26" Padding="1" Width="87" Grid.Column="6" Grid.ColumnSpan="1"  Grid.RowSpan="1" Margin="15,2,0,0"   />
+
+                        <Label x:Name="searchMesseg1" Foreground="White" Content="{StaticResource searchMesseg}" VerticalContentAlignment="Bottom" HorizontalAlignment="Left"  Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"   />
+                        <TextBox    Name="searchTextBox3" Background="#FFF1F1F1"   Grid.Column="4" BorderBrush="Black" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False" Margin="1"   />
+
+                        <Label   x:Name= "AreaLabel" Foreground="White" Content="{StaticResource Area}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="0" />
+                        <ComboBox x:Name="AreaComboBox"  Margin="1"  SelectedIndex="0"  BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top" Background="#FFF1F1F1"   />
+                        <Label x:Name= "SubAreaLabel"  Foreground="White" HorizontalContentAlignment="Left" Content="{StaticResource SubArea}" HorizontalAlignment="Left" VerticalContentAlignment="Bottom" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Bottom"  />
+                        <ComboBox Margin="1" x:Name="SubAreaComboBox" Grid.Column="2" Background="#FFF1F1F1" StaysOpenOnEdit="False" BorderBrush="Black"  Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="1" ></ComboBox>
+                        <Label  x:Name= "TypeLabel" Foreground="White" Content="{StaticResource Type}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="0" />
+                        <ComboBox Margin="1" x:Name="TypeComboBox" Grid.Column="3"  Background="#FFF1F1F1" BorderBrush="Black"   Grid.Row="1" VerticalAlignment="Top" />
+
+                    </Grid>
+
+                    <DataGrid x:Name="UnitsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
+                            <DataGridTextColumn Header="{DynamicResource HostingUnitName}" Binding="{Binding HostingUnitName}"/>
+                            <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
+                            <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
+                            <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
+                            <!--<DataGridTextColumn Header="{DynamicResource Diary}"  />-->
+                            <DataGridTextColumn Header="{DynamicResource num_beds}" Binding="{Binding num_beds}"/>
+                            <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
+                            <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
+                            <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
+                            <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
+                            <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
+                            <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
+                            <DataGridTextColumn  Width="*" />
+                            
+                           
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid x:Name="unitsEndingGrid" Grid.Row="2">
+                       
+                    </Grid>
                 </Grid>
-
-                <DataGrid x:Name="ordersDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Header="{DynamicResource OrderKey}" Binding="{Binding OrderKey}"/>
-                        <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
-                        <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
-                        <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
-                        <DataGridTextColumn Header="{DynamicResource CreateDate}" Binding="{Binding CreateDate}" />
-                        <DataGridTextColumn  Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Grid x:Name="ordersEndingGrid" Grid.Row="2"></Grid>
-            </Grid>
-        </TabItem>
+            </TabItem>
 
 
-        <TabItem x:Name="RequestsMainGrid" Header="Guest requests" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
-            <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="43*"/>
-                    <ColumnDefinition Width="670*"/>
-                    <ColumnDefinition Width="49*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid x:Name="RequestHeaderGrid" Grid.ColumnSpan="3" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
+            <TabItem x:Name="ordersMainGrid"   BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
+                <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="713*"/>
+                        <ColumnDefinition Width="49*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="ordersHeaderGrid" Grid.ColumnSpan="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2.6*" />
+                            <ColumnDefinition Width="6*"/>
 
-                    <Label x:Name="logout4" Content="{StaticResource logout}" Height="60" Width="100"  HorizontalAlignment="Right" Foreground="{DynamicResource not_over_color}" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.Column="8" ></Label>
-                    <Label x:Name= "ResetRequestFiltersLabel" Content="{StaticResource ResetFiltersLabel}" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="5" Width="75" Grid.Column="7" Grid.Row="1" ></Label>
-                    <Label x:Name= "searchRequestsLabel" Content="{StaticResource searchLabel}" FontSize="20" HorizontalAlignment="Center" Foreground="{DynamicResource not_over_color}" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="75" Grid.Column="6" Grid.Row="1" />
-                    <!--<Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name= "ResetorderFiltersLabel" Padding="1" Content="{StaticResource ResetFiltersLabel}" FontSize="18" HorizontalAlignment="Left" Foreground="Black" VerticalAlignment="Top"  Grid.Column="8" Grid.Row="1"   Width="133" Height="26" Margin="-150,2,0,0"  />
+                        <Button   x:Name= "searchordersLabel" Content="{StaticResource searchLabel}" FontSize="18" HorizontalAlignment="Center" Foreground="Black" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Height="26" Padding="1" Width="87" Grid.Column="4" Grid.ColumnSpan="1"  Grid.RowSpan="1" Margin="-170,2,0,0"   />
+                        <Label x:Name= "statusLabel" Content="{StaticResource status}" Grid.Column="1" Grid.Row="0"  Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        <ComboBox x:Name="statusComboBox" HorizontalAlignment="Left" Margin="0,2,2,2" Background="#FFF1F1F1" Foreground="Black"  BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top" Width="90"   />
+                        <Label x:Name= "fromLabel" Content="{StaticResource fromLabel}"  Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
+                        <DatePicker x:Name="fromdatePicker" Height="25" Margin="-40,2,3,3" Background="#FFF1F1F1"  FontSize="20"  BorderThickness="0"   SelectedDateChanged="SelectedDateChanged"    HorizontalAlignment="Center" VerticalAlignment="Top"     Grid.Column="2" Grid.Row="3"   >
+                            <DatePicker.Resources>
+                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Text" Value="Select date" />
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.CalendarStyle>
+                                <StaticResource ResourceKey="resizedCalendarItem"/>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
+
+                        <Label x:Name= "toLabel" Content="{StaticResource toLabel}"  Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="0" />
+                        <DatePicker x:Name="todatePicker" Margin="-40,2,3,3" Height="25" Background="#FFF1F1F1" FontSize="20" Grid.Column="3" Grid.Row="2"  BorderThickness="0"    SelectedDateChanged="SelectedDateChanged" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                    VerticalContentAlignment="Center"     >
+                            <DatePicker.Resources >
+                                <Style  TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Text" Value="Select date" />
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.CalendarStyle>
+                                <StaticResource ResourceKey="resizedCalendarItem"/>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
+                    </Grid>
+
+                    <DataGrid x:Name="ordersDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="{DynamicResource OrderKey}" Binding="{Binding OrderKey}"/>
+                            <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
+                            <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
+                            <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="{DynamicResource CreateDate}" Binding="{Binding CreateDate}" />
+                            <DataGridTextColumn  Width="*" />
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid x:Name="ordersEndingGrid" Grid.Row="2"></Grid>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem x:Name="RequestsMainGrid" BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
+                <Grid HorizontalAlignment="Stretch" Background="{StaticResource main}" Margin="-2,-2,-2,-12"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="713*"/>
+                        <ColumnDefinition Width="49*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="RequestHeaderGrid" Grid.ColumnSpan="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.2*" />
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                            <ColumnDefinition Width="2.5*"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Button x:Name= "ResetRequestFiltersLabel" Padding="1" Content="{StaticResource ResetFiltersLabel}" FontSize="18" HorizontalAlignment="Left" Foreground="Black" VerticalAlignment="Top"  Grid.Column="8" Grid.Row="1"   Width="133" Height="26" Margin="-150,2,0,0"  />
+                        <Button x:Name= "searchRequestsLabel" Content="{StaticResource searchLabel}" FontSize="18" HorizontalAlignment="Left" Foreground="Black" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Height="26" Padding="1" Width="87" Grid.Column="6" Grid.ColumnSpan="1"  Grid.RowSpan="1"   />
+                        <!--<Label x:Name= "searchMesseg" Content="{StaticResource searchMesseg}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2"  ></Label>
                     <TextBox Name="searchTextBox"  Background="{StaticResource main}" Grid.Column="4" BorderBrush="Black" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="False"   ></TextBox>-->
 
-                    <Label x:Name= "AreaLabel2" Content="{StaticResource Area}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="AreaComboBox2" Foreground="{DynamicResource not_over_color}" SelectedIndex="0" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Center"  ></ComboBox>
-                    <Label x:Name= "SubAreaLabel2" Content="{StaticResource SubArea}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="SubAreaComboBox2" Grid.Column="2" Background="{DynamicResource main}" StaysOpenOnEdit="False" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
-                    <Label x:Name= "TypeLabel2" Content="{StaticResource Type}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="0" ></Label>
-                    <ComboBox x:Name="TypeComboBox2" Grid.Column="3" Background="{DynamicResource main}" BorderBrush="Black"  Margin="3" Grid.Row="1" VerticalAlignment="Center" ></ComboBox>
-                    <Label x:Name= "fromLabel2" Content="{StaticResource fromLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="4" Grid.Row="0" ></Label>
-                    <DatePicker FontSize="20"  BorderThickness="0"  x:Name="fromdatePicker2" SelectedDateChanged="SelectedDateChanged"    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"  Grid.Column="4" Grid.Row="3"   >
-                        <DatePicker.Resources>
-                            <Style TargetType="{x:Type DatePickerTextBox}">
-                                <Setter Property="Text" Value="Select date" />
-                                <Setter Property="Background" Value="{x:Null}"/>
-                                <Setter Property="IsEnabled" Value="False"/>
-                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
-                            </Style>
-                        </DatePicker.Resources>
-                        <DatePicker.CalendarStyle>
-                            <StaticResource ResourceKey="resizedCalendarItem"/>
-                        </DatePicker.CalendarStyle>
-                    </DatePicker>
+                        <Label x:Name= "AreaLabel2" Foreground="White" Content="{StaticResource Area}" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="0" />
+                        <ComboBox x:Name="AreaComboBox2"  Margin="1"  SelectedIndex="0"  BorderBrush="Black" Grid.Column="1"  Grid.Row="1" VerticalAlignment="Top" Background="#FFF1F1F1"   />
+                        <Label x:Name= "SubAreaLabel2"   Foreground="White" HorizontalContentAlignment="Left" Content="{StaticResource SubArea}" HorizontalAlignment="Left" VerticalContentAlignment="Bottom" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Bottom"  />
+                        <ComboBox x:Name="SubAreaComboBox2"  Margin="1"  SelectedIndex="0"  BorderBrush="Black" Grid.Column="2"  Grid.Row="1" VerticalAlignment="Top" Background="#FFF1F1F1"   />
+                        <Label x:Name= "TypeLabel2" Foreground="White" Content="{StaticResource Type}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="0" />
+                        <ComboBox x:Name="TypeComboBox2"  Margin="1"  SelectedIndex="0"  BorderBrush="Black" Grid.Column="3"  Grid.Row="1" VerticalAlignment="Top" Background="#FFF1F1F1"   />
+                        <Label x:Name= "fromLabel2" Content="{StaticResource fromLabel}"  Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{DynamicResource main}" BorderBrush="Black" Grid.Column="4" Grid.Row="0" Margin="0" ></Label>
+                        <DatePicker  x:Name="fromdatePicker2"  Height="25" Margin="3,1,3,3" Background="#FFF1F1F1"  FontSize="20"  BorderThickness="0"   SelectedDateChanged="SelectedDateChanged"    HorizontalAlignment="Left" VerticalAlignment="Top"     Grid.Column="4" Grid.Row="3"   >
+                            <DatePicker.Resources>
+                                <Style TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Text" Value="Select date" />
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.CalendarStyle>
+                                <StaticResource ResourceKey="resizedCalendarItem"/>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
 
-                    <Label x:Name= "toLabel2" Content="{StaticResource toLabel}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="5" Grid.Row="0" ></Label>
-                    <DatePicker FontSize="20" Grid.Column="5" Grid.Row="2"  BorderThickness="0"  x:Name="todatePicker2"  SelectedDateChanged="SelectedDateChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   VerticalContentAlignment="Center"     >
-                        <DatePicker.Resources >
-                            <Style  TargetType="{x:Type DatePickerTextBox}">
-                                <Setter Property="Text" Value="Select date" />
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
-                                <Setter Property="Background" Value="{x:Null}"/>
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </Style>
-                        </DatePicker.Resources>
-                        <DatePicker.CalendarStyle>
-                            <StaticResource ResourceKey="resizedCalendarItem"/>
-                        </DatePicker.CalendarStyle>
-                    </DatePicker>
+                        <Label x:Name= "toLabel2" Content="{StaticResource toLabel}"  Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="0" />
+                        <DatePicker x:Name="todatePicker2" Margin="2,1,3,3" Height="25" Background="#FFF1F1F1" FontSize="20" Grid.Column="5" Grid.Row="2"  BorderThickness="0"    SelectedDateChanged="SelectedDateChanged" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <DatePicker.Resources >
+                                <Style  TargetType="{x:Type DatePickerTextBox}">
+                                    <Setter Property="Text" Value="Select date" />
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </Style>
+                            </DatePicker.Resources>
+                            <DatePicker.CalendarStyle>
+                                <StaticResource ResourceKey="resizedCalendarItem"/>
+                            </DatePicker.CalendarStyle>
+                        </DatePicker>
+                    </Grid>
+
+                    <DataGrid x:Name="RequestsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">
+                        <DataGrid.Columns >
+
+                            <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
+                            <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
+                            <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
+                            <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
+                            <DataGridTextColumn Header="{DynamicResource EntryDate}" Binding="{Binding EntryDate}"/>
+                            <DataGridTextColumn Header="{DynamicResource ReleaseDate}" Binding="{Binding ReleaseDate}"/>
+                            <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
+                            <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
+                            <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
+                            <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
+                            <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
+                            <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
+                            <DataGridTextColumn Header="{DynamicResource Meals}" Binding="{Binding Meals}" />
+                            <DataGridTextColumn Header="{DynamicResource specialMmeal}" Binding="{Binding specialMmeal}"/>
+                            <DataGridTextColumn  Width="*" />
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid x:Name="RequestndingGrid" Grid.Row="2">
+
+                    </Grid>
                 </Grid>
+            </TabItem>
 
-                <DataGrid x:Name="RequestsDataGrid" Grid.Row="1"  IsReadOnly="True" AlternatingRowBackground="{DynamicResource AlternatingRowBackground}" AutoGenerateColumns="False"  FlowDirection="LeftToRight" HorizontalContentAlignment="Center" Grid.ColumnSpan="3">
-                    <DataGrid.Columns >
-
-                        <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
-                        <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
-                        <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
-                        <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
-                        <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
-                        <DataGridTextColumn Header="{DynamicResource EntryDate}" Binding="{Binding EntryDate}"/>
-                        <DataGridTextColumn Header="{DynamicResource ReleaseDate}" Binding="{Binding ReleaseDate}"/>
-                        <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
-                        <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
-                        <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />
-                        <DataGridTextColumn Header="{DynamicResource Jacuzzi}" Binding="{Binding Jacuzzi}"/>
-                        <DataGridTextColumn Header="{DynamicResource wifi}" Binding="{Binding wifi}" />
-                        <DataGridTextColumn Header="{DynamicResource ChildrensAttractions}" Binding="{Binding ChildrensAttractions}"/>
-                        <DataGridTextColumn Header="{DynamicResource Meals}" Binding="{Binding Meals}" />
-                        <DataGridTextColumn Header="{DynamicResource specialMmeal}" Binding="{Binding specialMmeal}"/>
-                        <DataGridTextColumn  Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <Grid x:Name="RequestndingGrid" Grid.Row="2" Grid.ColumnSpan="2">
-
-                </Grid>
-            </Grid>
-        </TabItem>
-
-    </TabControl>
+        </TabControl>
+    </Grid>
 </Window>
+
+
+
+
+
+
+

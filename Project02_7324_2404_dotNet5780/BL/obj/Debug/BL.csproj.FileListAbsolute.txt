@@ -37,3 +37,16 @@ C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.
 C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.csproj.CopyComplete
 C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.dll
 C:\Users\yanky\Desktop\scoole\C#\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.pdb
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\BL.dll
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\BL.pdb
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\BE.dll
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\DAL.dll
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\DS.dll
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\BE.pdb
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\DAL.pdb
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\bin\Debug\DS.pdb
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.dll
+C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\BL\obj\Debug\BL.pdb

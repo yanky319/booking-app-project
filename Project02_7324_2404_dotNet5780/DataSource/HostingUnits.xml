@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ArrayOfHostingUnit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HostingUnit>
+    <HostingUnitKey>0</HostingUnitKey>
+    <HostID>0</HostID>
+    <Area>All</Area>
+    <SubArea>All</SubArea>
+    <Type>All</Type>
+    <num_beds>0</num_beds>
+    <Pool>false</Pool>
+    <Jacuzzi>false</Jacuzzi>
+    <Garden>false</Garden>
+    <ChildrensAttractions>false</ChildrensAttractions>
+    <wifi>false</wifi>
+    <accessibility>false</accessibility>
+  </HostingUnit>
+</ArrayOfHostingUnit>

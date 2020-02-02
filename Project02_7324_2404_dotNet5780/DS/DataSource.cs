@@ -95,14 +95,15 @@ namespace DS
             new BE.Host()
     {
                 HostID = 10000002,
-        PrivateName = "Chna",
+        PrivateName = "name1",
         FamilyName = "Esterzon",
+        passwordeHash = "11".GetHashCode(),
         FhoneNumber = "05276140977",
         MailAddress = "bb@b.b",
         BankBranch = new BankBranch()
            {
                  BankNumber = 123,
-                 BankName = BankNames.Hapoalim,
+                 BankName ="Hapoalim",
                  BranchNumber = 765,
                  BranchAddress = "ggg",
                  BranchCity = "jerusalem"
@@ -127,7 +128,7 @@ namespace DS
            new BankBranch()
            {
                  BankNumber = 123,
-                 BankName = BankNames.Hapoalim,
+                 BankName = "Hapoalim",
                  BranchNumber = 765,
                  BranchAddress = "ggg",
                  BranchCity = "jerusalem"

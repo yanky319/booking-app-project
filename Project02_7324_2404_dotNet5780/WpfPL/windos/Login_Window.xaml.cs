@@ -63,6 +63,13 @@ namespace WpfPL.windos
             CancelLable2.MouseLeave += mouseLeave;
             LoginLable.MouseLeave += mouseLeave;
             LoginLable2.MouseLeave += mouseLeave;
+            LBaddHost.MouseDown += addHost;
+        }
+
+        private void addHost(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+            new windos.add_host().ShowDialog();
         }
 
         private void mouseEnter(object sender, MouseEventArgs e)
@@ -190,21 +197,30 @@ namespace WpfPL.windos
         private void LoginLable2_Click(object sender, RoutedEventArgs e)
         {
             BL.IBL  bl = BL.FactorySingleton.Instance;
-            List<BE.Host> hosts = bl.getHosts().ToList();
-            foreach (BE.Host host in hosts)
+            try
             {
-                if (host.PrivateName + ' ' + host.FamilyName == NameTextBox2.Text && host.passwordeHash == PasswordPasswordBox2.Password.GetHashCode())
+                List<BE.Host> hosts = bl.getHosts().ToList();
+                foreach (BE.Host host in hosts)
                 {
-                    for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                        if (App.Current.Windows[intCounter] != this)
-                            App.Current.Windows[intCounter].Close();
-                    new Host_Window(host,true).Show();
-                    this.Close();
-
+                    if (host.PrivateName == NameTextBox2.Text && host.passwordeHash == int.Parse(PasswordPasswordBox2.Password))
+                    {
+                        //for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                            //if (App.Current.Windows[intCounter] != this)
+                            //    App.Current.Windows[intCounter].Close();
+                        new Host_Window(host, true).Show();
+                        this.Close();
+                    }
                 }
+                ERROR_LABLE2.Content = this.FindResource("Incorrect_login_information").ToString();
+                ERROR_LABLE2.Foreground = Brushes.Red;
             }
-            ERROR_LABLE2.Content = this.FindResource("Incorrect_login_information").ToString();
-            ERROR_LABLE2.Foreground = Brushes.Red;
+            catch (Exception)
+            {
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                                  MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            }
+           
+           
         }
     }
 }

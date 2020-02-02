@@ -21,13 +21,62 @@ namespace DAL
         static string HostsFileName = @"Hosts.xml";
         static string Configurations = @"Configurations.xml";
         static string BanksFileName = @"Banks.xml";
+        static bool Bankdownload = false;
 
+        public Dal_XML_imp()
+        {
+    
+                WebClient wc = new WebClient();
+                try
+                {
+                    string xmlServerPath = @"https://www.boi.org.il/en/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_en.xml";
+                    wc.DownloadFile(xmlServerPath, path + BanksFileName);
+                }
+                catch (Exception)
+                {
+                        
+                }
+                 wc.Dispose();
+            List<BankBranch> bankRoot = new List<BankBranch>();
+            try
+            {
+
+                XElement tmp = XElement.Load(path + BanksFileName);
+                bankRoot = (from item in tmp.Elements()
+                            select new BankBranch()
+                            {
+                                BankName = item.Element("Bank_Name").Value,
+                                BankNumber = int.Parse(item.Element("Bank_Code").Value),
+                                BranchAddress = item.Element("Address").Value,
+                                BranchCity = item.Element("City").Value,
+                                BranchNumber = int.Parse(item.Element("Branch_Code").Value)
+                            }).ToList();
+                XElement bankRootxml = new XElement("Banks");
+            }
+            catch { }
+
+            FileStream file = new FileStream(path + BanksFileName, FileMode.Create);
+                XmlSerializer xmlSerializer = new XmlSerializer(bankRoot.GetType());
+                xmlSerializer.Serialize(file, bankRoot);
+                file.Close();
+
+                Bankdownload = true;
+            
+        }
         public static void SaveToXML<T>(T source, string fileName)
         {
-            FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
-            XmlSerializer xmlSerializer = new XmlSerializer(source.GetType());
-            xmlSerializer.Serialize(file, source);
-            file.Close();
+            try
+            {
+                FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
+                XmlSerializer xmlSerializer = new XmlSerializer(source.GetType());
+                xmlSerializer.Serialize(file, source);
+                file.Close();
+            }
+            catch
+            {
+                throw new TargetNotFoundException("DAL_");
+            }
+           
         }
 
         public static T LoadFromXML<T>(string fileName) where T : new()
@@ -36,13 +85,22 @@ namespace DAL
             {
                 FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                T result = (T)xmlSerializer.Deserialize(file);
+                T result;
+                try
+                {
+                    result = (T)xmlSerializer.Deserialize(file);
+                }
+                catch
+                {
+                     result = new T();
+                }
                 file.Close();
                 return result;
             }
             else
             {
                 FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
+                SaveToXML(new T(), fileName);
                 file.Close();
                 return new T();
             }
@@ -134,20 +192,20 @@ namespace DAL
 
         public void addHostingUnit(HostingUnit unit)
         {
+            List<HostingUnit> Units = new List<HostingUnit>();
             try
             {
-                List<HostingUnit> Units = LoadFromXML<List<HostingUnit>>(HostingUnitsFileName);
+                Units = LoadFromXML<List<HostingUnit>>(HostingUnitsFileName);
                 if (!File.Exists(path + HostingUnitsFileName))
                     throw new TargetNotFoundException("DAL_");
                 List<Host> hosts = LoadFromXML<List<Host>>(HostsFileName);
-                hosts.Find(i => i.HostID == unit.HostID).numUnits++;
+                hosts.Find(i => i.HostID == unit.HostID).numUnits = hosts.Find(i => i.HostID == unit.HostID).numUnits + 1;
                 SaveToXML(hosts, HostsFileName);
                 Units.Add(unit);
                 SaveToXML(Units, HostingUnitsFileName);
             }
             catch
             {
-
                 throw new TargetNotFoundException("DAL_");
             }
         }
@@ -382,22 +440,10 @@ namespace DAL
 
         public IEnumerable<BankBranch> getBankBranchs()
         {
-            return null;
-            //WebClient client = new WebClient();
-            //try
-            //{
-            //    //client.DownloadFile(@"https://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_dnld_he.xml", path + BanksFileName);
+            if (!Bankdownload)
+                return new List<BankBranch>();
+            return LoadFromXML<List<BankBranch>>(BanksFileName);
 
-            //    client.DownloadFile(@"http://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/atm.xml", path + BanksFileName);
-            //}
-            //catch
-            //{
-            //    client.DownloadFile(@"http://www.jct.ac.il/~coshri/atm.xml", path + BanksFileName);
-            //}
-            //finally
-            //{
-            //    client.Dispose();
-            //}            
         }
 
         #endregion

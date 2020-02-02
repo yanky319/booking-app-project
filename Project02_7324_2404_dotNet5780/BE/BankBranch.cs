@@ -9,7 +9,7 @@ namespace BE
     public class BankBranch : IComparable<BankBranch>
     {
         public int BankNumber { get; set; }
-        public BankNames BankName { get; set; }
+        public string BankName { get; set; }
         public int BranchNumber { get; set; }
         public string BranchAddress { get; set; }
         public string BranchCity { get; set; }

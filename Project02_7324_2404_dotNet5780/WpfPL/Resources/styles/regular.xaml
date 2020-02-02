@@ -9,7 +9,7 @@
     <System:Double x:Key="not_over_size">12</System:Double>
     <SolidColorBrush x:Key="over_color">#FF211616</SolidColorBrush>
     <SolidColorBrush x:Key="not_over_color">#FFFFFFFF</SolidColorBrush>
-    <SolidColorBrush x:Key="AlternatingRowBackground">blue</SolidColorBrush>
+    <SolidColorBrush x:Key="AlternatingRowBackground">#FF0767A8</SolidColorBrush>
 
 
     <SolidColorBrush x:Key="frameBrush">#FF2A4061</SolidColorBrush>

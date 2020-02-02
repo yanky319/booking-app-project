@@ -26,11 +26,11 @@ namespace WpfPL.windos
             InitializeComponent();
             myhost = host;
             isHost = ishost;
-            if(!ishost)
+            if (!ishost)
             {
                 logout1.Content = "Back";
-                logout2.Content = "Back";
-                logout3.Content = "Back";
+
+
             }
             TypeComboBox.ItemsSource = Enum.GetValues(typeof(Types));
             TypeComboBox2.ItemsSource = Enum.GetValues(typeof(Types));
@@ -47,16 +47,16 @@ namespace WpfPL.windos
             UnitsResetFilters(this, new RoutedEventArgs());
             ordersResetFilters(this, new RoutedEventArgs());
             RequesResetFilters(this, new RoutedEventArgs());
-            searchUnitsLabel.MouseDown += refreshUnitsdata;
-            ResetUnitFiltersLabel.MouseDown += UnitsResetFilters;
+            searchUnitsLabel.Click += refreshUnitsdata;
+            ResetUnitFiltersLabel.Click += UnitsResetFilters;
             searchUnitsLabel.MouseDown += refreshordersdata;
             ResetorderFiltersLabel.MouseDown += ordersResetFilters;
             searchRequestsLabel.MouseDown += refreshRequesdata;
             ResetRequestFiltersLabel.MouseDown += RequesResetFilters;
             logout1.MouseDown += logout;
-            logout2.MouseDown += logout;
-            logout3.MouseDown += logout;
-            tabControl.SelectionChanged += tabControl_SelectionChanged;
+
+
+
 
             searchUnitsLabel.MouseEnter += mouseEnter;
             ResetUnitFiltersLabel.MouseEnter += mouseEnter;
@@ -65,8 +65,6 @@ namespace WpfPL.windos
             ResetRequestFiltersLabel.MouseEnter += mouseEnter;
             searchRequestsLabel.MouseEnter += mouseEnter;
             logout1.MouseEnter += mouseEnter;
-            logout2.MouseEnter += mouseEnter;
-            logout3.MouseEnter += mouseEnter;
 
             searchUnitsLabel.MouseLeave += mouseLeave;
             ResetUnitFiltersLabel.MouseLeave += mouseLeave;
@@ -75,20 +73,44 @@ namespace WpfPL.windos
             ResetRequestFiltersLabel.MouseLeave += mouseLeave;
             searchRequestsLabel.MouseLeave += mouseLeave;
             logout1.MouseLeave += mouseLeave;
-            logout2.MouseLeave += mouseLeave;
-            logout3.MouseLeave += mouseLeave;
+
+            LBOrders.MouseDown += changeTab;
+            LBunits.MouseDown += changeTab;
+            LBrequsts.MouseDown += changeTab;
         }
 
-        void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void changeTab(object sender, MouseButtonEventArgs e)
         {
-            UnitsResetFilters(this, new RoutedEventArgs());
-            ordersResetFilters(this, new RoutedEventArgs());
-            RequesResetFilters(this, new RoutedEventArgs());
+            Label l = sender as Label;
+            if (l.Name == "LBOrders")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 1));
+                LBOrders.Foreground = Brushes.White;
+                LBrequsts.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBunits.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+            if (l.Name == "LBunits")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 0));
+                LBunits.Foreground = Brushes.White;
+                LBrequsts.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBOrders.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+            if (l.Name == "LBrequsts")
+            {
+                Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 2));
+                LBrequsts.Foreground = Brushes.White;
+                LBunits.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+                LBOrders.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+
         }
+
+
 
         void logout(object sender, MouseButtonEventArgs e)
         {
-            if(isHost)
+            if (isHost)
             {
                 MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?", "logout", MessageBoxButton.YesNo,
                                                         MessageBoxImage.Question, MessageBoxResult.No);
@@ -116,7 +138,7 @@ namespace WpfPL.windos
                 if (result.ToString() == "Yes")
                 {
                     try
-                    { 
+                    {
                         this.Close();
                     }
                     catch (Exception ex)
@@ -126,19 +148,19 @@ namespace WpfPL.windos
                     }
                 }
             }
-           
+
         }
         void mouseEnter(object sender, MouseEventArgs e)
         {
-            Label label = sender as Label;
-            label.FontSize = int.Parse(FindResource("over_size").ToString());
-            label.Foreground = (Brush)new BrushConverter().ConvertFromString(FindResource("over_color").ToString());
+            Label l = sender as Label;
+            if (l != null)
+                l.Foreground = Brushes.White;
         }
         void mouseLeave(object sender, MouseEventArgs e)
         {
-            Label label = sender as Label;
-            label.FontSize = int.Parse(FindResource("not_over_size").ToString());
-            label.Foreground = (Brush)new BrushConverter().ConvertFromString(FindResource("not_over_color").ToString());
+            Label l = sender as Label;
+            if (l != null)
+                l.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
         }
 
         void SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -192,29 +214,39 @@ namespace WpfPL.windos
         void refreshUnitsdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bl = BL.FactorySingleton.Instance;
-
-            UnitsDataGrid.ItemsSource = from item in bl.GetHostsHostingUnits(myhost,
+            try
+            {
+                UnitsDataGrid.ItemsSource = from item in bl.GetHostsHostingUnits(myhost,
                 (i => i.HostingUnitName.Contains(searchTextBox.Text)
                 && (AreaComboBox.SelectedIndex == 0 || i.Area.ToString() == AreaComboBox.SelectedItem.ToString())
                 && (SubAreaComboBox.SelectedIndex == 0 || i.SubArea.ToString() == SubAreaComboBox.SelectedItem.ToString())
                 && (TypeComboBox.SelectedIndex == 0 || i.Type.ToString() == TypeComboBox.SelectedItem.ToString())))
-                                        select new
-                                        {
-                                            item.HostingUnitKey,
-                                            item.HostingUnitName,
-                                            item.Area,
-                                            item.SubArea,
-                                            item.Type,
-                                            //item.
-                                            item.num_beds,
-                                            accessibility = item.accessibility ? "     \u2713" : "     \u2717",
-                                            Garden = item.Garden ? "     \u2713" : "     \u2717",
-                                            Pool = item.Pool ? "  \u2713" : "  \u2717",
-                                            Jacuzzi = item.Jacuzzi ? "   \u2713" : "   \u2717",
-                                            wifi = item.wifi ? "  \u2713" : "  \u2717",
-                                            ChildrensAttractions = item.ChildrensAttractions ? "     \u2713" : "     \u2717",
+                                            select new
+                                            {
+                                                item.HostingUnitKey,
+                                                item.HostingUnitName,
+                                                item.Area,
+                                                item.SubArea,
+                                                item.Type,
+                                                //item.
+                                                item.num_beds,
+                                                accessibility = item.accessibility ? "     \u2713" : "     \u2717",
+                                                Garden = item.Garden ? "     \u2713" : "     \u2717",
+                                                Pool = item.Pool ? "  \u2713" : "  \u2717",
+                                                Jacuzzi = item.Jacuzzi ? "   \u2713" : "   \u2717",
+                                                wifi = item.wifi ? "  \u2713" : "  \u2717",
+                                                ChildrensAttractions = item.ChildrensAttractions ? "     \u2713" : "     \u2717",
 
-                                        };
+                                            };
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+
+            }
+
 
         }
 
@@ -239,7 +271,7 @@ namespace WpfPL.windos
                 else
                 {
                     dynamic a = UnitsDataGrid.SelectedItem;
-                    new Unit_window(a.HostingUnitKey).ShowDialog();
+                    new Unit_window(a.HostingUnitKey, true).ShowDialog();
                 }
             }
         }
@@ -282,7 +314,7 @@ namespace WpfPL.windos
         {
             if (isHost)
             {
-                new Unit_window().ShowDialog();
+                new Unit_window(myhost.HostID, false).ShowDialog();
             }
         }
         #endregion
@@ -290,7 +322,7 @@ namespace WpfPL.windos
         #region orders
         void ordersResetFilters(object sender, RoutedEventArgs e)
         {
-            statusComboBox.SelectedIndex = -1;
+            statusComboBox.SelectedIndex = 0;
             fromdatePicker.SelectedDate = null;
             todatePicker.SelectedDate = null;
             refreshordersdata(sender, e);
@@ -299,11 +331,20 @@ namespace WpfPL.windos
         void refreshordersdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bl = BL.FactorySingleton.Instance;
-            ordersDataGrid.ItemsSource = from item in bl.getHostsOrders(myhost,
-                (i => (statusComboBox.SelectedIndex == -1 || i.Status.ToString() == statusComboBox.SelectedItem.ToString())
-                && (fromdatePicker.SelectedDate == null || i.CreateDate >= fromdatePicker.SelectedDate)
-                && (todatePicker.SelectedDate == null || i.CreateDate <= todatePicker.SelectedDate)))
-                                         select item;
+            try
+            {
+                ordersDataGrid.ItemsSource = from item in bl.getHostsOrders(myhost,
+                    (i => (statusComboBox.SelectedIndex == 0 || i.Status.ToString() == statusComboBox.SelectedItem.ToString())
+                    && (fromdatePicker.SelectedDate == null || i.CreateDate >= fromdatePicker.SelectedDate)
+                    && (todatePicker.SelectedDate == null || i.CreateDate <= todatePicker.SelectedDate)))
+                                             select item;
+            }
+            catch (BE.SourceNotFoundException ex)
+            {
+                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+
+            }
 
         }
         void Updateorder(object sender, RoutedEventArgs e)
@@ -351,7 +392,7 @@ namespace WpfPL.windos
                     if (b.Contains("closed_without_deal") || b.Contains("closed_with_deal"))
                     {
 
-                        MessageBox.Show("error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
+                        MessageBox.Show("Error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
                                         MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                         ordersResetFilters(sender, e);
                         return;
@@ -363,20 +404,19 @@ namespace WpfPL.windos
                         b = b.Replace(",", "");
                         int Start = b.IndexOf("OrderKey", 0) + "OrderKey".Length;
                         BL.IBL bl = BL.FactorySingleton.Instance;
-                        float i = bl.calculatOrderCommition(bl.getOrder(int.Parse(b.Substring(Start, 8))));
-                        MessageBoxResult result = MessageBox.Show("Closing the deal will result a charge of" + i + "NIS", "Order Confirmation", MessageBoxButton.YesNo,
-                                                        MessageBoxImage.Question, MessageBoxResult.No);
-                        if (result.ToString() == "Yes")
+                        MessageBoxResult result = MessageBoxResult.Cancel;
+                        try
                         {
-                            try
-                            {
+                            float i = bl.calculatOrderCommition(bl.getOrder(int.Parse(b.Substring(Start, 8))));
+                            result = MessageBox.Show("Closing the deal will result a charge of" + i + "NIS", "Order Confirmation", MessageBoxButton.YesNo,
+                                                        MessageBoxImage.Question, MessageBoxResult.No);
+                            if (result.ToString() == "Yes")
                                 bl.updateOrder(int.Parse(b.Substring(Start, 8)), OrderStatus.closed_with_deal);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message);
-
-                            }
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error cannot update order", "EROOR", MessageBoxButton.OK,
+                                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                         }
                     }
 
@@ -419,14 +459,23 @@ namespace WpfPL.windos
         void refreshRequesdata(object sender, RoutedEventArgs e)
         {
             BL.IBL bl = BL.FactorySingleton.Instance;
+            try
+            {
+                RequestsDataGrid.ItemsSource = from item in bl.findGuestRequestWithCondition(
+               i => (AreaComboBox2.SelectedIndex == 0 || i.Area.ToString() == AreaComboBox2.SelectedItem.ToString())
+               && (SubAreaComboBox2.SelectedIndex == 0 || i.SubArea.ToString() == SubAreaComboBox2.SelectedItem.ToString())
+               && (TypeComboBox2.SelectedIndex == 0 || i.Type.ToString() == TypeComboBox2.SelectedItem.ToString())
+               && (fromdatePicker2.SelectedDate == null || i.EntryDate >= fromdatePicker2.SelectedDate)
+               && (todatePicker2.SelectedDate == null || i.EntryDate <= todatePicker2.SelectedDate))
+                                               select item;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error cannot load data", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
-            RequestsDataGrid.ItemsSource = from item in bl.findGuestRequestWithCondition(
-                i => (AreaComboBox2.SelectedIndex == 0 || i.Area.ToString() == AreaComboBox2.SelectedItem.ToString())
-                && (SubAreaComboBox2.SelectedIndex == 0 || i.SubArea.ToString() == SubAreaComboBox2.SelectedItem.ToString())
-                && (TypeComboBox2.SelectedIndex == 0 || i.Type.ToString() == TypeComboBox2.SelectedItem.ToString())
-                && (fromdatePicker2.SelectedDate == null || i.EntryDate >= fromdatePicker2.SelectedDate)
-                && (todatePicker2.SelectedDate == null || i.EntryDate <= todatePicker2.SelectedDate))
-                                        select item;
+            }
+
 
         }
 
@@ -445,19 +494,20 @@ namespace WpfPL.windos
                     string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
                     b = b.Replace(" ", "");
                     b = b.Replace(",", "");
-                    int Start = b.IndexOf("RequestKey", 0) + "RequestKey".Length+1;
+                    int Start = b.IndexOf("RequestKey", 0) + "RequestKey".Length + 1;
                     BL.IBL bl = BL.FactorySingleton.Instance;
-                    var req = bl.getGuestRequests().ToList().Find(i => i.GuestRequestKey == int.Parse(b.Substring(Start, 8)));
-                    var units = bl.FindAvailableUnits(req.EntryDate, (int)bl.dateRange(req.EntryDate, req.ReleaseDate), myhost);
-                    if (units.Count() == 0)
+                    try
                     {
-                        MessageBox.Show("error No units were found on those dates", "EROOR", MessageBoxButton.OK,
-                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                    }
-                    else
-                    {
-                       try
+                        var req = bl.getGuestRequests().ToList().Find(i => i.GuestRequestKey == int.Parse(b.Substring(Start, 8)));
+                        var units = bl.FindAvailableUnits(req.EntryDate, (int)bl.dateRange(req.EntryDate, req.ReleaseDate), myhost);
+                        if (units.Count() == 0)
                         {
+                            MessageBox.Show("error No units were found on those dates", "EROOR", MessageBoxButton.OK,
+                                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        }
+                        else
+                        {
+
                             Random random = new Random();
                             bl.addOrder(new BE.Order
                             {
@@ -466,21 +516,21 @@ namespace WpfPL.windos
                                 GuestRequestKey = int.Parse(b.Substring(Start, 8))
 
                             });
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "EROOR", MessageBoxButton.OK,
-                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                        }
-                       
-                    }
 
+
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("cunnot place order", "EROOR", MessageBoxButton.OK,
+                                                             MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    }
                 }
             }
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿<Window
+﻿<!--<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,11 +12,11 @@
     <Button Content="AAAA" Height="100" Width="100" Click="Button_Click"></Button>
 
 
-</Window>
+</Window>-->
 
 
 
-<!--<Window
+<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -32,11 +32,11 @@
         <ImageBrush ImageSource="C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\WpfPL\Resources\images\bak.jpg" Stretch="UniformToFill"/>
     </Window.Background>
     <Window.Resources>
-        --><!--<Style x:Key="CB"  TargetType="{x:Type ComboBox}">
+        <Style x:Key="CB"  TargetType="{x:Type ComboBox}">
 
             <Setter Property="Background" Value="Black"/>
 
-        </Style>--><!--
+        </Style>
 
     </Window.Resources>
     <TabControl x:Name="TabControl" BorderThickness="0" Background="{x:Null}">
@@ -170,7 +170,8 @@
                             <StaticResource ResourceKey="resizedCalendarItem"/>
                         </DatePicker.CalendarStyle>
                     </DatePicker>
-
+                  
+                   
                     <Frame  Grid.Row="3" BorderThickness="2" BorderBrush="{StaticResource frameBrush}"  Grid.RowSpan="1" Grid.Column="1"/>
                     <Frame  Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" BorderThickness="2" BorderBrush="{StaticResource frameBrush}"  />
                     <Frame  Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="1" BorderThickness="2" BorderBrush="{StaticResource frameBrush}"  />
@@ -556,4 +557,4 @@
 
     </TabControl>
 
-</Window>-->
+</Window>
