@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configurations>
-  <GuestRequestKey>10000003</GuestRequestKey>
-  <HostingUnitKey>10000000</HostingUnitKey>
-  <orderKey>10000000</orderKey>
-  <commission>10</commission>
+  <GuestRequestKey>10000002</GuestRequestKey>
+  <HostingUnitKey>10000001</HostingUnitKey>
+  <orderKey>10000008</orderKey>
+  <commission>15</commission>
 </Configurations>

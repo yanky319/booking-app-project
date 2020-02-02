@@ -28,15 +28,10 @@ namespace WpfPL.windos
             
             logout1.MouseEnter += mouseEnter;
 
-
             
-       
             logout1.MouseLeave += mouseLeave;
 
-
-
-
-           
+            
             ResetorderFiltersLabel.MouseDown += ResetorderFilters;
             ResetRequestFiltersLabel.MouseDown += ResetRequestFilters;
             ResetUnitFiltersLabel.MouseDown += ResetUnitstFilters;
@@ -146,8 +141,8 @@ namespace WpfPL.windos
             catch (Exception)
             {
 
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+            //    MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+            //                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             }
            
 
@@ -175,8 +170,8 @@ namespace WpfPL.windos
             }
             catch (Exception)
             {
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                //                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             }
            
         }
@@ -203,8 +198,8 @@ namespace WpfPL.windos
             }
             catch (Exception)
             {
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                //                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             }
             
         }
@@ -238,8 +233,8 @@ namespace WpfPL.windos
             }
             catch (Exception)
             {
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                                  MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                //                                  MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             }
           
         }

@@ -140,35 +140,35 @@ namespace BL
         }
         public void sendEmail(Order order)
         {
-            
+
             MailMessage mail = new MailMessage();
-            
-             mail.To.Add(getGuestRequests().ToList().Find(i => i.GuestRequestKey == order.GuestRequestKey).MailAddress);
-            
+
+            mail.To.Add(getGuestRequests().ToList().Find(i => i.GuestRequestKey == order.GuestRequestKey).MailAddress);
+
             mail.From = new MailAddress("Vications55@gmail.com");
-            
+
             mail.Subject = "New offer from vications";
-            var h = getHost(order.HostID);
-            mail.Body =h.MailAddress.ToString() + "  " + h.FhoneNumber.ToString();
-           
+            BE.Host h = getHost(order.HostID);
+            mail.Body = h.MailAddress.ToString() + "  " + h.FhoneNumber.ToString();
+
             mail.IsBodyHtml = true;
 
-           
+
             SmtpClient smtp = new SmtpClient();
-         
+
             smtp.Host = "smtp.gmail.com";
-             smtp.Credentials = new System.Net.NetworkCredential("Vications55@gmail.com",
-            "54565456");
-           
+            smtp.Credentials = new System.Net.NetworkCredential("Vications55@gmail.com",
+           "54565456");
+
             smtp.EnableSsl = true;
             try
             {
-               
+
                 smtp.Send(mail);
             }
             catch (Exception ex)
             {
-                
+
                 //txtMessage.Text = ex.ToString();
             }
         }
@@ -260,7 +260,7 @@ namespace BL
 
             return a;
         }
-        
+
         public IEnumerable<IGrouping<Areas, HostingUnit>> HostingUnitGroupdeByArae()
         {
             var a = from item in getHostingUnits()
@@ -350,8 +350,8 @@ namespace BL
             try
             {
                 List<GuestRequest> requests = getGuestRequests().ToList();
-                    if (predicate == null)
-                        return requests;
+                if (predicate == null)
+                    return requests;
 
                 return requests.Where(predicate).Select(item => item);
             }
@@ -372,16 +372,23 @@ namespace BL
                 var a = from order in getOrders()
                         where order.HostingUnitKey == unitKey
                         select new { order.Status, order.GuestRequestKey };
-
                 var b = from item in a
                         where item.Status != OrderStatus.closed_without_deal
                         from request in getGuestRequests()
                         let flag = request.GuestRequestKey == item.GuestRequestKey && request.ReleaseDate > DateTime.Today
                         where flag
                         select flag;
-
                 if (b.Count() != 0)
                     throw new CanNotDeleteException("BL_EROR, HostingUnit with open Orders can not be deleted ");
+            }
+            catch (CanNotDeleteException)
+            {
+
+                throw new CanNotDeleteException("BL_EROR, HostingUnit with open Orders can not be deleted ");
+            }
+            catch { }
+            try
+            {
 
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
                 dal.deleteHostingUnit(unitKey);
@@ -394,7 +401,7 @@ namespace BL
 
         public void addHostingUnit(HostingUnit unit)
         {
-           // IsValidHostKey(unit.HostID);
+            // IsValidHostKey(unit.HostID);
             //IsValidUnitName(unit.HostingUnitName);
             //IsValidNumBeds(unit.num_beds);
             //IsValidArea(unit.Area);
@@ -571,7 +578,7 @@ namespace BL
                     select item;
             if (predicate == null)
                 return a;
-            
+
             return a.Where(predicate).Select(item => item);
         }
 
@@ -713,7 +720,7 @@ namespace BL
 
         }
 
-      
+
 
 
 

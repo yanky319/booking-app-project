@@ -25,35 +25,39 @@ namespace BE
         public bool accessibility { get; set; }
         [XmlIgnore]
         public bool[,] Diary { get; set; }
-        //[XmlArray]
-        //bool[] Diary2
-        //{
-        //    set
-        //    {
-        //        Diary2 = value;
 
-        //        Diary = new bool[12, 31];
-        //        for (int j = 0; j < 12; j++)
-        //        {
-        //            for (int i = 0; i < 31; i++)
-        //            {
-        //                Diary[i, j] = Diary2[j * 31 + i];
-        //            }
-        //        }
-        //    }
-        //    get
-        //    {
-        //        Diary2 = new bool[12 * 31];
-        //        for (int j = 0; j < 12; j++)
-        //        {
-        //            for (int i = 0; i < 31; i++)
-        //            {
-        //                Diary2[j * 31 + i] = Diary[i, j];
-        //            }
-        //        }
-        //        return Diary2;
-        //    }
-        //}
+        [XmlArray("XMLdiary")]
+        public bool[] Diary2
+        {
+            set
+            {
+               if(value != null)
+                {
+                    //Diary2 = value;
+                    Diary = new bool[12, 31];
+                    for (int j = 0; j < 12; j++)
+                    {
+                        for (int i = 0; i < 31; i++)
+                        {
+                            Diary[j,i] = value[j * 31 + i];
+                        }
+                    }
+                }
+            }
+            get
+            {
+                
+                bool[] a = new bool[12 * 31];
+                for (int j = 0; j < 12; j++)
+                {
+                    for (int i = 0; i < 31; i++)
+                    {
+                        a[j * 31 + i] = Diary[j, i];
+                    }
+                }
+                return a;
+            }
+        }
         public override string ToString()
         {
             return string.Format("HostingUnitKey: {0}\nHostKey: {1}\nHostingUnitName: {2}" +

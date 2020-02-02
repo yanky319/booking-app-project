@@ -68,7 +68,8 @@ namespace DAL
             try
             {
                 FileStream file = new FileStream(path + fileName, FileMode.OpenOrCreate);
-                XmlSerializer xmlSerializer = new XmlSerializer(source.GetType());
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                file.SetLength(0);
                 xmlSerializer.Serialize(file, source);
                 file.Close();
             }

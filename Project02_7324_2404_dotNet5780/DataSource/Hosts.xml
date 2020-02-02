@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <ArrayOfHost xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Host>
-    <HostID>0</HostID>
-    <PrivateName>mmm</PrivateName>
+    <HostID>123456</HostID>
+    <PrivateName>yakov</PrivateName>
     <passwordeHash>11</passwordeHash>
-    <FamilyName>mmm</FamilyName>
-    <MailAddress>mm@m.m</MailAddress>
+    <FamilyName>taber</FamilyName>
+    <MailAddress>m9@g.p</MailAddress>
     <BankBranch>
       <BankNumber>39</BankNumber>
       <BankName>State Bank Of India</BankName>
@@ -13,61 +13,25 @@
       <BranchAddress>RAMAT GAN</BranchAddress>
       <BranchCity>RAMAT GAN</BranchCity>
     </BankBranch>
-    <BankAccountNumber>7777</BankAccountNumber>
+    <BankAccountNumber>555</BankAccountNumber>
     <CollectionClearance>true</CollectionClearance>
     <numOrders>0</numOrders>
-    <numUnits>23</numUnits>
-  </Host>
-  <Host>
-    <HostID>0</HostID>
-    <PrivateName>kkk</PrivateName>
-    <passwordeHash>11</passwordeHash>
-    <FamilyName>iii</FamilyName>
-    <MailAddress>m@m.m</MailAddress>
-    <BankBranch>
-      <BankNumber>22</BankNumber>
-      <BankName>Citibank N.A</BankName>
-      <BranchNumber>1</BranchNumber>
-      <BranchAddress>Menachem Begin 121st 121</BranchAddress>
-      <BranchCity>TEL AVIV - YAFO</BranchCity>
-    </BankBranch>
-    <BankAccountNumber>888</BankAccountNumber>
-    <CollectionClearance>true</CollectionClearance>
-    <numOrders>0</numOrders>
-    <numUnits>0</numUnits>
-  </Host>
-  <Host>
-    <HostID>0</HostID>
-    <PrivateName>aba</PrivateName>
-    <passwordeHash>11</passwordeHash>
-    <FamilyName>aba</FamilyName>
-    <MailAddress>mm@r.t</MailAddress>
-    <BankBranch>
-      <BankNumber>31</BankNumber>
-      <BankName>The First International Bank of Israel Ltd</BankName>
-      <BranchNumber>176</BranchNumber>
-      <BranchAddress>10,Ben Shatah St.  ElAd 10</BranchAddress>
-      <BranchCity>EL'AD</BranchCity>
-    </BankBranch>
-    <BankAccountNumber>56565</BankAccountNumber>
-    <CollectionClearance>true</CollectionClearance>
-    <numOrders>0</numOrders>
-    <numUnits>0</numUnits>
+    <numUnits>1</numUnits>
   </Host>
   <Host>
     <HostID>123123</HostID>
-    <PrivateName>jacov</PrivateName>
+    <PrivateName>kuku</PrivateName>
     <passwordeHash>11</passwordeHash>
-    <FamilyName>gram</FamilyName>
-    <MailAddress>m@y.p</MailAddress>
+    <FamilyName>zozo</FamilyName>
+    <MailAddress>m7@e.o</MailAddress>
     <BankBranch>
-      <BankNumber>39</BankNumber>
-      <BankName>State Bank Of India</BankName>
-      <BranchNumber>1</BranchNumber>
-      <BranchAddress>RAMAT GAN</BranchAddress>
-      <BranchCity>RAMAT GAN</BranchCity>
+      <BankNumber>13</BankNumber>
+      <BankName>Union Bank of Israel Ltd</BankName>
+      <BranchNumber>66</BranchNumber>
+      <BranchAddress>42 Gordon st., Tel Aviv 63414 42</BranchAddress>
+      <BranchCity>TEL AVIV - YAFO</BranchCity>
     </BankBranch>
-    <BankAccountNumber>159</BankAccountNumber>
+    <BankAccountNumber>666</BankAccountNumber>
     <CollectionClearance>true</CollectionClearance>
     <numOrders>0</numOrders>
     <numUnits>0</numUnits>

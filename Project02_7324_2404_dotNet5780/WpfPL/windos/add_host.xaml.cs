@@ -133,6 +133,7 @@ namespace WpfPL.windos
                             BL.IBL bl = BL.FactorySingleton.Instance;
                             Host.PrivateName = nameTB.Text;
                             Host.FamilyName = fNameTB.Text;
+                            Host.FhoneNumber = phoneTB.Text;
                             Host.MailAddress = EmailTB.Text;
                             Host.BankAccountNumber = int.Parse(AccountTB.Text);
                             dynamic a = BranchCB.SelectedItem;
@@ -162,6 +163,7 @@ namespace WpfPL.windos
                         HostID = int.Parse(IDTB.Text),
                         PrivateName = nameTB.Text,
                         FamilyName = fNameTB.Text,
+                        FhoneNumber = phoneTB.Text,
                         MailAddress = EmailTB.Text,
                         BankAccountNumber = int.Parse(AccountTB.Text),
                         BankBranch = branches.Find(i => i.BranchNumber == a.BranchNumber && i.BranchAddress == a.BranchAddress),

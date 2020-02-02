@@ -29,8 +29,6 @@ namespace WpfPL.windos
             if (!ishost)
             {
                 logout1.Content = "Back";
-
-
             }
             TypeComboBox.ItemsSource = Enum.GetValues(typeof(Types));
             TypeComboBox2.ItemsSource = Enum.GetValues(typeof(Types));
@@ -49,10 +47,10 @@ namespace WpfPL.windos
             RequesResetFilters(this, new RoutedEventArgs());
             searchUnitsLabel.Click += refreshUnitsdata;
             ResetUnitFiltersLabel.Click += UnitsResetFilters;
-            searchUnitsLabel.MouseDown += refreshordersdata;
-            ResetorderFiltersLabel.MouseDown += ordersResetFilters;
-            searchRequestsLabel.MouseDown += refreshRequesdata;
-            ResetRequestFiltersLabel.MouseDown += RequesResetFilters;
+            searchUnitsLabel.Click += refreshordersdata;
+            ResetorderFiltersLabel.Click += ordersResetFilters;
+            searchRequestsLabel.Click += refreshRequesdata;
+            ResetRequestFiltersLabel.Click += RequesResetFilters;
             logout1.MouseDown += logout;
 
 
@@ -105,8 +103,6 @@ namespace WpfPL.windos
             }
 
         }
-
-
 
         void logout(object sender, MouseButtonEventArgs e)
         {
@@ -239,17 +235,16 @@ namespace WpfPL.windos
 
                                             };
             }
-            catch (Exception)
+            catch 
             {
 
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                //                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
             }
 
 
         }
-
         void UnitsResetFilters(object sender, RoutedEventArgs e)
         {
             AreaComboBox.SelectedIndex = 0;
@@ -273,6 +268,7 @@ namespace WpfPL.windos
                     dynamic a = UnitsDataGrid.SelectedItem;
                     new Unit_window(a.HostingUnitKey, true).ShowDialog();
                 }
+                refreshUnitsdata(sender, e);
             }
         }
         void DeleteUnit(object sender, RoutedEventArgs e)
@@ -281,7 +277,7 @@ namespace WpfPL.windos
             {
                 if (UnitsDataGrid.SelectedItems.Count > 1)
                 {
-                    MessageBox.Show("error cannot updated more than one unit at a time", "EROOR", MessageBoxButton.OK,
+                    MessageBox.Show("Error cannot delete more than one unit at a time", "EROOR", MessageBoxButton.OK,
                                     MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                 }
                 else
@@ -308,6 +304,7 @@ namespace WpfPL.windos
                         }
                     }
                 }
+                refreshUnitsdata(sender, e);
             }
         }
         void AddButton_Click(object sender, RoutedEventArgs e)
@@ -315,6 +312,7 @@ namespace WpfPL.windos
             if (isHost)
             {
                 new Unit_window(myhost.HostID, false).ShowDialog();
+                refreshUnitsdata(sender, e);
             }
         }
         #endregion
@@ -341,8 +339,8 @@ namespace WpfPL.windos
             }
             catch (BE.SourceNotFoundException ex)
             {
-                MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
-                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
+                //                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
             }
 
@@ -358,24 +356,20 @@ namespace WpfPL.windos
                 }
                 else
                 {
+                    // BE.Order a;
                     dynamic a = ordersDataGrid.SelectedItem;
-                    string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
-                    if (b.Contains("not_addressed"))
+                    if (a.Status == OrderStatus.not_addressed)
                     {
                         if (myhost.CollectionClearance)
                         {
                             try
                             {
-                                b = b.Replace(" ", "");
-                                b = b.Replace(",", "");
-
-                                int Start = b.IndexOf("OrderKey", 0) + "OrderKey".Length;
                                 BL.IBL bl = BL.FactorySingleton.Instance;
-                                bl.updateOrder(int.Parse(b.Substring(Start, 8)), OrderStatus.mail_sent);
+                                bl.updateOrder(a.OrderKey, OrderStatus.mail_sent);
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message);
+                                MessageBox.Show(ex.Message +"AAAAAAAAAA");
 
                             }
                         }
@@ -389,7 +383,7 @@ namespace WpfPL.windos
                         return;
                     }
 
-                    if (b.Contains("closed_without_deal") || b.Contains("closed_with_deal"))
+                    if (a.Status== OrderStatus.closed_without_deal || a.Status == OrderStatus.closed_with_deal)
                     {
 
                         MessageBox.Show("Error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
@@ -398,26 +392,26 @@ namespace WpfPL.windos
                         return;
                     }
 
-                    if (b.Contains("mail_sent"))
+                    if (a.Status == OrderStatus.mail_sent)
                     {
-                        b = b.Replace(" ", "");
-                        b = b.Replace(",", "");
-                        int Start = b.IndexOf("OrderKey", 0) + "OrderKey".Length;
                         BL.IBL bl = BL.FactorySingleton.Instance;
                         MessageBoxResult result = MessageBoxResult.Cancel;
                         try
                         {
-                            float i = bl.calculatOrderCommition(bl.getOrder(int.Parse(b.Substring(Start, 8))));
+                            float i = bl.calculatOrderCommition(bl.getOrder(a.OrderKey));
                             result = MessageBox.Show("Closing the deal will result a charge of" + i + "NIS", "Order Confirmation", MessageBoxButton.YesNo,
                                                         MessageBoxImage.Question, MessageBoxResult.No);
                             if (result.ToString() == "Yes")
-                                bl.updateOrder(int.Parse(b.Substring(Start, 8)), OrderStatus.closed_with_deal);
+                                bl.updateOrder(a.OrderKey, OrderStatus.closed_with_deal);
                         }
                         catch (Exception)
                         {
                             MessageBox.Show("Error cannot update order", "EROOR", MessageBoxButton.OK,
                                                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                         }
+
+                        ordersResetFilters(sender, e);
+                        return;
                     }
 
                 }
@@ -444,8 +438,7 @@ namespace WpfPL.windos
             }
             SubAreaComboBox2.SelectedIndex = 0;
         }
-
-
+        
         void RequesResetFilters(object sender, RoutedEventArgs e)
         {
             AreaComboBox2.SelectedIndex = 0;
@@ -471,8 +464,8 @@ namespace WpfPL.windos
             }
             catch (Exception)
             {
-                MessageBox.Show("Error cannot load data", "EROOR", MessageBoxButton.OK,
-                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                //MessageBox.Show("Error cannot load data", "EROOR", MessageBoxButton.OK,
+                //                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
             }
 
@@ -527,6 +520,7 @@ namespace WpfPL.windos
                                                              MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
                     }
                 }
+                refreshordersdata(sender, e);
             }
         }
 

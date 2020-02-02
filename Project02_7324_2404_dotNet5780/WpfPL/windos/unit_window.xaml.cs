@@ -142,20 +142,20 @@ namespace WpfPL.windos
                 {
                     unit = new BE.HostingUnit()
                     {
-
+                        HostingUnitKey = BE.Configuration.HostingUnitKey,
                         HostID = Key,
                         HostingUnitName = nameTB.Text,
 
                         Area = (Areas)AreaCB.SelectedItem,
-                        SubArea = (SubAreas)AreaCB.SelectedItem,
-                        Type = (Types)AreaCB.SelectedItem,
+                        SubArea = (SubAreas)SaraeCB.SelectedItem,
+                        Type = (Types)typeCB.SelectedItem,
                         num_beds = int.Parse(NOB.Text),
                         Pool = pool == null ? false : (bool)pool.IsChecked,
                         Jacuzzi = Jacuzzi == null ? false : (bool)Jacuzzi.IsChecked,
                         Garden = Garden == null ? false : (bool)Garden.IsChecked,
                         ChildrensAttractions = attractions == null ? false : (bool)attractions.IsChecked,
                         wifi = wifi == null ? false : (bool)wifi.IsChecked,
-                        accessibility = accessibility == null ? false : (bool)accessibility.IsChecked
+                        accessibility = accessibility == null ? false : (bool)accessibility.IsChecked,
                     };
                     try
                     {
