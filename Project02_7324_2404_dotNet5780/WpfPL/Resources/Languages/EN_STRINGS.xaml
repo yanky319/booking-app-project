@@ -47,7 +47,7 @@
     <System:String x:Key="Pool">Pool</System:String>
     <System:String x:Key="Jacuzzi">Jacuzzi</System:String>
     <System:String x:Key="wifi">wifi</System:String>
-    <System:String x:Key="ChildrensAttractions">Childrens Attractions</System:String>
+    <System:String x:Key="ChildrensAttractions">Attractions</System:String>
 
 
     <System:String x:Key="GuestRequestKey">Request Key</System:String>
@@ -71,7 +71,7 @@
     <System:String x:Key="EntryDate">Entry Date</System:String>
     <System:String x:Key="ReleaseDate">Release date</System:String>
     <System:String x:Key="Meals">Meals</System:String>
-    <System:String x:Key="specialMmeal">special Mmeals</System:String>
+    <System:String x:Key="specialMmeal">special</System:String>
     <System:String x:Key="Placeorder">Place order</System:String>
 
     <!--#endregion-->

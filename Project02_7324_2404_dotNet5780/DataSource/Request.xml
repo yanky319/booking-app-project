@@ -2,16 +2,16 @@
 <ArrayOfGuestRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <GuestRequest>
     <GuestRequestKey>10000001</GuestRequestKey>
-    <PrivateName>zalman</PrivateName>
-    <FamilyName>gogo</FamilyName>
+    <PrivateName>jjjjj</PrivateName>
+    <FamilyName>uuuu</FamilyName>
     <MailAddress>Vications55@gmail.com</MailAddress>
-    <Status>deal_closed</Status>
+    <Status>expired</Status>
     <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
-    <EntryDate>2020-02-04T00:00:00</EntryDate>
-    <ReleaseDate>2020-02-13T00:00:00</ReleaseDate>
-    <Area>All</Area>
-    <SubArea>All</SubArea>
-    <Type>All</Type>
+    <EntryDate>2020-02-12T00:00:00</EntryDate>
+    <ReleaseDate>2020-02-19T00:00:00</ReleaseDate>
+    <Area>Jerusalem</Area>
+    <SubArea>Beit_Shemesh</SubArea>
+    <Type>Zimmer</Type>
     <Adults>4</Adults>
     <Children>0</Children>
     <Pool>optional</Pool>
@@ -25,17 +25,109 @@
   </GuestRequest>
   <GuestRequest>
     <GuestRequestKey>10000002</GuestRequestKey>
-    <PrivateName>yoram</PrivateName>
-    <FamilyName>abutbul</FamilyName>
+    <PrivateName>kuku</PrivateName>
+    <FamilyName>lolo</FamilyName>
     <MailAddress>Vications55@gmail.com</MailAddress>
-    <Status>open</Status>
+    <Status>deal_closed</Status>
     <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
-    <EntryDate>2020-04-13T00:00:00</EntryDate>
-    <ReleaseDate>2020-04-23T00:00:00</ReleaseDate>
+    <EntryDate>2020-02-11T00:00:00</EntryDate>
+    <ReleaseDate>2020-02-13T00:00:00</ReleaseDate>
+    <Area>Center</Area>
+    <SubArea>Tel_Aviv</SubArea>
+    <Type>Hotel</Type>
+    <Adults>5</Adults>
+    <Children>0</Children>
+    <Pool>optional</Pool>
+    <Jacuzzi>optional</Jacuzzi>
+    <Garden>optional</Garden>
+    <ChildrensAttractions>optional</ChildrensAttractions>
+    <wifi>optional</wifi>
+    <accessibility>optional</accessibility>
+    <Meals>not_interested</Meals>
+    <specialMmeal>non</specialMmeal>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000003</GuestRequestKey>
+    <PrivateName>vivi</PrivateName>
+    <FamilyName>toto</FamilyName>
+    <MailAddress>Vications55@gmail.com</MailAddress>
+    <Status>expired</Status>
+    <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
+    <EntryDate>2020-02-13T00:00:00</EntryDate>
+    <ReleaseDate>2020-02-28T00:00:00</ReleaseDate>
+    <Area>Center</Area>
+    <SubArea>Ramat_Gan</SubArea>
+    <Type>Hotel</Type>
+    <Adults>4</Adults>
+    <Children>0</Children>
+    <Pool>optional</Pool>
+    <Jacuzzi>optional</Jacuzzi>
+    <Garden>optional</Garden>
+    <ChildrensAttractions>optional</ChildrensAttractions>
+    <wifi>optional</wifi>
+    <accessibility>optional</accessibility>
+    <Meals>not_interested</Meals>
+    <specialMmeal>non</specialMmeal>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000004</GuestRequestKey>
+    <PrivateName>popit</PrivateName>
+    <FamilyName>mikal</FamilyName>
+    <MailAddress>Vications55@gmail.com</MailAddress>
+    <Status>expired</Status>
+    <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
+    <EntryDate>2020-03-11T00:00:00</EntryDate>
+    <ReleaseDate>2020-03-19T00:00:00</ReleaseDate>
     <Area>All</Area>
     <SubArea>All</SubArea>
-    <Type>All</Type>
-    <Adults>1</Adults>
+    <Type>Hotel</Type>
+    <Adults>4</Adults>
+    <Children>3</Children>
+    <Pool>optional</Pool>
+    <Jacuzzi>optional</Jacuzzi>
+    <Garden>optional</Garden>
+    <ChildrensAttractions>optional</ChildrensAttractions>
+    <wifi>optional</wifi>
+    <accessibility>optional</accessibility>
+    <Meals>not_interested</Meals>
+    <specialMmeal>non</specialMmeal>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000005</GuestRequestKey>
+    <PrivateName>ooo</PrivateName>
+    <FamilyName>hhh</FamilyName>
+    <MailAddress>m@f.o</MailAddress>
+    <Status>expired</Status>
+    <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
+    <EntryDate>2020-02-19T00:00:00</EntryDate>
+    <ReleaseDate>2020-02-27T00:00:00</ReleaseDate>
+    <Area>North</Area>
+    <SubArea>Haifa</SubArea>
+    <Type>Hotel</Type>
+    <Adults>3</Adults>
+    <Children>2</Children>
+    <Pool>optional</Pool>
+    <Jacuzzi>optional</Jacuzzi>
+    <Garden>optional</Garden>
+    <ChildrensAttractions>optional</ChildrensAttractions>
+    <wifi>optional</wifi>
+    <accessibility>optional</accessibility>
+    <Meals>not_interested</Meals>
+    <specialMmeal>non</specialMmeal>
+  </GuestRequest>
+  <GuestRequest>
+    <GuestRequestKey>10000006</GuestRequestKey>
+    <PrivateName>uuu</PrivateName>
+    <FamilyName>rprpr</FamilyName>
+    <MailAddress>mmm@dd.o</MailAddress>
+    <Status>expired</Status>
+    <RegistrationDate>0001-01-01T00:00:00</RegistrationDate>
+    <EntryDate>2020-02-12T00:00:00</EntryDate>
+    <ReleaseDate>2020-02-20T00:00:00</ReleaseDate>
+    <Area>Center</Area>
+    <SubArea>Tel_Aviv</SubArea>
+    <Type>Hotel</Type>
+    <Adults>4</Adults>
     <Children>0</Children>
     <Pool>optional</Pool>
     <Jacuzzi>optional</Jacuzzi>

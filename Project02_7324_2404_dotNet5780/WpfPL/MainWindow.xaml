@@ -26,11 +26,9 @@
         xmlns:windos="clr-namespace:WpfPL.windos" x:Name = "homepage"
         x:Class="WpfPL.MainWindow"
         mc:Ignorable="d"
-        Title="{DynamicResource MainWindowTitle}"  WindowState="Maximized"  FontFamily="Segoe UI Semibold"
-        WindowStartupLocation ="CenterScreen" >
-    <Window.Background>
-        <ImageBrush ImageSource="C:\Users\naomi\Desktop\mini project\mini_project\Project02_7324_2404_dotNet5780\WpfPL\Resources\images\bak.jpg" Stretch="UniformToFill"/>
-    </Window.Background>
+        Title="Vications.com"  WindowState="Maximized"  FontFamily="Segoe UI Semibold"
+        WindowStartupLocation ="CenterScreen" ResizeMode="NoResize" >
+    
     <Window.Resources>
         <Style x:Key="CB"  TargetType="{x:Type ComboBox}">
 

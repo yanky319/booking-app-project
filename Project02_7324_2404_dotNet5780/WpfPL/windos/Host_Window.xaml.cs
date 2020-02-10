@@ -14,16 +14,23 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace WpfPL.windos
 {
+
     public partial class Host_Window : Window
     {
+        BackgroundWorker worker;
         BE.Host myhost;
         bool isHost;
         public Host_Window(BE.Host host, bool ishost)
         {
             InitializeComponent();
+            worker = new BackgroundWorker();
+            worker.DoWork += sendMail;
+            worker.RunWorkerCompleted += updateOrder;
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
             myhost = host;
             isHost = ishost;
             if (!ishost)
@@ -45,9 +52,10 @@ namespace WpfPL.windos
             UnitsResetFilters(this, new RoutedEventArgs());
             ordersResetFilters(this, new RoutedEventArgs());
             RequesResetFilters(this, new RoutedEventArgs());
+
             searchUnitsLabel.Click += refreshUnitsdata;
             ResetUnitFiltersLabel.Click += UnitsResetFilters;
-            searchUnitsLabel.Click += refreshordersdata;
+            searchordersLabel.Click += refreshordersdata;
             ResetorderFiltersLabel.Click += ordersResetFilters;
             searchRequestsLabel.Click += refreshRequesdata;
             ResetRequestFiltersLabel.Click += RequesResetFilters;
@@ -75,6 +83,34 @@ namespace WpfPL.windos
             LBOrders.MouseDown += changeTab;
             LBunits.MouseDown += changeTab;
             LBrequsts.MouseDown += changeTab;
+        }
+
+        private void updateOrder(object sender, RunWorkerCompletedEventArgs e)
+        {
+            int key = int.Parse(e.Result.ToString());
+            if (key != -1)
+                BL.FactorySingleton.Instance.updateOrder(key, OrderStatus.mail_sent);
+            refreshordersdata(this, new RoutedEventArgs());
+        }
+
+        private void sendMail(object sender, DoWorkEventArgs e)
+        {
+            BE.Order order = e.Argument as BE.Order;
+            e.Result = -1;
+            int count = 0;
+            while (count < 5 && e.Result.ToString() == "-1")
+            {
+                count++;
+                try
+                {
+                    BL.FactorySingleton.Instance.sendEmail(order);
+                    e.Result = order.OrderKey;
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(2000);
+                }
+            }
         }
 
         private void changeTab(object sender, MouseButtonEventArgs e)
@@ -235,7 +271,7 @@ namespace WpfPL.windos
 
                                             };
             }
-            catch 
+            catch
             {
 
                 //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
@@ -337,7 +373,7 @@ namespace WpfPL.windos
                     && (todatePicker.SelectedDate == null || i.CreateDate <= todatePicker.SelectedDate)))
                                              select item;
             }
-            catch (BE.SourceNotFoundException ex)
+            catch (BE.SourceNotFoundException)
             {
                 //MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
                 //                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
@@ -353,68 +389,65 @@ namespace WpfPL.windos
                 {
                     MessageBox.Show("error cannot updated more than one order at a time", "EROOR", MessageBoxButton.OK,
                                     MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    return;
                 }
-                else
+
+                if (!myhost.CollectionClearance)
                 {
-                    // BE.Order a;
-                    dynamic a = ordersDataGrid.SelectedItem;
-                    if (a.Status == OrderStatus.not_addressed)
-                    {
-                        if (myhost.CollectionClearance)
-                        {
-                            try
-                            {
-                                BL.IBL bl = BL.FactorySingleton.Instance;
-                                bl.updateOrder(a.OrderKey, OrderStatus.mail_sent);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message +"AAAAAAAAAA");
+                    MessageBox.Show("error Host without Collection Clearance cannot updated order ", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    return;
+                }
 
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("error Host without collection Clearance cannot take orders", "EROOR", MessageBoxButton.OK,
-                                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                        }
-
-                        ordersResetFilters(sender, e);
-                        return;
-                    }
-
-                    if (a.Status== OrderStatus.closed_without_deal || a.Status == OrderStatus.closed_with_deal)
-                    {
-
-                        MessageBox.Show("Error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
-                                        MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                        ordersResetFilters(sender, e);
-                        return;
-                    }
-
-                    if (a.Status == OrderStatus.mail_sent)
+                dynamic a = ordersDataGrid.SelectedItem;
+                if (a.Status == OrderStatus.not_addressed)
+                {
+                    try
                     {
                         BL.IBL bl = BL.FactorySingleton.Instance;
-                        MessageBoxResult result = MessageBoxResult.Cancel;
-                        try
-                        {
-                            float i = bl.calculatOrderCommition(bl.getOrder(a.OrderKey));
-                            result = MessageBox.Show("Closing the deal will result a charge of" + i + "NIS", "Order Confirmation", MessageBoxButton.YesNo,
-                                                        MessageBoxImage.Question, MessageBoxResult.No);
-                            if (result.ToString() == "Yes")
-                                bl.updateOrder(a.OrderKey, OrderStatus.closed_with_deal);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Error cannot update order", "EROOR", MessageBoxButton.OK,
-                                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                        }
+                        worker.RunWorkerAsync(bl.getOrder(a.OrderKey)); ;
+                    }
+                    catch (Exception)
+                    {
 
-                        ordersResetFilters(sender, e);
-                        return;
                     }
 
+                    ordersResetFilters(sender, e);
+                    return;
                 }
+
+                if (a.Status == OrderStatus.closed_without_deal || a.Status == OrderStatus.closed_with_deal)
+                {
+
+                    MessageBox.Show("Error cannot updated order that is already closed", "EROOR", MessageBoxButton.OK,
+                                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    ordersResetFilters(sender, e);
+                    return;
+                }
+
+                if (a.Status == OrderStatus.mail_sent)
+                {
+                    BL.IBL bl = BL.FactorySingleton.Instance;
+                    MessageBoxResult result = MessageBoxResult.Cancel;
+                    try
+                    {
+                        float i = bl.calculatOrderCommition(bl.getOrder(a.OrderKey));
+                        result = MessageBox.Show("Closing the deal will result a charge of" + i + "NIS", "Order Confirmation", MessageBoxButton.YesNo,
+                                                    MessageBoxImage.Question, MessageBoxResult.No);
+                        if (result.ToString() == "Yes")
+                            bl.updateOrder(a.OrderKey, OrderStatus.closed_with_deal);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error cannot update order", "EROOR", MessageBoxButton.OK,
+                                                               MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    }
+
+                    ordersResetFilters(sender, e);
+                    return;
+                }
+
+
             }
         }
 
@@ -438,7 +471,7 @@ namespace WpfPL.windos
             }
             SubAreaComboBox2.SelectedIndex = 0;
         }
-        
+
         void RequesResetFilters(object sender, RoutedEventArgs e)
         {
             AreaComboBox2.SelectedIndex = 0;
@@ -468,8 +501,6 @@ namespace WpfPL.windos
                 //                    MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
             }
-
-
         }
 
         void Placeorder(object sender, RoutedEventArgs e)
@@ -480,50 +511,57 @@ namespace WpfPL.windos
                 {
                     MessageBox.Show("error cannot Place more than one order at a time", "EROOR", MessageBoxButton.OK,
                                     MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    return;
                 }
-                else
-                {
-                    dynamic a = RequestsDataGrid.SelectedItem;
-                    string b = a.ToString().Trim(new Char[] { ' ', '{', '}' });
-                    b = b.Replace(" ", "");
-                    b = b.Replace(",", "");
-                    int Start = b.IndexOf("RequestKey", 0) + "RequestKey".Length + 1;
-                    BL.IBL bl = BL.FactorySingleton.Instance;
-                    try
-                    {
-                        var req = bl.getGuestRequests().ToList().Find(i => i.GuestRequestKey == int.Parse(b.Substring(Start, 8)));
-                        var units = bl.FindAvailableUnits(req.EntryDate, (int)bl.dateRange(req.EntryDate, req.ReleaseDate), myhost);
-                        if (units.Count() == 0)
-                        {
-                            MessageBox.Show("error No units were found on those dates", "EROOR", MessageBoxButton.OK,
-                                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                        }
-                        else
-                        {
 
-                            Random random = new Random();
+                dynamic a = RequestsDataGrid.SelectedItem;
+                BL.IBL bl = BL.FactorySingleton.Instance;
+                try
+                {
+                    var req = bl.getGuestRequests().ToList().Find(i => i.GuestRequestKey == a.GuestRequestKey);
+                    var units = bl.FindAvailableUnits(req.EntryDate, (int)bl.dateRange(req.EntryDate, req.ReleaseDate), myhost);
+                    if (units.Count() == 0)
+                    {
+                        MessageBox.Show("error No units were found on those dates", "EROOR", MessageBoxButton.OK,
+                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                        return;
+                    }
+
+                    bool success = false;
+                    foreach (var item in units)
+                    {
+                        try
+                        {
                             bl.addOrder(new BE.Order
                             {
-                                HostingUnitKey = units[random.Next(units.Count() - 1)].HostingUnitKey,
+                                HostingUnitKey = item.HostingUnitKey,
                                 HostID = myhost.HostID,
-                                GuestRequestKey = int.Parse(b.Substring(Start, 8))
+                                GuestRequestKey = a.GuestRequestKey
 
                             });
-
-
-
+                            success = true;
+                        }
+                        catch (Exception)
+                        {
                         }
                     }
-                    catch (Exception)
-                    {
+                    if (success)
+                        MessageBox.Show("order placed successfully", "", MessageBoxButton.OK,
+                                   MessageBoxImage.Information, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                    else
                         MessageBox.Show("cunnot place order", "EROOR", MessageBoxButton.OK,
-                                                             MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
-                    }
-                }
-                refreshordersdata(sender, e);
-            }
-        }
+                                                       MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("cunnot place order \n" + ex.Message, "EROOR", MessageBoxButton.OK,
+                                                        MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                }
+            }
+            refreshordersdata(sender, e);
+
+        }
 
         #endregion
     }

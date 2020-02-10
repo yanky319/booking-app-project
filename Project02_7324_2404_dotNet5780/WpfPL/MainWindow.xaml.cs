@@ -94,8 +94,8 @@ namespace WpfPL
             InitializeComponent();
             Uri dictUri = new Uri(@"/Resources/Languages/EN_STRINGS.xaml", UriKind.Relative);
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
-            Uri uri = new Uri(@"/Resources/images/nof.jpg", UriKind.Relative);
-
+            Background = new ImageBrush(new BitmapImage(new Uri("../../Resources/images/bak.jpg", UriKind.Relative)));
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
 
             CBarea.Items.Add(strArea);
             CBarea.SelectedIndex = 0;
@@ -250,12 +250,8 @@ namespace WpfPL
             }
         }
 
-
-
         private void changePage(object sender, MouseButtonEventArgs e)
         {
-
-
             Viewbox v = sender as Viewbox;
             if (v.Name.ToString() == "Next")
             {

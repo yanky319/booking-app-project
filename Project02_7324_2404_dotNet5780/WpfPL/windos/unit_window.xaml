@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfPL.windos"
         mc:Ignorable="d"
-        Title="update_unit_window" Height="650" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Segoe UI Semibold">
+        Title="Vications.com" Height="650" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Segoe UI Semibold">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.2*"/>

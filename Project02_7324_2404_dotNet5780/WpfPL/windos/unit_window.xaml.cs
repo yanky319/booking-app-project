@@ -25,6 +25,7 @@ namespace WpfPL.windos
         public Unit_window(int key, bool isupdate = false)
         {
             InitializeComponent();
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
             isUpdate = isupdate;
             Key = key;
            
@@ -125,7 +126,7 @@ namespace WpfPL.windos
                             unit.accessibility = accessibility == null ? false : (bool)accessibility.IsChecked;
                             bl.updateHostingUnit(unit);
                             MessageBox.Show("Hosting unit details successfully updated", "", MessageBoxButton.OK,
-                                           MessageBoxImage.None, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
+                                           MessageBoxImage.None, MessageBoxResult.Cancel,MessageBoxOptions.RightAlign);
                         }
                         catch
                         {

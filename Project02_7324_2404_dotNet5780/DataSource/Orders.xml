@@ -2,74 +2,20 @@
 <Orders>
   <Order>
     <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000001</GuestRequestKey>
-    <OrderKey>10000001</OrderKey>
-    <Status>closed_with_deal</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000001</GuestRequestKey>
-    <OrderKey>10000002</OrderKey>
-    <Status>closed_with_deal</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000001</GuestRequestKey>
-    <OrderKey>10000003</OrderKey>
-    <Status>closed_with_deal</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000002</GuestRequestKey>
-    <OrderKey>10000004</OrderKey>
-    <Status>mail_sent</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
+    <HostID>123123</HostID>
     <GuestRequestKey>10000002</GuestRequestKey>
     <OrderKey>10000005</OrderKey>
-    <Status>not_addressed</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
+    <Status>closed_with_deal</Status>
+    <CreateDate>2020-02-10T00:00:00+02:00</CreateDate>
     <OrderDate>0001-01-01T00:00:00</OrderDate>
   </Order>
   <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000002</GuestRequestKey>
+    <HostingUnitKey>10000003</HostingUnitKey>
+    <HostID>123123</HostID>
+    <GuestRequestKey>10000003</GuestRequestKey>
     <OrderKey>10000006</OrderKey>
-    <Status>mail_sent</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000002</GuestRequestKey>
-    <OrderKey>10000007</OrderKey>
-    <Status>mail_sent</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
-    <OrderDate>0001-01-01T00:00:00</OrderDate>
-  </Order>
-  <Order>
-    <HostingUnitKey>10000001</HostingUnitKey>
-    <HostID>123456</HostID>
-    <GuestRequestKey>10000002</GuestRequestKey>
-    <OrderKey>10000008</OrderKey>
-    <Status>mail_sent</Status>
-    <CreateDate>2020-02-02T00:00:00+02:00</CreateDate>
+    <Status>closed_without_deal</Status>
+    <CreateDate>2020-02-10T00:00:00+02:00</CreateDate>
     <OrderDate>0001-01-01T00:00:00</OrderDate>
   </Order>
 </Orders>

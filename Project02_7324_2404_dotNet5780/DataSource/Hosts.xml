@@ -1,39 +1,23 @@
 <?xml version="1.0"?>
 <ArrayOfHost xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Host>
-    <HostID>123456</HostID>
-    <PrivateName>yakov</PrivateName>
-    <passwordeHash>11</passwordeHash>
-    <FamilyName>taber</FamilyName>
-    <MailAddress>m9@g.p</MailAddress>
-    <BankBranch>
-      <BankNumber>39</BankNumber>
-      <BankName>State Bank Of India</BankName>
-      <BranchNumber>1</BranchNumber>
-      <BranchAddress>RAMAT GAN</BranchAddress>
-      <BranchCity>RAMAT GAN</BranchCity>
-    </BankBranch>
-    <BankAccountNumber>555</BankAccountNumber>
-    <CollectionClearance>true</CollectionClearance>
-    <numOrders>0</numOrders>
-    <numUnits>1</numUnits>
-  </Host>
-  <Host>
     <HostID>123123</HostID>
-    <PrivateName>kuku</PrivateName>
+    <PrivateName>moshe</PrivateName>
     <passwordeHash>11</passwordeHash>
-    <FamilyName>zozo</FamilyName>
-    <MailAddress>m7@e.o</MailAddress>
+    <FamilyName>momo</FamilyName>
+    <FhoneNumber>44544</FhoneNumber>
+    <MailAddress>m@g.o</MailAddress>
     <BankBranch>
-      <BankNumber>13</BankNumber>
-      <BankName>Union Bank of Israel Ltd</BankName>
-      <BranchNumber>66</BranchNumber>
-      <BranchAddress>42 Gordon st., Tel Aviv 63414 42</BranchAddress>
-      <BranchCity>TEL AVIV - YAFO</BranchCity>
+      <BankNumber>31</BankNumber>
+      <BankName>
+The First International Bank of Israel Ltd</BankName>
+      <BranchNumber>128</BranchNumber>
+      <BranchAddress>6, Shmuel hanavi, Modiin 6</BranchAddress>
+      <BranchCity>MODI'IN-MAKKABBIM-RE'UT</BranchCity>
     </BankBranch>
-    <BankAccountNumber>666</BankAccountNumber>
+    <BankAccountNumber>1098</BankAccountNumber>
     <CollectionClearance>true</CollectionClearance>
     <numOrders>0</numOrders>
-    <numUnits>0</numUnits>
+    <numUnits>3</numUnits>
   </Host>
 </ArrayOfHost>

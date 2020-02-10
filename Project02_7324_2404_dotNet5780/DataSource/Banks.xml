@@ -6340,8 +6340,7 @@ QIRYAT GAT</BranchCity>
   </BankBranch>
   <BankBranch>
     <BankNumber>10</BankNumber>
-    <BankName>
-Bank Leumi Le-Israel B.M</BankName>
+    <BankName>Bank Leumi Le-Israel B.M</BankName>
     <BranchNumber>684</BranchNumber>
     <BranchAddress>shederut eliyao mazkeret batya 8</BranchAddress>
     <BranchCity>MAZKERET BATYA</BranchCity>
@@ -7596,7 +7595,8 @@ Bank Leumi Le-Israel B.M</BankName>
     <BankNumber>10</BankNumber>
     <BankName>Bank Leumi Le-Israel B.M</BankName>
     <BranchNumber>678</BranchNumber>
-    <BranchAddress> tolipman reshon le tzion  7</BranchAddress>
+    <BranchAddress>
+ tolipman reshon le tzion  7</BranchAddress>
     <BranchCity>RISHON LEZIYYON</BranchCity>
   </BankBranch>
   <BankBranch>
@@ -7881,8 +7881,7 @@ Bank Leumi Le-Israel B.M</BankName>
   </BankBranch>
   <BankBranch>
     <BankNumber>20</BankNumber>
-    <BankName>
-Mizrahi Tefahot Bank Ltd</BankName>
+    <BankName>Mizrahi Tefahot Bank Ltd</BankName>
     <BranchNumber>623</BranchNumber>
     <BranchAddress>Harokmim St,Holon 26</BranchAddress>
     <BranchCity>HOLON</BranchCity>

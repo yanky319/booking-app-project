@@ -24,21 +24,17 @@ namespace WpfPL.windos
         public Owner_screen()
         {
             InitializeComponent();
-           
-            
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
             logout1.MouseEnter += mouseEnter;
-
-            
             logout1.MouseLeave += mouseLeave;
 
-            
-            ResetorderFiltersLabel.MouseDown += ResetorderFilters;
-            ResetRequestFiltersLabel.MouseDown += ResetRequestFilters;
-            ResetUnitFiltersLabel.MouseDown += ResetUnitstFilters;
-            searchhostssLabel.MouseDown += refreshostssdata;
-            searchordersLabel.MouseDown += refresordersdata;
-            searchRequestsLabel.MouseDown += refresRequesdata;
-            searchUnitsLabel.MouseDown += refresUnitsdata;
+            ResetorderFiltersLabel.Click += ResetorderFilters;
+            ResetRequestFiltersLabel.Click += ResetRequestFilters;
+            ResetUnitFiltersLabel.Click += ResetUnitstFilters;
+            searchhostssLabel.Click += refreshostssdata;
+            searchordersLabel.Click += refresordersdata;
+            searchRequestsLabel.Click += refresRequesdata;
+            searchUnitsLabel.Click += refresUnitsdata;
             logout1.MouseDown += logout;
 
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 using System.Net.Mail;using BE;
+using System.Threading;
 
 namespace BL
 {
@@ -13,7 +14,12 @@ namespace BL
     {
 
         #region fonction's
-
+        public BL_imp()
+        {
+           Thread t = new Thread(updatEexpiredData);
+            t.Start();
+           t.IsBackground = true;
+        }
         public void IsValidEmail(string email)
         {
             new System.Net.Mail.MailAddress(email);
@@ -88,7 +94,7 @@ namespace BL
         {
             try
             {
-                if (!Regex.Match(number, "^[0-9][0-9]*$").Success)
+                if (!Regex.Match(number, "^[0-9][0-9]{1,}$").Success)
                     throw new FormatException("invalid Fhone Namber format");
             }
             catch
@@ -129,6 +135,56 @@ namespace BL
             if (!CheckDatsAvailable(unit.Diary, request.EntryDate, request.ReleaseDate))
                 throw new OrderCannotBePlacedException("The unit is not available on the requested dates");
         }
+        public void updatEexpiredData()
+        {
+            while(true)
+            {
+                try
+                {
+                    foreach (GuestRequest item in getGuestRequests().ToList())
+                    {
+                        if (item.EntryDate > DateTime.Today && item.Status == RequestStatus.open)
+                        {
+                            try
+                            {
+                                updateGuestRequest(item.GuestRequestKey, RequestStatus.expired);
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    foreach (Order item in getOrders().ToList())
+                    {
+                        if ((item.OrderDate != DateTime.MinValue && (DateTime.Today - item.OrderDate).TotalDays > 30 && item.Status != OrderStatus.closed_with_deal)
+                            || (getGuestRequests().ToList().Find(i => i.GuestRequestKey == item.GuestRequestKey).Status != RequestStatus.open && item.Status != OrderStatus.closed_with_deal)) 
+                        {
+                            try
+                            {
+                                updateOrder(item.OrderKey, OrderStatus.closed_without_deal);
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+               
+                Thread.Sleep(1000 * 60 * 60 * 24);
+            }
+        }
         public bool ThreeChoiceboolMatch(ThreeChoice requested, bool exists)
         {
 
@@ -149,7 +205,7 @@ namespace BL
 
             mail.Subject = "New offer from vications";
             BE.Host h = getHost(order.HostID);
-            mail.Body = h.MailAddress.ToString() + "  " + h.FhoneNumber.ToString();
+            mail.Body = "Contact us for more details <br /> mail:    " + h.MailAddress.ToString() + "<br /> phone:    " + h.FhoneNumber.ToString();
 
             mail.IsBodyHtml = true;
 
@@ -157,8 +213,7 @@ namespace BL
             SmtpClient smtp = new SmtpClient();
 
             smtp.Host = "smtp.gmail.com";
-            smtp.Credentials = new System.Net.NetworkCredential("Vications55@gmail.com",
-           "54565456");
+            smtp.Credentials = new System.Net.NetworkCredential("Vications55@gmail.com", "54565456");
 
             smtp.EnableSsl = true;
             try
@@ -166,10 +221,8 @@ namespace BL
 
                 smtp.Send(mail);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-
-                //txtMessage.Text = ex.ToString();
             }
         }
         public int calculatOrderCommition(Order order)
@@ -421,7 +474,7 @@ namespace BL
 
         public void updateHostingUnit(HostingUnit unit)
         {
-            IsValidUnitKey(unit.HostID);
+            IsValidUnitKey(unit.HostingUnitKey);
             IsValidUnitName(unit.HostingUnitName);
             try
             {
@@ -474,7 +527,7 @@ namespace BL
         {
             IsValidName(host.PrivateName, "Privat");
             IsValidName(host.FamilyName, "Family");
-            //IsValidFhoneNamber(host.FhoneNumber);
+            IsValidFhoneNamber(host.FhoneNumber);
             IsValidEmail(host.MailAddress);
             //IsValidBankBranch(host.BankBranch);
 
@@ -599,6 +652,9 @@ namespace BL
 
         public void addOrder(Order order)
         {
+            int index = getOrders().ToList().FindIndex(i => i.GuestRequestKey == order.GuestRequestKey && i.HostID == order.HostID && i.HostingUnitKey == order.HostingUnitKey);
+            if (index != -1)
+                throw new ArgumentException("cannot place more than one order per request");
             IsValidHostKey(order.HostID);
             IsValidUnitKey(order.HostingUnitKey);
             IsValidRequestKey(order.GuestRequestKey);
@@ -631,9 +687,10 @@ namespace BL
             try
             {
                 DAL.Idal dal = DAL.FactorySingleton.Instance;
-                dal.updateOrder(key, status);
                 if (status == OrderStatus.mail_sent)
-                    sendEmail(order);
+                    order.OrderDate = DateTime.Today;
+                dal.updateOrder(key, status);
+               
                 if (status == OrderStatus.closed_with_deal)
                 {
 

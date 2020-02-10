@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:WpfPL.windos"
         mc:Ignorable="d"
         x:Name="HostWindow"
-        Title="Host_Window" ResizeMode="NoResize" Height="900" WindowState="Maximized" FontFamily="Segoe UI Semibold"  Background="{StaticResource main}" >
+        Title="Vications.com" ResizeMode="NoResize" Height="900" WindowState="Maximized" FontFamily="Segoe UI Semibold"  Background="{StaticResource main}" >
 
     <Grid  >
         <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
         <Label Grid.Row="1" Width="80" x:Name="LBOrders" Content="Orders"   FontSize="22" Foreground="#FFC6C2C2" Margin="235,0,0,0" HorizontalAlignment="Left" />
         <Label Grid.Row="1" Width="90" x:Name="LBrequsts" Content="Requsts"  FontSize="22" Foreground="#FFC6C2C2" Margin="335,0,0,0" HorizontalAlignment="Left" />
         <Label   x:Name="logout1" FontSize="20" Content="{StaticResource logout}" Grid.ColumnSpan="2"    Foreground="#FFC6C2C2" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Grid.Column="8" Grid.RowSpan="1" Margin="0,0,40,0"  />
-        <TabControl Grid.Row="2" x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"  Height="850" FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
+        <TabControl Grid.Row="2" x:Name="tabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0"  FlowDirection="LeftToRight" Controls:TabControlHelper.IsUnderlined="False"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue">
 
             <TabItem x:Name="HostssMainGrid"  BorderThickness="0" Background="{StaticResource main}" VerticalAlignment="Top" >
@@ -222,7 +222,7 @@
                             <DataGridTextColumn Header="{DynamicResource HostingUnitKey}" Binding="{Binding HostingUnitKey}"/>
                             <DataGridTextColumn Header="{DynamicResource GuestRequestKey}" Binding="{Binding GuestRequestKey}"/>
                             <DataGridTextColumn Header="{DynamicResource Status}" Binding="{Binding Status}"/>
-                            <DataGridTextColumn Header="{DynamicResource CreateDate}" Binding="{Binding CreateDate}" />
+                            <DataGridTextColumn Header="{DynamicResource CreateDate}" Binding="{Binding CreateDate, StringFormat=dd/MM/yyyy}" />
                             <DataGridTextColumn  Width="*" />
                             
                         </DataGrid.Columns>
@@ -312,8 +312,8 @@
                             <DataGridTextColumn Header="{DynamicResource Area}" Binding="{Binding Area}"/>
                             <DataGridTextColumn Header="{DynamicResource SubArea}" Binding="{Binding SubArea}"/>
                             <DataGridTextColumn Header="{DynamicResource Type}" Binding="{Binding Type}" />
-                            <DataGridTextColumn Header="{DynamicResource EntryDate}" Binding="{Binding EntryDate}"/>
-                            <DataGridTextColumn Header="{DynamicResource ReleaseDate}" Binding="{Binding ReleaseDate}"/>
+                            <DataGridTextColumn Header="{DynamicResource EntryDate}" Binding="{Binding EntryDate, StringFormat=dd/MM/yyyy}"/>
+                            <DataGridTextColumn Header="{DynamicResource ReleaseDate}" Binding="{Binding ReleaseDate, StringFormat=dd/MM/yyyy}"/>
                             <DataGridTextColumn Header="{DynamicResource accessibility}" Binding="{Binding accessibility}"/>
                             <DataGridTextColumn Header="{DynamicResource Garden}" Binding="{Binding Garden}"/>
                             <DataGridTextColumn Header="{DynamicResource Pool}" Binding="{Binding Pool}" />

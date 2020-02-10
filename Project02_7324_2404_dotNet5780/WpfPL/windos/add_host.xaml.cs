@@ -28,6 +28,7 @@ namespace WpfPL.windos
             branches = new List<BE.BankBranch>();
             Host = host;
             InitializeComponent();
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
             try
             {
                 branches = bL.getBankBranchs().ToList();

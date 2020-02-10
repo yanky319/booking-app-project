@@ -23,6 +23,7 @@ namespace WpfPL.windos
     /// </summary>
     public partial class Login_Window : Window
     {
+        List<BE.Host> hosts;
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
         [DllImport("user32.dll", SetLastError = true)]
@@ -33,10 +34,12 @@ namespace WpfPL.windos
         public Login_Window()
         {
             InitializeComponent();
+            Icon = new BitmapImage(new Uri(@"../../Resources/images/icon.png", UriKind.Relative));
             this.ResizeMode = ResizeMode.NoResize;
             this.Topmost = true;
             Loaded += Loade;
-
+            BL.IBL bl = BL.FactorySingleton.Instance;
+            hosts = bl.getHosts().ToList();
             NameTextBox.MouseDoubleClick += DoubleClick;
             NameTextBox2.MouseDoubleClick += DoubleClick;
             PasswordPasswordBox.MouseDoubleClick += DoubleClick;
@@ -64,6 +67,27 @@ namespace WpfPL.windos
             LoginLable.MouseLeave += mouseLeave;
             LoginLable2.MouseLeave += mouseLeave;
             LBaddHost.MouseDown += addHost;
+            LBhostLogin.MouseDown += changePage;
+            LBownerLogin.MouseDown += changePage;
+            LBaddHost.MouseEnter += addHostEnter;
+            LBaddHost.MouseLeave += addHostLeave;
+        }
+
+        private void changePage(object sender, MouseButtonEventArgs e)
+        {
+            Label l = sender as Label;
+            if (l.Name == "LBhostLogin")
+            {
+                Dispatcher.BeginInvoke((Action)(() => TC.SelectedIndex = 0));
+                l.Foreground = Brushes.White;
+                LBownerLogin.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
+            if (l.Name == "LBownerLogin")
+            {
+                Dispatcher.BeginInvoke((Action)(() => TC.SelectedIndex = 1));
+                l.Foreground = Brushes.White;
+                LBhostLogin.Foreground = new BrushConverter().ConvertFromString("#FFC6C2C2") as Brush;
+            }
         }
 
         private void addHost(object sender, MouseButtonEventArgs e)
@@ -196,21 +220,23 @@ namespace WpfPL.windos
         }
         private void LoginLable2_Click(object sender, RoutedEventArgs e)
         {
-            BL.IBL  bl = BL.FactorySingleton.Instance;
             try
             {
-                List<BE.Host> hosts = bl.getHosts().ToList();
-                foreach (BE.Host host in hosts)
+                if(PasswordPasswordBox2.Password != "")
                 {
-                    if (host.PrivateName == NameTextBox2.Text && host.passwordeHash == int.Parse(PasswordPasswordBox2.Password))
+                    foreach (BE.Host host in hosts)
                     {
-                        //for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                        if (host.PrivateName == NameTextBox2.Text && host.passwordeHash == int.Parse(PasswordPasswordBox2.Password))
+                        {
+                            //for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
                             //if (App.Current.Windows[intCounter] != this)
                             //    App.Current.Windows[intCounter].Close();
-                        new Host_Window(host, true).Show();
-                        this.Close();
+                            new Host_Window(host, true).Show();
+                            this.Close();
+                        }
                     }
                 }
+               
                 ERROR_LABLE2.Content = this.FindResource("Incorrect_login_information").ToString();
                 ERROR_LABLE2.Foreground = Brushes.Red;
             }
@@ -219,8 +245,17 @@ namespace WpfPL.windos
                 MessageBox.Show("Error cannot load data ", "EROOR", MessageBoxButton.OK,
                                                   MessageBoxImage.Error, MessageBoxResult.Cancel, MessageBoxOptions.RightAlign);
             }
-           
-           
+            
+
+        }
+        private void addHostLeave(object sender, MouseEventArgs e)
+        {
+            LBaddHost.Foreground = new BrushConverter().ConvertFromString("#FFA7A7A7") as Brush;
+        }
+
+        private void addHostEnter(object sender, MouseEventArgs e)
+        {
+            LBaddHost.Foreground = Brushes.Black;
         }
     }
 }

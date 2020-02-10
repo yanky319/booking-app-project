@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -23,45 +24,72 @@ namespace DAL
         static string BanksFileName = @"Banks.xml";
         static bool Bankdownload = false;
 
+        static Thread t;
         public Dal_XML_imp()
         {
-    
+            t = new Thread(downloadBanks);
+            t.Start();
+            
+        }
+        public void downloadBanks()
+        {
+            bool x = false, y = false, z = false;
+            int count = 0;
+            while (!Bankdownload && count < 5)
+            {
+                count++;
                 WebClient wc = new WebClient();
                 try
                 {
                     string xmlServerPath = @"https://www.boi.org.il/en/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/snifim_en.xml";
                     wc.DownloadFile(xmlServerPath, path + BanksFileName);
+                    x = true;
                 }
                 catch (Exception)
                 {
-                        
+
                 }
-                 wc.Dispose();
-            List<BankBranch> bankRoot = new List<BankBranch>();
-            try
-            {
+                wc.Dispose();
+                List<BankBranch> bankRoot = new List<BankBranch>();
+                try
+                {
 
-                XElement tmp = XElement.Load(path + BanksFileName);
-                bankRoot = (from item in tmp.Elements()
-                            select new BankBranch()
-                            {
-                                BankName = item.Element("Bank_Name").Value,
-                                BankNumber = int.Parse(item.Element("Bank_Code").Value),
-                                BranchAddress = item.Element("Address").Value,
-                                BranchCity = item.Element("City").Value,
-                                BranchNumber = int.Parse(item.Element("Branch_Code").Value)
-                            }).ToList();
-                XElement bankRootxml = new XElement("Banks");
+                    XElement tmp = XElement.Load(path + BanksFileName);
+                    bankRoot = (from item in tmp.Elements()
+                                select new BankBranch()
+                                {
+                                    BankName = item.Element("Bank_Name").Value,
+                                    BankNumber = int.Parse(item.Element("Bank_Code").Value),
+                                    BranchAddress = item.Element("Address").Value,
+                                    BranchCity = item.Element("City").Value,
+                                    BranchNumber = int.Parse(item.Element("Branch_Code").Value)
+                                }).ToList();
+                    XElement bankRootxml = new XElement("Banks");
+                    y = true;
+                }
+                catch { }
+
+                try
+                {
+                    FileStream file = new FileStream(path + BanksFileName, FileMode.Create);
+                    XmlSerializer xmlSerializer = new XmlSerializer(bankRoot.GetType());
+                    xmlSerializer.Serialize(file, bankRoot);
+                    file.Close();
+                    z = true;
+                }
+                catch (Exception)
+                {
+
+                }
+               
+                    
+                
+                
+                Bankdownload = x && y && z;
+                t.Abort();
             }
-            catch { }
 
-            FileStream file = new FileStream(path + BanksFileName, FileMode.Create);
-                XmlSerializer xmlSerializer = new XmlSerializer(bankRoot.GetType());
-                xmlSerializer.Serialize(file, bankRoot);
-                file.Close();
 
-                Bankdownload = true;
-            
         }
         public static void SaveToXML<T>(T source, string fileName)
         {
